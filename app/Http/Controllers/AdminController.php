@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Blog;
 use App\User;
+use App\Admin;
 use App\Guser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,8 +22,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
-
+        $admin = DB :: table('admins')->paginate(4);
+        return view('admin.index',compact('admin'));
     }
 
     /**
@@ -33,8 +33,23 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.signUp');
     }
+
+    //----------- signUp------------------------------//
+
+    public function store(Request $request)
+    {
+        $admin = $this->validate(request(),[
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password'=>'required|string|min:6',
+        ]);
+        $admin['password'] = bcrypt($admin['password']);
+        Admin::create($admin);
+        return redirect()->route('login');
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -42,10 +57,7 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
@@ -66,8 +78,8 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        return view('user.edit',compact('user','id'));
+        $admin = Admin::find($id);
+        return view('admin.edit',compact('admin','id'));
     }
 
     /**

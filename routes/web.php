@@ -37,5 +37,6 @@ Route::resource('users','UserController');
 
 
 
+Route::get('signUp1','AdminController@create')->name('signUp1');
 
 Route::resource('admins','AdminController');

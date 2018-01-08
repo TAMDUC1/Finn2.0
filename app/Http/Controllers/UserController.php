@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Blog;
 use App\User;
+use App\Admin;
 use App\Guser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,18 +43,28 @@ class UserController extends Controller
         $Email =$request->email;
         $Password = $request->password;
         $users = DB::table('users')->get();
+        $admins = DB::table('admins')->get();
+        foreach ($admins as $admin){
+            if($Email===$admin->email){
+                    if(Hash::check($Password,$admin->password))
+                    {
+                        session(['user_id'=>$admin->id,'email'=>$request->email]);
+                        return view('admin.profile');
+                    }
+            }
+        }
         foreach ($users as $user)
         {
             if($Email===$user->email)
             {
-                if($Email==='tamduc@stud.ntnu.no')
+              /*  if($Email==='tamduc@stud.ntnu.no')
                 {
                     if(Hash::check($Password,$user->password))
                     {
                         session(['user_id'=>$user->id,'email'=>$request->email]);
                         return view('admin.profile');
                     }
-                }
+                }*/
                 if($Email!=='tamduc@stud.ntnu.no'){
                     if(Hash::check($Password,$user->password)){
                         session(['user_id'=>$user->id,'email'=>$request->email]);

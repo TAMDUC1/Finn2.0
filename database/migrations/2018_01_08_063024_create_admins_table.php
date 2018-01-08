@@ -1,10 +1,10 @@
-'<?php
+<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateUsersTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class UpdateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function ($table) {
-            $table->string('name')->nullable()->change();
-            $table->string('password')->nullable()->change();
-
+        Schema::create('admins', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -26,6 +26,6 @@ class UpdateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('admins');
     }
 }
