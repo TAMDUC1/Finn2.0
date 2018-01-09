@@ -63,18 +63,12 @@
         <div class="signup">
             <a href="{{route('users.create')}}"style="text-decoration: none">Or sign up here</a>
         </div>
-        <div class="signup">
-            <a href="{{route('users.create')}}"style="text-decoration: none">Forget your password</a>
-        </div>
     </div>
     <div></div>
 </div>
 
 <script type="text/javascript">
-
     // login by javascript----
-
-
     // window.fbAsyncInit = function() {
     FB.init({
         appId            : '891006804401694',
@@ -120,8 +114,6 @@
 
     }
     // end----
-
-
 
     console.log('1222');
     $.ajaxSetup({

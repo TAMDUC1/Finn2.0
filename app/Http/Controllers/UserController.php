@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Blog;
 use App\User;
@@ -42,35 +41,25 @@ class UserController extends Controller
     public function signin1(Request $request){
         $Email =$request->email;
         $Password = $request->password;
-        $users = DB::table('users')->get();
-        $admins = DB::table('admins')->get();
-        foreach ($admins as $admin){
-            if($Email===$admin->email){
-                    if(Hash::check($Password,$admin->password))
-                    {
-                        session(['user_id'=>$admin->id,'email'=>$request->email]);
-                        return view('admin.profile');
-                    }
-            }
-        }
-        foreach ($users as $user)
-        {
-            if($Email===$user->email)
+        $admin = DB::table('admins')->where('email',$Email)->first();
+        $user = DB::table('users')->where('email',$Email)->first();
+        if(!empty($admin)) {
+              if(Hash::check($Password,$admin->password)){
+                  session(['user_id'=>$admin->id,'email'=>$request->email]);
+                  return view('admin.profile');
+              }
+          }
+        elseif(empty($admin)) {
+            if(!empty($user))
             {
-              /*  if($Email==='tamduc@stud.ntnu.no')
+                if(Hash::check($Password,$user->password))
                 {
-                    if(Hash::check($Password,$user->password))
-                    {
-                        session(['user_id'=>$user->id,'email'=>$request->email]);
-                        return view('admin.profile');
-                    }
-                }*/
-                if($Email!=='tamduc@stud.ntnu.no'){
-                    if(Hash::check($Password,$user->password)){
-                        session(['user_id'=>$user->id,'email'=>$request->email]);
-                        return redirect()->route('profile');
-                    }
+                    session(['user_id'=>$user->id,'email'=>$request->email]);
+                    return view('user.profile');
                 }
+            }
+            if(empty($user)){
+                echo 'no user found';
             }
         }
     }
@@ -268,6 +257,6 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        return redirect('user')->with('success','User has been  deleted');
+        return redirect()->route('users.index');
     }
 }

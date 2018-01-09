@@ -73,29 +73,6 @@
     <div class=" footer"style="background-color: #efefef">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, rem, vitae? Accusamus blanditiis ducimus eum hic id natus odit quisquam sint tempora voluptate? Ad, adipisci alias amet autem consequuntur cupiditate, distinctio dolores, doloribus eligendi explicabo harum hic impedit ipsum maxime nemo nisi nulla odio omnis placeat quae quibusdam sunt veniam.
     </div>
-    <script type="text/javascript">
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $(document).ready(function ()
-        {
-            $('#register').submit(function ()
-            {
-                var aName = $('#name').val();
-                var aEmail = $('#email').val();
-                var aPassword = $('#password').val();
-                var aPhone = $('#phone').val();
-                var aAddress = $('#address').val();
-                $.post('users',{name: aName,mail: aEmail, password: aPassword, phone: aPhone, address: aAddress }, function()
-                {
-                    console.log(data);
-                    $('#postRequestData').html(data);
-                });
-            });
-        })
-    </script>
 </body>
 </html>
 

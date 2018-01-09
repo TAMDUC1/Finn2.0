@@ -26,21 +26,7 @@
 <nav class="navbar" style="background-color: #cac8c6" role="navigation">
     <div class="navbar navbar-dark" style="text-decoration: none">
     </div>
-    <div>
-        <div id="admin">
-              <span>
-                    <a href="signUp1"class="btn btn-primary">Create a new admin</a>
-        </span>
-            <span>
-                    <a href="{{route('admins.index')}}" class=" btn btn-warning">Admin list</a>
-        </span>
-        </div>
 
-        <span>
-                    <a href="{{route('users.index')}}" class=" btn btn-warning">User list</a>
-        </span>
-
-    </div>
     <div>
         <form method="post" action="{{action('UserController@logout')}}">
             {{ csrf_field() }}
@@ -53,13 +39,35 @@
     </div>
 </nav>
 <div class="flex-center position-ref full-height">
-    <div class="content">
-        <div class="title m-b-md">
-            Admin
-        </div>
-        <h4>{{session('email')}}</h4>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="content">
+                    <div class="title m-b-md">
+                        Admin
+                    </div>
+                    <h4>{{session('email')}}</h4>
+                </div>
+            </div>
+            <div class="col-md-4">
 
+                <div id="admin">
+                          <span>
+                                <a href="signUp1"class="btn btn-primary">Create a new admin</a>
+                          </span>
+                          <span>
+                                <a href="{{route('admins.index')}}" class=" btn btn-warning">Admin list</a>
+                          </span>
+                          <span>
+                                <a href="{{route('users.index')}}" class=" btn btn-warning">User list</a>
+                          </span>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
 </div>
 <div class="footer">footer</div>
 </body>

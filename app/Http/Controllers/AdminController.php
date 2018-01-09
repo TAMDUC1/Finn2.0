@@ -1,5 +1,15 @@
 <?php
-
+/**
+ * MyClass Class Doc Comment
+ *
+ * @category Class
+ * @package  MyPackage
+ * @author   Tam <tamduc@stud.ntnu.no>
+ * @license  abc vnexpress.net
+ * @link     http://vnexpress.net
+ *
+ PHP version 5 
+*/
 namespace App\Http\Controllers;
 use App\User;
 use App\Admin;
@@ -23,7 +33,7 @@ class AdminController extends Controller
     public function index()
     {
         $admin = DB :: table('admins')->paginate(4);
-        return view('admin.index',compact('admin'));
+        return view('admin.index', compact('admin'));
     }
 
     /**
@@ -36,89 +46,83 @@ class AdminController extends Controller
         return view('admin.signUp');
     }
 
-    //----------- signUp------------------------------//
-
+    /**----------- signUp------------------------------*/
     public function store(Request $request)
     {
-        $admin = $this->validate(request(),[
+        $admin = $this->validate(
+            request(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password'=>'required|string|min:6',
-        ]);
+            ]
+        );
         $admin['password'] = bcrypt($admin['password']);
         Admin::create($admin);
-        return redirect()->route('login');
+        return redirect()->route('admins.index');
     }
-
-
     /**
-     * Store a newly created resource in storage.
+     * Show
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+
+    }
+    public function profile()
+    {
+        return view('admin.profile');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $admin = Admin::find($id);
-        return view('admin.edit',compact('admin','id'));
+        return view('admin.edit', compact('admin', 'id'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int                      $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $this->validate(request(), [
-            'name' => 'required',
+        $admin = Admin::find($id);
+        $this->validate(
+            request(), [
             'email' => 'required',
             'password'=>'required',
-            'phone' => 'required',
-            'address' => 'required'
-        ]);
-        $user->name = $request->get('name');
-        $user->email = $request->get('email');
-        $user->password = $request->get('password');
-        $user['password'] = bcrypt($user['password']);
-        $user->phone = $request->get('phone');
-        $user->address = $request->get('address');
-        $user->save();
-        return redirect()->route('root')->with('success','User has been updated');
+            ]
+        );
+        $admin->name = $request->get('name');
+        $admin->email = $request->get('email');
+        $admin->password = $request->get('password');
+        $admin['password'] = bcrypt($admin['password']);
+        $admin->save();
+        return redirect()->route('admins.index')->with('success', 'Admin has been updated');
     }
-
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
-        return redirect('user')->with('success','User has been  deleted');
+        $admin = Admin::find($id);
+        if($id!==1) {
+            $admin->delete();
+        }
+        return redirect()->route('admins.index');
     }
+
 }

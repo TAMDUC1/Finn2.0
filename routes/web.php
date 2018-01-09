@@ -10,16 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Support\Facades\Response;
 use App\User;
-
 Route::get('/', function () {
     return view('welcome');
 })->name('root');
-
-
 Route::get('redirectToProvider','UserController@redirectToProvider')->name('redirectToProvider');
 Route::get('handleProviderCallback','UserController@handleProviderCallback')->name('handleProviderCallback');
 Route::get('redirect','UserController@redirect')->name('redirect');
@@ -33,10 +29,7 @@ Route::post('signin1','UserController@signin1')->name('signin1');
 Route::post('changePass','UserController@changePass')->name('changePass');
 Route::get('profile','UserController@profile')->name('profile');
 Route::resource('users','UserController');
-
-
-
-
+Route::get('profile1','AdminController@profile')->name('profile1');
+Route::get('admins','AdminController@index')->name('admins');
 Route::get('signUp1','AdminController@create')->name('signUp1');
-
 Route::resource('admins','AdminController');

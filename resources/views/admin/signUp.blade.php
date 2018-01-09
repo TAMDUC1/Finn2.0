@@ -14,6 +14,8 @@
 <body>
 <nav class="navbar"style="background-color: #cac8c6" role="navigation">
     <a href="{{route('login')}}">Login</a>
+    <a href="{{route('profile1')}}">Profile</a>
+
 </nav>
 <div class="flex-center position-ref full-height">
     <div>

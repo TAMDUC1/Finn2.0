@@ -14,7 +14,7 @@
     <div class="navbar navbar-dark" style="text-decoration: none">
     </div>
     <div>
-
+        <a href="{{route('profile1')}}">Profile</a>
     </div>
 </nav>
 <div class="flex-center position-ref full-height">
