@@ -11,11 +11,25 @@
     </head>
     <body>
         <nav class="navbar" style="background-color: #cac8c6" role="navigation">
+            <div>
+                @if (!session('email'))
+                    <div class="alert alert-success">
+                        <a href="signUp" class="btn btn-warning">SignUp</a>
+                        <a href="login" class="btn btn-warning">Login</a>
+                    </div>
+                @endif
+                @if (session('email'))
+                        <form method="post" action="{{action('UserController@logout')}}">
+                            {{ csrf_field() }}
+                            <div class="logout-button">
+                                <label>
+                                    <button type="submit" class="btn btn-danger" >Log out</button>
+                                </label>
+                            </div>
+                        </form>
+                @endif
             <div class="navbar navbar-dark" style="text-decoration: none">
             </div>
-            <div>
-                    <a href="signUp">SignUp</a>
-                    <a href="login">Login</a>
             </div>
         </nav>
         <div class="flex-center position-ref full-height">

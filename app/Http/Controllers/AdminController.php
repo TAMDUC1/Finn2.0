@@ -8,9 +8,10 @@
  * @license  abc vnexpress.net
  * @link     http://vnexpress.net
  *
- PHP version 5 
-*/
+ PHP version 5
+ */
 namespace App\Http\Controllers;
+
 use App\User;
 use App\Admin;
 use App\Guser;
@@ -23,6 +24,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use App\Http\Controllers\Userapp;
 use Illuminate\Support\Facades\Hash;
+
 class AdminController extends Controller
 {
     /**
@@ -34,8 +36,7 @@ class AdminController extends Controller
     {
         $admin = DB :: table('admins')->paginate(4);
         return view('admin.index', compact('admin'));
-    }
-
+    }//end index()
     /**
      * Show the form for creating a new resource.
      *
@@ -44,37 +45,37 @@ class AdminController extends Controller
     public function create()
     {
         return view('admin.signUp');
-    }
+    }//end create()
 
-    /**----------- signUp------------------------------*/
+
+    // ----------- signUp------------------------------
     public function store(Request $request)
     {
         $admin = $this->validate(
-            request(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password'=>'required|string|min:6',
+            request(),
+            [
+             'name'     => 'required|string|max:255',
+             'email'    => 'required|string|email|max:255|unique:users',
+             'password' => 'required|string|min:6',
             ]
         );
         $admin['password'] = bcrypt($admin['password']);
         Admin::create($admin);
         return redirect()->route('admins.index');
-    }
+    }//end store()
     /**
      * Show
      *
-     * @param $id
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-
-    }
+    }//end show()
     public function profile()
     {
         return view('admin.profile');
-    }
-
+    }//end profile()
     /**
      * Show the form for editing the specified resource.
      *
@@ -85,8 +86,7 @@ class AdminController extends Controller
     {
         $admin = Admin::find($id);
         return view('admin.edit', compact('admin', 'id'));
-    }
-
+    }//end edit()
     /**
      * Update the specified resource in storage.
      *
@@ -98,18 +98,19 @@ class AdminController extends Controller
     {
         $admin = Admin::find($id);
         $this->validate(
-            request(), [
-            'email' => 'required',
-            'password'=>'required',
+            request(),
+            [
+             'email'    => 'required',
+             'password' => 'required',
             ]
         );
-        $admin->name = $request->get('name');
-        $admin->email = $request->get('email');
-        $admin->password = $request->get('password');
+        $admin->name       = $request->get('name');
+        $admin->email      = $request->get('email');
+        $admin->password   = $request->get('password');
         $admin['password'] = bcrypt($admin['password']);
         $admin->save();
         return redirect()->route('admins.index')->with('success', 'Admin has been updated');
-    }
+    }//end update()
     /**
      * Remove the specified resource from storage.
      *
@@ -119,10 +120,9 @@ class AdminController extends Controller
     public function destroy($id)
     {
         $admin = Admin::find($id);
-        if($id!==1) {
+        if ($id !== 1) {
             $admin->delete();
         }
         return redirect()->route('admins.index');
-    }
-
-}
+    }//end destroy()
+}//end class

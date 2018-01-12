@@ -9,66 +9,63 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
     <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            alert($.session.get("email"));
-            var elem = $('#admin');
-            if($.session.get('email'==='tamduc@stud.ntnu.no')){
-                elem.style.visibility = 'visible';
-            }
-            else{
-                elem.style.visibility = 'hidden';
-            }
-        })
-    </script>
 </head>
 <body>
-<nav class="navbar" style="background-color: #cac8c6" role="navigation">
-    <div class="navbar navbar-dark" style="text-decoration: none">
-    </div>
-
-    <div>
-        <form method="post" action="{{action('UserController@logout')}}">
-            {{ csrf_field() }}
-            <div class="logout-button">
-                <label>
-                    <button type="submit" class="btn btn-danger" >Log out</button>
-                </label>
-            </div>
-        </form>
-    </div>
-</nav>
-<div class="flex-center position-ref full-height">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="content">
-                    <div class="title m-b-md">
-                        Admin
-                    </div>
-                    <h4>{{session('email')}}</h4>
+    <nav class="navbar" style="background-color: #cac8c6" role="navigation">
+        <div class="navbar navbar-dark" style="text-decoration: none">
+        </div>
+        <div>
+            <form method="post" action="{{action('UserController@logout')}}">
+                {{ csrf_field() }}
+                <div class="logout-button">
+                    <label>
+                        <button type="submit" class="btn btn-danger" >Log out</button>
+                    </label>
                 </div>
-            </div>
-            <div class="col-md-4">
-
-                <div id="admin">
-                          <span>
-                                <a href="signUp1"class="btn btn-primary">Create a new admin</a>
-                          </span>
-                          <span>
-                                <a href="{{route('admins.index')}}" class=" btn btn-warning">Admin list</a>
-                          </span>
-                          <span>
-                                <a href="{{route('users.index')}}" class=" btn btn-warning">User list</a>
-                          </span>
+            </form>
+        </div>
+    </nav>
+    <div class="flex-center position-ref full-height">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="content">
+                        <div class="title m-b-md">
+                            Admin
+                        </div>
+                        <h4>{{session('email')}}</h4>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div id="admin">
+                        <div class="container">
+                            <div class="row">
+                                @if (session('email')==='tamduc@stud.ntnu.no')
+                                    <div class="alert alert-success">
+                                        <a href="signUp1"class="btn btn-warning">Create a new admin**</a>
+                                        <a href="{{route('admins.index')}}" class=" btn btn-warning">Admin list</a>
+                                    </div>
+                                @endif
+                                <div class="col-md-6">
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a href="{{route('users.index')}}" class=" btn btn-warning">User list</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-</div>
-<div class="footer">footer</div>
+    <div class="footer">footer</div>
 </body>
 </html>

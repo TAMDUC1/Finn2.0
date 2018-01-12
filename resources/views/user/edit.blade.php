@@ -12,45 +12,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<nav class="navbar" style="background-color: #cac8c6" role="navigation">
-    <div class="navbar navbar-dark" style="text-decoration: none">
-    </div>
-    <div>
+    <nav class="navbar" style="background-color: #cac8c6" role="navigation">
+        <div class="navbar navbar-dark" style="text-decoration: none">
+        </div>
+        <div>
             <span>
                   Profile
             </span>
-        <a href="/">Home</a>
+            <a href="/">Home</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Change Pass</h2><br  />
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div><br />
+        @endif
+        <form method="post" action="{{action('UserController@update', $id)}}">
+            {{csrf_field()}}
+            <input name="_method" type="hidden" value="PATCH">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="form-group col-md-4">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" placeholder="Enter your new password" name="password" value="{{$user->password}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="form-group col-md-4">
+                    <button type="submit" class="btn btn-success" style="margin-left:100px">Change Pass</button>
+                </div>
+            </div>
+        </form>
     </div>
-</nav>
-<div class="container">
-    <h2>Change Pass</h2><br  />
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div><br />
-    @endif
-    <form method="post" action="{{action('UserController@update', $id)}}">
-        {{csrf_field()}}
-        <input name="_method" type="hidden" value="PATCH">
-
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="form-group col-md-4">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" placeholder="Enter your new password" name="password" value="{{$user->password}}">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="form-group col-md-4">
-                <button type="submit" class="btn btn-success" style="margin-left:100px">Change Pass</button>
-            </div>
-        </div>
-    </form>
-</div>
 </body>
 </html>
