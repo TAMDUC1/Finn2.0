@@ -43,12 +43,12 @@ class UserController extends Controller
         if (!empty($admin)) {
             if ($Email === 'tamduc@stud.ntnu.no') {
                 if (Hash::check($Password, $admin->password)) {
-                    session(['user_id' => $admin->id, 'email' => $request->email]);
+                    session(['user_id' => $admin->id, 'email' => $request->email, 'role' =>'boss']);
                     return view('admin.profile');
                 }
             } elseif ($Email !== 'tamduc@stud.ntnu.no') {
                 if (Hash::check($Password, $admin->password)) {
-                    session(['user_id' => $admin->id, 'email' => $request->email]);
+                    session(['user_id' => $admin->id, 'email' => $request->email,'role' =>'admin']);
                     return view('admin.profile');
                 }
             }

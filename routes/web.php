@@ -34,3 +34,4 @@ Route::get('profile1', 'AdminController@profile')->name('profile1');
 Route::get('admins', 'AdminController@index')->name('admins');
 Route::get('signUp1', 'AdminController@create')->name('signUp1');
 Route::resource('admins', 'AdminController');
+Route::resource('blogs', 'BlogController');

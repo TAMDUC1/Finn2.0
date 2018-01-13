@@ -12,8 +12,17 @@
     <title>Finn </title>
 </head>
 <body>
-    <nav class="navbar"style="background-color: #cac8c6" role="navigation">
-        <a href="{{route('login')}}">Login</a>
+    <nav class="clearfix"style="background-color: #cac8c6">
+        <a class="btn float-right" href="{{route('login')}}">Login</a>
+    </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+
+            <li class="breadcrumb-item active" aria-current="page">
+                SignUp
+            </li>
+        </ol>
     </nav>
     <div class="flex-center position-ref full-height">
         <div>

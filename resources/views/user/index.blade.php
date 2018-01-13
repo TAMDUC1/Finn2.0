@@ -10,13 +10,21 @@
     <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar" style="background-color: #cac8c6" role="navigation">
-    <div class="navbar navbar-dark" style="text-decoration: none">
-    </div>
+<nav class="clearfix" style="background-color: #cac8c6" role="navigation">
     <div>
-        <a href="{{route('profile1')}}">Profile</a>
+        <form method="post" action="{{action('UserController@logout')}}">
+            {{ csrf_field() }}
+            <button type="submit" class="btn btn-danger float-right" >Log out</button>
+        </form>
     </div>
 </nav>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active"> <a href="{{route('profile1')}}">Profile</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        User index
+    </li>
+</ol>
 <div class="flex-center position-ref full-height">
     <div class="content">
         <div class="title m-b-md">
@@ -28,25 +36,25 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Mobile</th>
-                <th>Address</th>
+                <th>Change Pass</th>
+                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
             @foreach($user as $U)
-                <tr>
-                    <td>{{$id=$U->id}}</td>
-                    <td>{{$name=$U->name}}</td>
-                    <td>{{$email=$U->email}}</td>
-                    <td><a href="{{action('UserController@edit', $id=$U->id)}}" class="btn btn-warning">Edit</a></td>
-                    <td>
-                        <form action="{{action('UserController@destroy', $id=$U->id)}}" method="post">
-                            {{csrf_field()}}
-                            <input name="_method" type="hidden" value="DELETE">
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
-                    </td>
-                </tr>
+            <tr>
+                <td>{{$id=$U->id}}</td>
+                <td>{{$name=$U->name}}</td>
+                <td>{{$email=$U->email}}</td>
+                <td><a href="{{action('UserController@edit', $id=$U->id)}}" class="btn btn-warning">Edit</a></td>
+                <td>
+                    <form action="{{action('UserController@destroy', $id=$U->id)}}" method="post">
+                        {{csrf_field()}}
+                        <input name="_method" type="hidden" value="DELETE">
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
             @endforeach
             {{$user->links()}}
             </tbody>

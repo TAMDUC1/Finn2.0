@@ -10,13 +10,19 @@
     <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar" style="background-color: #cac8c6" role="navigation">
-    <div class="navbar navbar-dark" style="text-decoration: none">
-    </div>
-    <div>
-        <a href="{{route('profile1')}}">Profile</a>
-    </div>
+<nav class="clearfix" style="background-color: #cac8c6" role="navigation">
+    <form method="post" action="{{action('UserController@logout')}}">
+        {{ csrf_field() }}
+        <button type="submit" class="btn btn-danger float-right" >Log out</button>
+    </form>
 </nav>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active"> <a href="{{route('profile1')}}">Profile</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        Admin index
+    </li>
+</ol>
 <div class="flex-center position-ref full-height">
     <div class="content">
         <div class="title m-b-md">

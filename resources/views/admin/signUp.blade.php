@@ -12,9 +12,20 @@
     <title>Finn </title>
 </head>
 <body>
-    <nav class="navbar"style="background-color: #cac8c6" role="navigation">
-        <a href="{{route('profile1')}}">Profile</a>
+    <nav class="clearfix" style="background-color: #cac8c6" role="navigation">
+        <form method="post" action="{{action('UserController@logout')}}">
+            {{ csrf_field() }}
+            <button type="submit" class="btn btn-danger float-right" >Log out</button>
+        </form>
     </nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active"> <a href="{{route('profile1')}}">Profile</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Create a new admin
+        </li>
+    </ol>
+
     <div class="flex-center position-ref full-height">
         <div>
             <form method="post" action="{{url('admins')}}" id="register" >

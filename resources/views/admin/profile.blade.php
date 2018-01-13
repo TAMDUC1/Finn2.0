@@ -11,19 +11,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-    <nav class="navbar" style="background-color: #cac8c6" role="navigation">
-        <div class="navbar navbar-dark" style="text-decoration: none">
-        </div>
-        <div>
-            <form method="post" action="{{action('UserController@logout')}}">
-                {{ csrf_field() }}
-                <div class="logout-button">
-                    <label>
-                        <button type="submit" class="btn btn-danger" >Log out</button>
-                    </label>
-                </div>
-            </form>
-        </div>
+    <nav class="clearfix" style="background-color: #cac8c6" role="navigation">
+        <form method="post" action="{{action('UserController@logout')}}">
+            {{ csrf_field() }}
+            <button type="submit" class="btn btn-danger float-right" >Log out</button>
+        </form>
+    </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item active" aria-current="page">
+                Profile
+            </li>
+        </ol>
     </nav>
     <div class="flex-center position-ref full-height">
         <div class="container">
@@ -53,6 +53,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
+                                    <a href="blogs" class="btn btn-warning"style="width: 84px ">Blogs</a>
                                 </div>
                             </div>
                             <div class="row">

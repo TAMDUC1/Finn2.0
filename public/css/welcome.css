@@ -48,11 +48,30 @@ a{
     color:black;
 }
 a:hover{
-    color: #8082a8;
+    color: #e0dedc;
     text-decoration: none;
 }
 .m-b-md {
     margin-bottom: 30px;
 }
 .navbar{
+}
+nav{
+}
+nav>a{
+    padding: 2px;
+    margin-top: 0px;
+    margin-left: 1px;
+    width: 100px;
+    border-radius: 20px;
+
+}
+nav>button{
+    background-color: transparent;
+    padding: 2px;
+    margin: 2px;
+    width: 100px;
+}
+nav>button :hover{
+    border-color: transparent;
 }
