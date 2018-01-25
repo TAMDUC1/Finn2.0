@@ -16,7 +16,7 @@
         <nav class="clearfix" style="background-color: #8b8987" role="navigation">
             <form method="post" action="{{action('UserController@logout')}}">
                 {{ csrf_field() }}
-                <button type="submit" class="btn btn-warning float-right" >Log out</button>
+                <button type="submit" class="btn btn-danger float-right" >Log out</button>
             </form>
         </nav>
         <nav aria-label="breadcrumb">
@@ -27,7 +27,6 @@
                 </li>
             </ol>
         </nav>
-
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4">

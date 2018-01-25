@@ -38,24 +38,24 @@ class UserController extends Controller
     {
            $Email = $request->email;
         $Password = $request->password;
-           $admin = DB::table('admins')->where('email', $Email)->first();
-            $user = DB::table('users')->where('email', $Email)->first();
+        $admin = DB::table('admins')->where('email', $Email)->first();
+        $user = DB::table('users')->where('email', $Email)->first();
         if (!empty($admin)) {
             if ($Email === 'tamduc@stud.ntnu.no') {
                 if (Hash::check($Password, $admin->password)) {
-                    session(['user_id' => $admin->id, 'email' => $request->email, 'role' =>'boss']);
+                    session(['user_id' => $admin->id, 'email' => $request->email, 'role' =>'boss','name' =>'admin tam']);
                     return view('admin.profile');
                 }
             } elseif ($Email !== 'tamduc@stud.ntnu.no') {
                 if (Hash::check($Password, $admin->password)) {
-                    session(['user_id' => $admin->id, 'email' => $request->email,'role' =>'admin']);
+                    session(['user_id' => $admin->id, 'email' => $request->email,'role' =>'admin','name' => $admin->name]);
                     return view('admin.profile');
                 }
             }
         } elseif (empty($admin)) {
             if (!empty($user)) {
                 if (Hash::check($Password, $user->password)) {
-                    session(['user_id' => $user->id, 'email' => $request->email]);
+                    session(['user_id' => $user->id, 'email' => $request->email,'name' => $user->name]);
                     return view('user.profile');
                 } else {
                     echo 'wrong password';

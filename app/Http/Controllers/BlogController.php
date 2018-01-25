@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Admin;
 use App\Blog;
+use App\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -23,9 +24,17 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blog = Blog::all()->toArray();
+        //$blog = Blog::all()->toArray();
+        //$blog = Blog::all()->paginate(4);
+        // var_dump($comment["blog_id"]);die();
+        //$comment = Comment::all()->toArray();
+        $blog = DB :: table('blogs')->paginate(4);
+        $comment = DB :: table('comments');
+        $blogs = Blog :: with('commentsCount')->get();
+        //var_dump($blogs);die();
 
-        return view('blog.index', compact('blog'));
+        //$blog->id = session('blog_id');
+        return view('blog.index', compact('blog'),compact('comment'),compact('blogs'));
     }
 
     /**
@@ -46,13 +55,20 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $blog = $this->validate(request(), [
-            'title' => 'required',
-            'content'=>'required'
-        ]);
-        $blog['user_id'] = session('user_id');
-        Blog::create($blog);
-        return response()->json($blog);
+        $user =User::find(session('user_id'));
+        if($user){
+            $blog = $this->validate(request(), [
+                'title' => 'required',
+                'content'=>'required'
+            ]);
+            $blog['author']=$user['name'];
+            $user->blogs()->create($blog);
+            return response()->json($blog);
+        }
+        else{
+            return redirect()->route('login');
+        }
+
     }
 
     /**
@@ -61,9 +77,17 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
-        //
+
+        $blog = Blog::find($id);
+        $comment = DB::table('comments')->where('blog_id',$id)->get();
+        $commentCount = $blog->commentsCount->first()->aggregate;
+
+        //var_dump($comment);die();
+        // var_dump($blog); die();
+        return view('blog.view',compact('blog'),compact('comment'),$commentCount);
     }
 
     /**
@@ -87,11 +111,18 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate(request(), [
-            'title' => 'required',
-            'content' => 'required',
-        ]);
-        return redirect('blog')->with('success', 'Blog has been updated');
+       //  var_dump($blog);die();
+        $blog = Blog::find($id);
+        if($blog){
+            $this->validate(request(), [
+                'title' => 'required',
+                'content' => 'required',
+            ]);
+            $blog->title = $request->get('title');
+            $blog->content = $request->get('content');
+            $blog->save();
+            return redirect()->route('blogs.index');
+        }
     }
     /**
      * Remove the specified resource from storage.

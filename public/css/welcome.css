@@ -60,7 +60,7 @@ nav{
 }
 nav>a{
     padding: 2px;
-    margin-top: 0px;
+    margin-top: 3px;
     margin-left: 1px;
     width: 100px;
     border-radius: 20px;
@@ -74,4 +74,71 @@ nav>button{
 }
 nav>button :hover{
     border-color: transparent;
+}
+.contentBlog{
+    text-align: center;
+    height: 200px;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 2px;
+    padding: 1em;
+    margin: 1em;
+    border-color: #e0dedc;
+    background-color: transparent;
+}
+.contentUser{
+    text-align: left;
+    height: 50px;
+    border-style: solid;
+    border-width: thin;
+    border-color: #e0dedc;
+
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+
+}
+.blogDetail{
+    text-align: left;
+    height: 50px;
+    border-style: solid;
+    border-width: thin;
+    border-color: #e0dedc;
+    border-left-color:transparent ;
+    border-right-color:transparent ;
+    border-bottom-color:transparent ;
+    margin-top: 1em;
+    padding-left: 1em;
+}
+.frame-comment{
+    border-style: solid;
+    border-width: thin;
+    margin-top: 1em;
+    text-align: right;
+    border-color: #e0dedc;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-top-color: transparent;
+}
+.frame-comment-context{
+text-align: left;
+}
+.date{
+    font-size:xx-small;
+}
+.blog-comment{
+    border-style: solid;
+    border-width: thin;
+    border-color: #e0dedc;
+    border-top-color: transparent;
+    border-left-color:transparent ;
+    border-right-color:transparent ;
+    border-bottom-color:transparent ;
+
+}
+.comment-header{
+    padding: 0px;
+    background-color: lightblue;
 }

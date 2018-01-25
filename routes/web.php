@@ -35,3 +35,12 @@ Route::get('admins', 'AdminController@index')->name('admins');
 Route::get('signUp1', 'AdminController@create')->name('signUp1');
 Route::resource('admins', 'AdminController');
 Route::resource('blogs', 'BlogController');
+
+Route::put('blogs/{blog}/comments/{comment}', function ($blogId, $commentId) {
+
+
+});
+Route::put('store', 'CommentController@store')->name('store');
+Route::get('create', 'CommentController@create')->name('comment');
+Route::resource('comments', 'CommentController');
+
