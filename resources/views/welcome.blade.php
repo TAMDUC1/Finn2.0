@@ -23,11 +23,11 @@
             @endif
                 <a href="blogs" class="float-right">Blogs</a>
             @if(session('role'))
-                    <a href="{{route('profile1')}}" class="float-right">Profile</a>
+                <a href="{{route('profile1')}}" class="float-right">Profile</a>
             @endif
             @if(!session('role'))
-                    <a href="{{route('profile')}}" class="float-right">Profile</a>
-                @endif
+                <a href="{{route('profile')}}" class="float-right">Profile</a>
+            @endif
         </nav>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -43,6 +43,6 @@
                 </div>
             </div>
         </div>
-        <div class="footer">footer</div>
+        <div class="footer"></div>
     </body>
 </html>

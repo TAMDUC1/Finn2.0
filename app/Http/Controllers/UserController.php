@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Admin;
+use App\Blog;
+use App\Comment;
 use App\Guser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,19 +46,22 @@ class UserController extends Controller
             if ($Email === 'tamduc@stud.ntnu.no') {
                 if (Hash::check($Password, $admin->password)) {
                     session(['user_id' => $admin->id, 'email' => $request->email, 'role' =>'boss','name' =>'admin tam']);
-                    return view('admin.profile');
+                    $blog = Blog::where('user_id', $admin->id)->get();
+                    return view('admin.profile',compact('blog'));
                 }
             } elseif ($Email !== 'tamduc@stud.ntnu.no') {
                 if (Hash::check($Password, $admin->password)) {
                     session(['user_id' => $admin->id, 'email' => $request->email,'role' =>'admin','name' => $admin->name]);
-                    return view('admin.profile');
+                    $blog = Blog::where('user_id', $admin->id)->get();
+                    return view('admin.profile',compact('blog'));
                 }
             }
         } elseif (empty($admin)) {
             if (!empty($user)) {
                 if (Hash::check($Password, $user->password)) {
                     session(['user_id' => $user->id, 'email' => $request->email,'name' => $user->name]);
-                    return view('user.profile');
+                    $blog = Blog::where('user_id', $user->id)->get();
+                    return view('user.profile',compact('blog'));
                 } else {
                     echo 'wrong password';
                 }
@@ -70,11 +75,13 @@ class UserController extends Controller
     public function profile()
     {
         $id = Session::get('user_id');
+        $user = User::find($id);
+        $blog = Blog::where('user_id', $id)->get();
+
         if (empty($id)) {
             return redirect()->route('login');
         }
-
-        return view('user.profile');
+        return view('user.profile',compact('blog'));
     }//end profile()
 
     public function create()

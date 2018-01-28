@@ -40,7 +40,6 @@
             </ol>
         </nav>
         <div class="title m-b-md">
-            List of Blogs
         </div>
             <div class="container-fluid">
                 <div class="row" style="background-color: transparent" >
@@ -48,83 +47,84 @@
                     </div>
                     <div class="col-md-6">
                     @foreach($blog as $b)
-                            @if($b->content)
-                                <div class="contentBlog">
-                                    <div class="comment-header">
-                                        <div class="pull-left">
-                                            blog {{$b->id}}
-                                            <div class="date">
-                                                {{$b->created_at}}
-                                            </div>
+                        @if($b->content)
+                            <div class="contentBlog">
+                                <div class="comment-header">
+                                    <div class="pull-left">
+                                        blog {{$b->id}}
+                                        <div class="date">
+                                            {{$b->created_at}}
                                         </div>
-                                        <div>
-                                            <a href="{{route('blogs.show',['id'=> $b->id])}}" class="btn btn-primary pull-right">View Blog</a>
-                                            @if($b->user_id === session('user_id') and (!session('role')))
-                                                <a href="{{action('BlogController@edit', $id = $b->id)}}" class="btn btn-warning pull-right" >Edit</a>
-                                                <form action="{{action('BlogController@destroy', $id = $b->id)}}" method="post">
-                                                    {{csrf_field()}}
-                                                    <input name="_method" type="hidden" value="DELETE">
-                                                    <button class="btn btn-danger pull-right" type="submit">Delete</button>
-                                                </form>
-                                            @endif
-                                            @if(session('role'))
-                                                <form action="{{action('BlogController@destroy', $id = $b->id)}}" method="post">
-                                                    {{csrf_field()}}
-                                                    <input name="_method" type="hidden" value="DELETE">
-                                                    <td>
-                                                        <button class="btn btn-danger pull-right" type="submit">Delete</button>
-                                                    </td>
-                                                </form>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="contentUser">
-                                        {{$b->author}}
                                     </div>
                                     <div>
-                                        <div class="blogDetail" style="background-color: #e0dedc">
-                                            <div style="font-size: small">
-                                                <span>
-                                                   {{$b->title}}
-                                                </span>
-                                            </div>
-                                            <div>
-                                                <span>
-                                                    {{$b->content}}
-                                                </span>
-                                            </div>
+                                        <a href="{{route('blogs.show',['id'=> $b->id])}}" class="btn btn-primary pull-right">View Blog</a>
+                                        @if($b->user_id === session('user_id') and (!session('role')))
+                                            <a href="{{action('BlogController@edit', $id = $b->id)}}" class="btn btn-warning pull-right" >Edit</a>
+                                            <form action="{{action('BlogController@destroy', $id = $b->id)}}" method="post">
+                                                {{csrf_field()}}
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <button class="btn btn-danger pull-right" type="submit">Delete</button>
+                                            </form>
+                                        @endif
+                                        @if(session('role'))
+                                            <form action="{{action('BlogController@destroy', $id = $b->id)}}" method="post">
+                                                {{csrf_field()}}
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <td>
+                                                    <button class="btn btn-danger pull-right" type="submit">Delete</button>
+                                                </td>
+                                            </form>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="contentUser">
+                                    {{$b->author}}
+                                </div>
+                                <div>
+                                    <div class="blogDetail" style="background-color: #e0dedc">
+                                        <div style="font-size: small">
+                                            <span>
+                                               {{$b->title}}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span>
+                                                {{$b->content}}
+                                            </span>
                                         </div>
                                     </div>
-                                    <div class="frame-comment">
-                                        <div class="blog-comment">
-                                            <div style="padding: 0.3em;">
-                                                <div>
-                                                    @if(session('user_id'))
-                                                        <tr>
-                                                            <td>
-                                                                <form  action="{{action('CommentController@update', $id=$b->id)}}" id="comment" method="POST">
-                                                                    {{csrf_field()}}
-                                                                    {{ method_field('PATCH')}}
-                                                                    <input name="_method" value="PATCH" type="hidden">
-                                                                    <div>
-                                                                        <input type="text" class="form-control" name="comment" id="comment" style="border-color: #e0dedc;border-radius: 5px"/>
-                                                                    </div>
-                                                                </form>
-                                                            </td>
-                                                        </tr>
-                                                    @endif
-                                                </div>
-                                                <div style="float:right">
-                                                    <a href="#" id="comment" data-toggle="collapse" data-target="#demo">Comment</a>
-                                                </div>
-                                                <div style="float: left">
-                                                    <a href="#" id="like">Like</a>
-                                                </div>
+                                </div>
+                                <div class="frame-comment">
+                                    <div class="blog-comment">
+                                        <div style="padding: 0.3em;">
+                                            <div>
+                                                @if(session('user_id'))
+                                                    <tr>
+                                                        <td>
+                                                            <form action="{{action('CommentController@update', $id=$b->id)}}" id="comment" method="POST">
+                                                                {{csrf_field()}}
+                                                                {{ method_field('PATCH')}}
+                                                                <input name="_method" value="PATCH" type="hidden">
+                                                                <div>
+                                                                    <input type="text" class="form-control" name="comment" id="comment" style="border-color: #e0dedc;border-radius: 5px"/>
+                                                                </div>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            </div>
+                                            <div style="float:right">
+                                                {{$b->commentsCount->first()->aggregate}}Comments
+                                            </div>
+                                            <div style="float: left">
+                                                {{$b->emotions()->count()}}
+                                                <a href="{{action('EmotionController@show', $id=$b->id)}}">Like</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            @endif
+                            </div>
+                        @endif
                         @endforeach
                             {{ $blog->links() }}
                     </div>
@@ -134,53 +134,34 @@
             </div>
             <div class="content">
             </div>
-    <script type="text/javascript">
-        $(document).ready(function ()
-        {
-            console.log('sdgsdg');
-
-            $('#like').click(function () {
-                console.log('like');
-                $('.frame-comment').animate({
-                    "height":"500px"
-                },5000,function () {
-                });
-            });
-
-            $('#comment').submit(function (event)// save blogs
+        <script type="text/javascript">
+            $(document).ready(function ()
             {
-                event.preventDefault();
-                var bComment = $('#comment').val();
-                $.post('comments',{ comment: bComment},function (data)
-                {
-
-                })
-            })
-
-            //  $('input[type="text"]').addClass('highLight');
-            $.ajax
-            (
-                {
-                    dataType: 'json',
-                    url:'getBlog',
-                    success:function(data){
-                        $.each(data,function (i,value)
-                        {
-                            var tr =$("<tr/>");
-                            tr.append($("<td/>",
-                                {
-                                    text : " Title la :" + value.title + " content la : " + value.content
-                                }))
-                            $('#blogPost').prepend(tr);
-                        })
-                    },
-                    error: function (jqXhr,textStatus,errorMessage)
+                console.log('sdgsdg');
+                //  $('input[type="text"]').addClass('highLight');
+                $.ajax
+                (
                     {
-                        $('#blogPost').append('Error')
+                        dataType: 'json',
+                        url:'getBlog',
+                        success:function(data){
+                            $.each(data,function (i,value)
+                            {
+                                var tr =$("<tr/>");
+                                tr.append($("<td/>",
+                                    {
+                                        text : " Title la :" + value.title + " content la : " + value.content
+                                    }))
+                                $('#blogPost').prepend(tr);
+                            })
+                        },
+                        error: function (jqXhr,textStatus,errorMessage)
+                        {
+                            $('#blogPost').append('Error')
+                        }
                     }
-                }
-            )
-        })
-    </script>
+                )
+            })
+        </script>
     </body>
 </html>

@@ -22,4 +22,15 @@ class Blog extends Model
             ->selectRaw('blog_id, count(*) as aggregate')
             ->groupBy('blog_id');
     }
+    public function emotions(){
+        return $this->hasMany('App\Emotion');
+    }
+
+    public function emotionsCount()
+    {
+        return $this->emotions()
+            ->selectRaw('blog_id, count(*) as aggregate')
+            ->groupBy('blog_id');
+    }
+
 }

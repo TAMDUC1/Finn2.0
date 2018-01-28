@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Emotion;
 use Illuminate\Http\Request;
 use App\User;
 use App\Admin;
@@ -24,13 +25,12 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //$blog = Blog::all()->toArray();
+        $blog = Blog::paginate(4);
         //$blog = Blog::all()->paginate(4);
         // var_dump($comment["blog_id"]);die();
         //$comment = Comment::all()->toArray();
-        $blog = DB :: table('blogs')->paginate(4);
+        //$blog = DB :: table('blogs')->paginate(4);
         $comment = DB :: table('comments');
-        $blogs = Blog :: with('commentsCount')->get();
         //var_dump($blogs);die();
 
         //$blog->id = session('blog_id');
@@ -80,11 +80,13 @@ class BlogController extends Controller
 
     public function show($id)
     {
-
         $blog = Blog::find($id);
         $comment = DB::table('comments')->where('blog_id',$id)->get();
+        //$emmotion = Emotion::find($id);
+      //  var_dump($blog->emotions()->count());die();
         $commentCount = $blog->commentsCount->first()->aggregate;
-
+        //$blog->emotionsCount->first()->aggregate;
+        // var_dump($blog->emotionsCount->first()->aggregate);die();
         //var_dump($comment);die();
         // var_dump($blog); die();
         return view('blog.view',compact('blog'),compact('comment'),$commentCount);

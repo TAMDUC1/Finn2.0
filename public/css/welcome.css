@@ -142,3 +142,7 @@ text-align: left;
     padding: 0px;
     background-color: lightblue;
 }
+.text-info{
+    padding: 1em;
+    margin-left: 1em;
+}

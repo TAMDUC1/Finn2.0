@@ -44,3 +44,4 @@ Route::put('store', 'CommentController@store')->name('store');
 Route::get('create', 'CommentController@create')->name('comment');
 Route::resource('comments', 'CommentController');
 
+Route::resource('emotions', 'EmotionController');
