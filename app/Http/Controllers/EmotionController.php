@@ -6,7 +6,6 @@ use App\User;
 use App\Admin;
 use App\Blog;
 use App\Emotion;
-
 use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -88,13 +87,17 @@ class EmotionController extends Controller
     {
         $blog = Blog::find($id);
         if($emotion = DB::table('emotions')->where('user_id', Session::get('user_id'))->where('blog_id',$id)->first()){
-           //var_dump($emotion);die();
-           //$blog->emotions()->delete($emotion);
+           // var_dump($emotion->user_id);die();
+            if($emotion->user_id = Session::get('user_id')){
+                //$blog->emotions()->delete($emotion);  ---> delete het toan bo like cua blog
+                $emotion1 = Emotion::find($emotion->id); // tim theo id roi delete
+                $emotion1->delete();
+            }
             return redirect()->route('blogs.index');
         }
         else
         {
-            $emotion =  [
+            $emotion = [
                 'blog_id' => $id,
                 'user_id'=> Session::get('user_id'),
                 'status' => 'like'

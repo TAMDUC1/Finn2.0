@@ -114,11 +114,11 @@
                                                 @endif
                                             </div>
                                             <div style="float:right">
-                                                {{$b->commentsCount->first()->aggregate}}Comments
+                                                <a href="{{route('blogs.show',['id'=> $b->id])}}">{{$b->commentsCount->first()->aggregate}} Comments</a>
                                             </div>
                                             <div style="float: left">
                                                 {{$b->emotions()->count()}}
-                                                <a href="{{action('EmotionController@show', $id=$b->id)}}">Like</a>
+                                                <a href="{{action('EmotionController@show', $id=$b->id)}}">Likes</a>
                                             </div>
                                         </div>
                                     </div>
