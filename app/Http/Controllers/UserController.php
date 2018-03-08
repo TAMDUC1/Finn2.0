@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-
 use App\User;
 use App\Admin;
 use App\Blog;
@@ -15,7 +14,6 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use App\Http\Controllers\Userapp;
 use Illuminate\Support\Facades\Hash;
-
 class UserController extends Controller
 {
 
@@ -34,8 +32,6 @@ class UserController extends Controller
 
         return view('user.login');
     }//end signin()
-
-
     public function signin1(Request $request)
     {
            $Email = $request->email;
@@ -70,8 +66,6 @@ class UserController extends Controller
             }
         }
     }//end signin1()
-
-
     public function profile()
     {
         $id = Session::get('user_id');
@@ -81,9 +75,9 @@ class UserController extends Controller
         if (empty($id)) {
             return redirect()->route('login');
         }
+       // var_dump($blog);die();
         return view('user.profile',compact('blog'));
     }//end profile()
-
     public function create()
     {
         return view('user.signUp');
@@ -103,7 +97,6 @@ class UserController extends Controller
         User::create($user);
         return redirect()->route('login');
     }//end store()
-
     public function redirectToProvider()
     {
         return Socialite :: driver('google')->redirect();
@@ -202,7 +195,7 @@ class UserController extends Controller
     {
           $email = $request->email;
         $queries = DB::table('users')
-            ->Where('email', 'like', '%'.$email.'%')
+            ->Where('email', 'like.js', '%'.$email.'%')
             ->take(20)->get();
         foreach ($queries as $q) {
             $results[] = ['email' => $q->email];

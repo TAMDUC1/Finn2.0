@@ -14,7 +14,7 @@
     </head>
     <body>
         <nav class="clearfix"style="background-color: #cac8c6">
-            <a class="btn float-right" href="{{route('login')}}">Login</a>
+            <a class="btn float-right" href="{{route('login')}}"style="margin:1px ">Login</a>
         </nav>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">

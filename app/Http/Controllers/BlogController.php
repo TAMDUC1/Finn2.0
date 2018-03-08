@@ -25,7 +25,9 @@ class BlogController extends Controller
      */
     public function index()
     {
+       // $blog = Blog::paginate(4);
         $blog = Blog::paginate(4);
+
         //$blog = Blog::all()->paginate(4);
         // var_dump($comment["blog_id"]);die();
         //$comment = Comment::all()->toArray();
@@ -47,12 +49,15 @@ class BlogController extends Controller
         //
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
     public function store(Request $request)
     {
         $user =User::find(session('user_id'));
@@ -81,15 +86,36 @@ class BlogController extends Controller
     public function show($id)
     {
         $blog = Blog::find($id);
-        $comment = DB::table('comments')->where('blog_id',$id)->get();
+        $comment = DB::table('comments')->where('blog_id',$id)->paginate(10);
         //$emmotion = Emotion::find($id);
-      //  var_dump($blog->emotions()->count());die();
+        //var_dump($blog->emotions()->count());die();
         $commentCount = $blog->commentsCount->first()->aggregate;
         //$blog->emotionsCount->first()->aggregate;
         // var_dump($blog->emotionsCount->first()->aggregate);die();
         //var_dump($comment);die();
         // var_dump($blog); die();
         return view('blog.view',compact('blog'),compact('comment'),$commentCount);
+    }
+
+    public function showComment($id)
+    {
+        $blog = Blog::find($id);
+       // $comment = DB::table('comments')->where('blog_id',$id)->paginate(10)->toJson();
+        $comment = DB::table('comments')->where('blog_id',$id)->get();
+
+        //$emmotion = Emotion::find($id);
+        //var_dump($blog->emotions()->count());die();
+       // $commentCount = $blog->commentsCount->first()->aggregate;
+
+        //$blog->emotionsCount->first()->aggregate;
+        // var_dump($blog->emotionsCount->first()->aggregate);die();
+        //var_dump($comment);die();
+        // var_dump($blog); die();
+        //return view('blog.viewcomment',compact('blog'),compact('comment'),$commentCount);
+       // var_dump($blog);die();
+       // var_dump($comment);die();
+
+        return view('blog.viewcomment')->with('comment',json_decode($comment));
     }
 
     /**

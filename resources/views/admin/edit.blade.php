@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <nav class="navbar" style="background-color: #cac8c6" role="navigation">
+        <nav class="navbar" style="background-color: #cac8c6" role="navigation" style="margin:1px ">
             <div class="navbar navbar-dark" style="text-decoration: none">
             </div>
             <div>

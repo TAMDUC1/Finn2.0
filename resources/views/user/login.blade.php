@@ -36,7 +36,10 @@
                             <label for="password">Password</label>
                         </div>
                         <div>
-                            <input type="password" class="form-control" name="password"style="border-color: #5bc0de;border-radius: 5px">
+                            <input id="viewPwdLogin" type="password" class="form-control" placeholder="Password" name="password"style="border-color: #5bc0de;border-radius: 5px">
+                        </div>
+                        <div>
+                            <button style="margin-top: 5px;border-radius: 5px" onclick="changePwd()" type="button" class="btn-primary">Show/Hide Pass</button>
                         </div>
                         <div>
                             <button type="submit" class="btn"style="margin-top: 5px">Login</button>
@@ -81,7 +84,6 @@
                 js.src = "https://connect.facebook.net/en_US/sdk.js";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
-
             function login() {
                 FB.login(function (response) {
                     if(response.status==='connected'){
@@ -96,12 +98,9 @@
             }
             function logout() {
                 FB.logout(function (response) {
-
                 });
-
             }
             // end----
-
             console.log('1222');
             $.ajaxSetup({
                 headers:
@@ -129,6 +128,21 @@
             })
         </script>
         <script>
+            var viewLoginPwd = false;
+            function changePwd() {
+                var getPwdView = $('#viewPwdLogin');
+                if(viewLoginPwd === false){
+
+                    getPwdView.attr("type","text");
+                    viewLoginPwd = true;
+                }
+                else if(viewLoginPwd === true){
+                    getPwdView.attr("type","password");
+                    viewLoginPwd = false;
+                }
+            }
+
+
         </script>
     </body>
 </html>

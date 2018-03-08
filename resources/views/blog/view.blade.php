@@ -47,6 +47,7 @@
                         </td>
                     </tr>
                 @endforeach
+                {{$comment->links()}}
                 <tr>
                     <td>
                         <form  action="{{action('CommentController@update', $id=$blog->id)}}" id="comment" method="POST">

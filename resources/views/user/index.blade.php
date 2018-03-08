@@ -14,7 +14,7 @@
             <div>
                 <form method="post" action="{{action('UserController@logout')}}">
                     {{ csrf_field() }}
-                    <button type="submit" class="btn btn-danger float-right" >Log out</button>
+                    <button type="submit" class="btn btn-danger float-right"style="margin:1px " >Log out</button>
                 </form>
             </div>
         </nav>

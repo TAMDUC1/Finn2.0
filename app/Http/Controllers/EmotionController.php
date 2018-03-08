@@ -86,24 +86,67 @@ class EmotionController extends Controller
     public function show($id)
     {
         $blog = Blog::find($id);
+
         if($emotion = DB::table('emotions')->where('user_id', Session::get('user_id'))->where('blog_id',$id)->first()){
            // var_dump($emotion->user_id);die();
             if($emotion->user_id = Session::get('user_id')){
+                //var_dump('sdgsdg');die();
+
                 //$blog->emotions()->delete($emotion);  ---> delete het toan bo like cua blog
                 $emotion1 = Emotion::find($emotion->id); // tim theo id roi delete
                 $emotion1->delete();
             }
-            return redirect()->route('blogs.index');
+            elseif (!Session::get('user_id'))
+            {
+                return view('user.login');
+            }
+
+           //return view($blog->currentPage());
+            return redirect()->back();
+           // return redirect('blogs'.$_COOKIE['pageurl']); //return to currentpage
+
         }
+
         else
         {
+          //  $emotion = new Emotion(['blog_id' => $id], ['status' => 'like'], ['user_id' => Session::get('user_id')]);
+            //$blog->emotions()->save($emotion);
             $emotion = [
                 'blog_id' => $id,
                 'user_id'=> Session::get('user_id'),
                 'status' => 'like'
             ];
             $blog->emotions()->create($emotion);
-            return redirect()->route('blogs.index');
+             return redirect()->back();
+            //return redirect('blogs'.$_COOKIE['pageurl']); //return to currentpage
+        }
+    }
+    public function postLikePost(Request $request){
+        $id = $request['postId'];
+        $blog = Blog::find($id);
+        if($emotion = DB::table('emotions')->where('user_id', Session::get('user_id'))->where('blog_id',$id)->first()){
+            // var_dump($emotion->user_id);die();
+            if($emotion->user_id = Session::get('user_id')){
+                //$blog->emotions()->delete($emotion);  ---> delete het toan bo like cua blog
+                $emotion1 = Emotion::find($emotion->id); // tim theo id roi delete
+                $emotion1->delete();
+            }
+            //return view($blog->currentPage());
+            return redirect()->back();
+            // return redirect('blogs'.$_COOKIE['pageurl']); //return to currentpage
+        }
+        else
+        {
+            //  $emotion = new Emotion(['blog_id' => $id], ['status' => 'like'], ['user_id' => Session::get('user_id')]);
+            //$blog->emotions()->save($emotion);
+            $emotion = [
+                'blog_id' => $id,
+                'user_id'=> Session::get('user_id'),
+                'status' => 'like'
+            ];
+            $blog->emotions()->create($emotion);
+            return redirect()->back();
+            //return redirect('blogs'.$_COOKIE['pageurl']); //return to currentpage
         }
     }
     /**
@@ -145,8 +188,40 @@ class EmotionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
         //
+    }
+
+    public function toggle($id)
+    {
+        $blog = Blog::find($id);
+
+        if($emotion = DB::table('emotions')->where('user_id', Session::get('user_id'))->where('blog_id',$id)->first()){
+            // var_dump($emotion->user_id);die();
+            if($emotion->user_id = Session::get('user_id')){
+                //var_dump('sdgsdg');die();
+                //$blog->emotions()->delete($emotion);  ---> delete het toan bo like cua blog
+                $emotion1 = Emotion::find($emotion->id); // tim theo id roi delete
+                $emotion1->delete();
+            }
+        }
+        else
+        {
+            //  $emotion = new Emotion(['blog_id' => $id], ['status' => 'like'], ['user_id' => Session::get('user_id')]);
+            //$blog->emotions()->save($emotion);
+            $emotion = [
+                'blog_id' => $id,
+                'user_id'=> Session::get('user_id'),
+                'status' => 'like'
+            ];
+            $blog->emotions()->create($emotion);
+        }
+        $response = array(
+            'status' => 'success',
+            'like' => $blog->emotions()->count(),
+        );
+        return \Response::json($response);
     }
 }

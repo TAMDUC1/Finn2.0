@@ -1440,7 +1440,7 @@
                 "swiftmailer/swiftmailer": "^5.3|^6.0"
             },
             "suggest": {
-                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
+                "aws/aws-sdk-php": "Allow sending log messages to AWS services like.js DynamoDB",
                 "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
                 "ext-mongo": "Allow sending log messages to a MongoDB server",
