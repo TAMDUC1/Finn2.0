@@ -58,7 +58,6 @@
                         <ul class="list-group" style="text-align: left">
                             <li>
                                 Overview
-
                             </li>
                             <li>
                                 <a href="" class="work">Work and Education</a>
@@ -105,8 +104,8 @@
                             </div>
 
                         </div>
-                        <div class="details-container-right">
-                            <ul>
+                        <div class="details-container-right"style="margin-right: 12px">
+                            <ul style="margin-top: 10px">
                                 <li>
                                     <img src="{{URL::asset('/images/profile.jpg')}}" alt="profile Pic" height="100" width="100" style="border-radius: 50px" >
                                 </li>

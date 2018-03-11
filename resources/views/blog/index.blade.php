@@ -49,12 +49,9 @@
                 </li>
             </ol>
         </nav>
-        <div class="title m-b-md">
-        </div>
             <div class="container-fluid">
                 <div class="row" style="background-color: transparent" >
                     <div class="col-sm-4" style="background-color: transparent">
-
                     </div>
                     <div class="col-sm-4" style="background-color: transparent">
                         @foreach($blog as $b)
@@ -71,7 +68,6 @@
                                             <div>
                                                 <a href="{{route('blogs.show',['id'=> $b->id])}}" class="btn btn-primary pull-right" style="margin:1px ">View Blog</a>
                                                 <a href="{{route('showComment',['id'=> $b->id])}}" class="btn btn-primary pull-right" style="margin:1px ">View Comments</a>
-
                                             @if($b->user_id === session('user_id') and (!session('role')))
                                                         <a href="{{action('BlogController@edit', $id = $b->id)}}" class="btn btn-warning pull-right" style="margin:1px ">Edit</a>
                                                         <form action="{{action('BlogController@destroy', $id = $b->id)}}" method="post">
@@ -110,23 +106,22 @@
                                         </div>
                                         <div class="frame-comment" data-postid = "d">
                                             <div class="blog-comment" data-postid = "e">
-                                                <div style="padding: 0.3em;" data-postid = "{{ $b->id }}">
+                                                <div style="padding: 0.3em;" data-postid = "f">
                                                     @if(session('user_id'))
                                                         <tr data-postid = "t">
                                                             <td data-postid = "g">
-                                                                <form  class="comment" id="comment" data-id="{{$b->id}}" method="post" type="hidden">
+                                                                <form  class="comment" id="comment{{$b->id}}" data-id="{{$b->id}}" method="post" type="hidden">
                                                                     {{csrf_field()}}
-                                                                        <input type="text"  name="comment" id="{{$b->id}}" style="border-color: #669fe0;border-radius: 5px;width: 100%"/>
+                                                                        <input type="text"  name="comment" id="input{{$b->id}}" style="border-color: #669fe0;border-radius: 5px;width: 100%"/>
                                                                 </form>
                                                             </td>
                                                         </tr>
                                                     @endif
-                                                        <div style="float:right">
-                                                            <span>
+                                                        <div style="float:right" data-postid ="g2">
+                                                            <span id="blogCommentCount{{$b->id}}" data-postid = "h">
                                                                 {{$b->commentsCount->first()->aggregate}}
                                                             </span>
                                                             <a data-id="{{$b->id}}" class="test" href="#{{$b->id+1}}">Comments</a>
-
                                                             <div class="testdiv" id="{{$b->id+1}}" >
                                                                 <div id="com" class="collapse"></div>
                                                             </div>
@@ -137,7 +132,6 @@
                                                         </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 @endif
@@ -145,25 +139,11 @@
                         @endforeach
                         {{ $blog->links() }}
                     </div>
-                    </div>
-                    <div class="col-sm-4" style="background-color: transparent">
-                        <div class="panel-group">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" href="#collapse1">Collapsible list group</a>
-                                    </h4>
-                                </div>
-                                <div id="collapse1" class="panel-collapse collapse">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">One</li>
-                                        <li class="list-group-item">Two</li>
-                                        <li class="list-group-item">Three</li>
-                                    </ul>
-                                    <div class="panel-footer">Footer</div>
-                                </div>
+                    <div class="col-sm-4" id="show" style="background-color: #f5f8ff">
+                        @foreach($blog as $b)
+                            <div id="show{{$b->id}}">
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             <div class="content">
@@ -181,7 +161,6 @@
             {
                 $('.testdiv').hide();
                 $('#columns').hide();
-
                 $('.test').click(function() {
                    // event.preventDefault();
                     var _this = $(this);
@@ -207,7 +186,6 @@
                                 "                        <th>COMMENT</th></tr>";
                             console.log(data2);
                             $.each(data2,function () {
-
                                         $.each(this, function (index , value) {
                                     if(index =='author'){
                                         x =  value;
@@ -235,60 +213,67 @@
                   $( '#'+id).toggle( "fold", 700 );
 
                 });
+
+                $('.comment').submit(function (event)// save comments
+                {
+                    event.preventDefault();
+                    var params = $(this).data();
+                    var bComment = $('#input'+params.id).val();// chuyen qua id *********************************
+                    if(bComment){
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $.ajax(
+                            {
+                                method: "POST",
+                                url: "comments/" + params.id,
+                                data: { comment: bComment },
+                                success: function (data)
+                                {
+                                    console.log(params.id);
+                                    console.log(bComment);
+                                    console.log(data);
+                                    $('#blogCommentCount'+params.id).text(data.comment_count);// hien thi comment count
+                                    $('#show'+params.id).text('you have just posted comment "'+bComment+'" on blog '+params.id );
+                                    if(!bComment){
+                                        console.log('wrong');
+                                        console.log($('#input'+params.id));
+                                    }
+                                },
+                                error: function (data)
+                                {
+                                    var errors = $.parseJSON(data.responseText);
+                                    $.each(errors, function (key, value)
+                                    {
+                                        $('#' + key).parent().addClass('error');
+                                    });
+                                }
+                            })
+                            .done(function( msg )
+                            {
+                                $(this).find("input").val("");
+                                $(".comment").trigger("reset");
+                            });
+                    }
+
+                });
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
             })
         </script>
         <script>
             document.cookie = "pageurl=" + encodeURIComponent(window.location['search']);
         </script>
         <script>
-            var token = '{{ Session::token() }}';
-            var urlLike = '{{ route('like') }}';
-            $('.comment').submit(function (event)// save comments
-            {
-                event.preventDefault();
-                var _this = $(this);
-                var params = _this.data();
-                var comment = _this.val();
-               // var bComment = $('.comment100').val();
-                var bComment = $('#'+params.id).val();// chuyen qua id *********************************
-
-                var id = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.dataset['postid'];
-                var _that = event.target.valueOf();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax(
-                {
-                    method: "POST",
-                    url: "comments/" + params.id,
-                    data: { comment1: bComment },
-                    success: function (data)
-                    {
-                        alert('done');
-
-                    },
-                    error: function (data)
-                    {
-                        var errors = $.parseJSON(data.responseText);
-                        $.each(errors, function (key, value)
-                        {
-                            $('#' + key).parent().addClass('error');
-                        });
-                    }
-                })
-                    .done(function( msg )
-                    {
-                        $(this).find("input").val("");
-                        $(".comment").trigger("reset");
-                    });
-            });
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+           //var token = '{{ Session::token() }}';
+           // var urlLike = '{{ route('like') }}';
+         //var id = event.target.parentNode.parentNode.parentNode.dataset['postid'];
+           //var _that = event.target.valueOf();
             $('.like10').click(function (event) {
                 var _this = $(this);
                 var params = _this.data();
@@ -297,10 +282,6 @@
                     url: "/toggle/" + params.id,
                     data: {},
                     success: function (data) {
-                       // console.log('like')
-                        // tim cach thay gia tri
-                      //  console.log(data);
-                      // console.log(_this.data);
                         _this.prev().text(data.like);//hien thi like
                     },
                     error: function (data) {

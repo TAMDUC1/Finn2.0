@@ -180,6 +180,11 @@ section {
     grid-auto-rows: 60px;
     grid-auto-flow: dense;
 }
+.main .blog-comment{
+    margin: auto;
+    padding: 20px;
+
+}
 .intro{
 
 }

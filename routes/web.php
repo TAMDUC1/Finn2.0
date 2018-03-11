@@ -53,16 +53,11 @@ Route::put('blogs/{blog}/comments/{comment}', function ($blogId, $commentId) {
 
 
 Route::post('comments/{id}', 'CommentController@comment')->name('comment1');
-
 Route::put('store', 'CommentController@store')->name('store');
 Route::get('create', 'CommentController@create')->name('comment');
-
 Route::get('comments/{id}', 'CommentController@show')->name('toggleComment');
 Route::get('comments1/{id}', 'CommentController@show1')->name('toggleComment1');
-
 Route::resource('comments', 'CommentController');
-
-
 Route::post('/like','EmotionController@postLikePost')->name('like');
 
 Route::post('toggle/{id}', 'EmotionController@toggle')->name('toggleEmotion');

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\User;
 use App\Admin;
@@ -55,18 +54,24 @@ class CommentController extends Controller
     public function comment($id){
         $blog = Blog::find($id);
         if ($blog){
-            $c = $_POST['comment1'];
-            $comment['comment'] = $_POST['comment1'];
+           // $c = $_POST['comment1'];
+            $comment['comment'] = $_POST['comment'];
             $comment['author'] = Session::get('name');
             $comment['blog_id'] = $id;
             $comment['author_id'] = Session::get('user_id');
             $blog->comments()->create($comment);
-          //  Comment::create($comment);
-         //   $comment = new Comment(['comment' => $c],['author'=> Session::get('name')],['author_id'=>Session::get('user_id')]);
-           // $blog->comments()->save($comment);
+            //Comment::create($comment);
+            //$comment = new Comment(['comment' => $c],['author'=> Session::get('name')],['author_id'=>Session::get('user_id')]);
+            // $blog->comments()->save($comment);
             $blog->commentsCount->first()->aggregate;
-           // Comment::create($comment);
+            $count=$blog->commentsCount->first()->aggregate;
+            // Comment::create($comment);
+            $response = array(
+                'status' => 'success',
+                'comment_count' => $count,
+            );
         }
+        return \Response::json($response);
     }
 
     public function store($comment1, $id)
