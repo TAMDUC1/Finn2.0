@@ -10,7 +10,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="ha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="{{asset('js/jquery-ui.js')}}"></script>
         <script src="{{asset('js/jquery-ui.min.js')}}"></script>
         <script src="{{asset('js/jquery.columns.min.js')}}"></script>
@@ -21,6 +20,8 @@
         <link href="{{ asset('css/jquery-ui.theme.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
         <link href="{{ asset('css/classic.css') }}" rel="stylesheet">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
     </head>
     <body>
         <nav class="clearfix" style="background-color: #cac8c6">
@@ -29,7 +30,7 @@
                 <a href="login" class="btn  float-right" style="margin:1px ">Login</a>
             @endif
             @if (session('email'))
-                <form method="post" action="{{action('UserController@logout')}}">
+                <form method="post" action="{{route('logout')}}">
                     {{ csrf_field() }}
                         <button type="submit" class="btn btn-danger float-right" style="margin:1px ">Log out</button>
                 </form>
@@ -119,7 +120,7 @@
                                                     @endif
                                                         <div style="float:right" data-postid ="g2">
                                                             <span id="blogCommentCount{{$b->id}}" data-postid = "h">
-                                                                {{$b->commentsCount->first()->aggregate}}
+                                                                {{$b->comments()->count()}}
                                                             </span>
                                                             <a data-id="{{$b->id}}" class="test" href="#{{$b->id+1}}">Comments</a>
                                                             <div class="testdiv" id="{{$b->id+1}}" >
@@ -211,9 +212,7 @@
                     });
                    // $('#com').toggle("fold",300);
                   $( '#'+id).toggle( "fold", 700 );
-
                 });
-
                 $('.comment').submit(function (event)// save comments
                 {
                     event.preventDefault();
@@ -228,7 +227,7 @@
                         $.ajax(
                             {
                                 method: "POST",
-                                url: "comments/" + params.id,
+                                url: "comments1/" + params.id,
                                 data: { comment: bComment },
                                 success: function (data)
                                 {
@@ -259,24 +258,24 @@
                     }
 
                 });
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
             })
         </script>
         <script>
             document.cookie = "pageurl=" + encodeURIComponent(window.location['search']);
         </script>
         <script>
-           //var token = '{{ Session::token() }}';
+           //var token = '{{Session::token() }}';
            // var urlLike = '{{ route('like') }}';
          //var id = event.target.parentNode.parentNode.parentNode.dataset['postid'];
            //var _that = event.target.valueOf();
             $('.like10').click(function (event) {
                 var _this = $(this);
                 var params = _this.data();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
                 $.ajax({
                     method: "POST",
                     url: "/toggle/" + params.id,
@@ -293,5 +292,6 @@
                 });
             });
         </script>
+        </div>
     </body>
 </html>

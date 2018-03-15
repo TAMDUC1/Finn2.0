@@ -74,6 +74,9 @@ class CommentController extends Controller
         return \Response::json($response);
     }
 
+
+
+
     public function store($comment1, $id)
     {
 
@@ -120,6 +123,10 @@ class CommentController extends Controller
        // return response(compact('comment1'));
     }
 
+
+
+
+
     public function show1($id)
     {
         $blog = Blog::find($id);
@@ -142,7 +149,14 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment['comment'] = $_GET['comment'];
+        $comment->save();
+
+       // if ($comment){
+            // $c = $_POST['comment1'];
+         //   $comment['comment'] = $_POST['comment'];
+        //}
     }
 
     /**
@@ -173,7 +187,15 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment -> delete();
+        return redirect()->route('blogs.show',['id'=> $comment->blog_id]);
+    }
+    public function delete($id)
+    {
+        $comment = Comment::find($id);
+        $comment -> delete();
+        return redirect()->route('blogs.show',['id'=> $comment->blog_id]);
     }
     public function getComment()
     {
@@ -184,4 +206,8 @@ class CommentController extends Controller
         return response($comment
         );
     }
+
+
+
+
 }

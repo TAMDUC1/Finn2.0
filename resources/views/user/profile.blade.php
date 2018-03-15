@@ -14,7 +14,7 @@
     </head>
     <body>
         <nav class="clearfix" style="background-color: #8b8987" role="navigation">
-            <form method="post" action="{{action('UserController@logout')}}">
+            <form method="post" action="{{route('logout')}}">
                 {{ csrf_field() }}
                 <button type="submit" class="btn btn-danger float-right" style="margin:1px ">Log out</button>
             </form>
@@ -172,7 +172,8 @@
                                     {{$b->created_at}}
                                 </td>
                                 <td>
-                                    <a href="{{route('blogs.show',['id'=> $b->id])}}" class="btn btn-primary pull-right">{{$b->commentsCount->first()->aggregate}} Comment</a>
+                                    {{$b->commentsCount->count()}}
+
                                 </td>
                             </tr>
                         @endforeach

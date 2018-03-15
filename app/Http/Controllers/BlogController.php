@@ -89,12 +89,12 @@ class BlogController extends Controller
         $comment = DB::table('comments')->where('blog_id',$id)->paginate(10);
         //$emmotion = Emotion::find($id);
         //var_dump($blog->emotions()->count());die();
-        $commentCount = $blog->commentsCount->first()->aggregate;
+       // $commentCount = $blog->commentsCount->first()->aggregate;
         //$blog->emotionsCount->first()->aggregate;
         // var_dump($blog->emotionsCount->first()->aggregate);die();
         //var_dump($comment);die();
         // var_dump($blog); die();
-        return view('blog.view',compact('blog'),compact('comment'),$commentCount);
+        return view('blog.view',compact('blog'),compact('comment'));
     }
 
     public function showComment($id)
@@ -127,6 +127,7 @@ class BlogController extends Controller
     public function edit($id)
     {
         $blog = Blog::find($id);
+
         return view('blog.edit', compact('blog', 'id'));
     }
 
@@ -139,19 +140,15 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-       //  var_dump($blog);die();
+
         $blog = Blog::find($id);
-        if($blog){
-            $this->validate(request(), [
-                'title' => 'required',
-                'content' => 'required',
-            ]);
-            $blog->title = $request->get('title');
-            $blog->content = $request->get('content');
-            $blog->save();
-            return redirect()->route('blogs.index');
-        }
+       //
+        $blog->title = $request->get('title');
+        $blog->content = $request->get('content');
+        $blog->save();
+        return redirect()->route('blogs.show',['id'=> $blog->id]);
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -173,5 +170,17 @@ class BlogController extends Controller
               ->get();
         return response($blog);
 
+    }
+
+    public function editTitleBlog($id){
+        $blog =Blog::find($id);
+        $blog->title = $_POST['title'];
+        $blog->save();
+    }
+
+    public function editContentBlog($id){
+        $blog =Blog::find($id);
+        $blog->content = $_POST['content'];
+        $blog->save();
     }
 }

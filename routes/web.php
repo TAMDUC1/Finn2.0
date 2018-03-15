@@ -41,25 +41,39 @@ Route::resource('admins', 'AdminController');
 
 Route::get('showComment/{id}', 'BlogController@showComment')->name('showComment');
 
-
-
-
-Route::resource('blogs', 'BlogController');
-
-Route::put('blogs/{blog}/comments/{comment}', function ($blogId, $commentId) {
-
-
+Route::get('test', function()
+{
+    Mail::send('Email.test', [], function ($message)
+    {
+        $message->to('example@gmail.com', 'HisName')->subject('Welcome!');
+    });
 });
-
-
-Route::post('comments/{id}', 'CommentController@comment')->name('comment1');
+Route::put('blogs/{blog}/comments/{comment}', function ($blogId, $commentId) {
+});
+Route::post('comments1/{id}', 'CommentController@comment')->name('comment1');
+Route::post('comments/{id}', 'CommentController@delete')->name('commentDelete');
 Route::put('store', 'CommentController@store')->name('store');
 Route::get('create', 'CommentController@create')->name('comment');
 Route::get('comments/{id}', 'CommentController@show')->name('toggleComment');
 Route::get('comments1/{id}', 'CommentController@show1')->name('toggleComment1');
+Route::get('comments/{id}/edit', 'CommentController@edit')->name('commentEdit');
 Route::resource('comments', 'CommentController');
 Route::post('/like','EmotionController@postLikePost')->name('like');
 
 Route::post('toggle/{id}', 'EmotionController@toggle')->name('toggleEmotion');
 
 Route::resource('emotions', 'EmotionController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('blogs/{id}/comments1', 'CommentController@comment')->name('comment2');
+
+
+
+
+Route::post('blogs/{id}/editTitleBlog', 'BlogController@editTitleBlog')->name('editTitleBlog');
+Route::post('blogs/{id}/editContentBlog', 'BlogController@editContentBlog')->name('editContentBlog');
+
+Route::resource('blogs', 'BlogController');

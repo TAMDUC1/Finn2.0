@@ -12,7 +12,7 @@
     </head>
     <body>
         <nav class="clearfix" style="background-color: #cac8c6" role="navigation">
-            <form method="post" action="{{action('UserController@logout')}}">
+            <form method="post" action="{{route('logout')}}">
                 {{ csrf_field() }}
                 <button type="submit" class="btn btn-danger float-right" >Log out</button>
             </form>
