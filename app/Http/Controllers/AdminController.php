@@ -62,7 +62,19 @@ class AdminController extends Controller
         $admin['password'] = bcrypt($admin['password']);
         Admin::create($admin);
         return redirect()->route('admins.index');
-    }//end store()
+    }
+
+
+
+
+
+
+
+
+
+
+
+    //end store()
     /**
      * Show
      *
@@ -110,7 +122,23 @@ class AdminController extends Controller
         $admin['password'] = bcrypt($admin['password']);
         $admin->save();
         return redirect()->route('admins.index')->with('success', 'Admin has been updated');
-    }//end update()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //end update()
     /**
      * Remove the specified resource from storage.
      *

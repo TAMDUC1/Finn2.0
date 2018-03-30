@@ -29,6 +29,7 @@
             @if(!session('role'))
                 <a href="{{route('profile')}}" class="float-right">Profile</a>
             @endif
+                <a href="webHome">Web</a>
         </nav>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -146,12 +147,8 @@
                    // $('#studie').hide();
                     $('#live').replaceWith("<div id='#live'>" + "Hanoi and Norway "+"</div>");
                    // $('.details-container-left').toggle();
-
                 })
-
             })
-
-
         </script>
     </body>
 </html>

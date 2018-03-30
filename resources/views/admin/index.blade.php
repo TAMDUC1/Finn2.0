@@ -8,6 +8,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
     </head>
     <body>
         <nav class="clearfix" style="background-color: #cac8c6" role="navigation">
@@ -38,7 +41,7 @@
                     </thead>
                     <tbody>
                     @foreach($admin as $A)
-                        <tr>
+                        <tr id="admin{{$A->id}}">
                             <td>{{$id=$A->id}}</td>
                             <td>{{$name=$A->name}}</td>
                             <td>{{$email=$A->email}}</td>
@@ -50,6 +53,11 @@
                                     <button class="btn btn-danger" type="submit">Delete</button>
                                 </form>
                             </td>
+                            <td>
+                                <button class="btn btn-primary delete" id="delete{{$id}}" data-id="{{$id}}" data-token="{{ csrf_token() }}">
+                                    Delete Jquery
+                                </button>
+                            </td>
                         </tr>
                     @endforeach
                     {{$admin->links()}}
@@ -58,5 +66,36 @@
             </div>
         </div>
         <div class="footer">footer</div>
+        <script type="text/javascript">
+            $('.delete').click(function (event) {
+                var _this = $(this);
+                var params = _this.data();
+                console.log(params.id);
+                var token = $(this).data('token');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    method: "post",
+                    url: "/admins/" + params.id,
+                    data: {_method: 'delete', _token :token},
+                    success: function (data) {
+                        console.log(params.id);
+                        $( "#admin"+params.id ).remove();
+
+                        //  _this.prev().text(data.like);//hien thi like
+                    },
+                    error: function (data) {
+                        var errors = $.parseJSON(data.responseText);
+                        $.each(errors, function (key, value) {
+                            $('#' + key).parent().addClass('error');
+                        });
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

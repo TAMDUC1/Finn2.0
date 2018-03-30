@@ -14,9 +14,15 @@ use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Support\Facades\Response;
 use App\User;
 
+
 Route::get('/', function () {
     return view('welcome');
 })->name('root');
+
+
+Route::get('/webHome', function () {
+    return View::make('Web.webHome');
+})->name('webHome');
 Route::get('redirectToProvider', 'UserController@redirectToProvider')->name('redirectToProvider');
 Route::get('handleProviderCallback', 'UserController@handleProviderCallback')->name('handleProviderCallback');
 Route::get('redirect', 'UserController@redirect')->name('redirect');

@@ -4,11 +4,13 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <script type="text/javascript" src="{{ URL::to('js/bootstrap.min.js') }}"></script>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
+        <script type="text/javascript" src="{!! asset('js/validate.js') !!}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
         <title>Finn </title>
     </head>
     <body>
@@ -60,6 +62,31 @@
                     </div>
                 </form>
             </div>
+            <div style="padding-left: 5px " id="formRegister">
+                <form action="">
+                    <div>
+                        <label for="name">Admin:</label>
+
+                        <input  name="field1" class="form-control" type="text"style="border-color: #5bc0de;border-radius: 5px" id="adminName">
+                    </div>
+                    <div>
+                        <label for="name">Email:</label>
+
+                        <input name="filed2" class="form-control" type="text"style="border-color: #5bc0de;border-radius: 5px" id="adminEmail">
+
+                    </div>
+                    <div>
+                        <label for="name">Pass:</label>
+
+                        <input name="field3" class="form-control" type="text"style="border-color: #5bc0de;border-radius: 5px" id="adminPass">
+
+                    </div>
+                    <div style="padding-top: 5px">
+                        <button type="submit"class="btn btn-primary" style="padding-left: 15px;margin-left: 20px">Create via Jquery</button>
+                    </div>
+
+                </form>
+            </div>
             <div>
                 <div class="fail">
                     @if ($errors->any())
@@ -85,13 +112,10 @@
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, rem, vitae? Accusamus blanditiis ducimus eum hic id natus odit quisquam sint tempora voluptate? Ad, adipisci alias amet autem consequuntur cupiditate, distinctio dolores, doloribus eligendi explicabo harum hic impedit ipsum maxime nemo nisi nulla odio omnis placeat quae quibusdam sunt veniam.
     </div>
     <script type="text/javascript">
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+
         $(document).ready(function ()
         {
+            console.log('abc');
             $('#register').submit(function ()
             {
                 var aName = $('#name').val();
@@ -105,6 +129,39 @@
                     $('#postRequestData').html(data);
                 });
             });
+
+            $('#formRegister').submit(function ()
+            {
+                var aName = $('#name').val();
+                var aEmail = $('#email').val();
+                var aPassword = $('#password').val();
+                var aPhone = $('#phone').val();
+                var aAddress = $('#address').val();
+
+                $('#formRegister').validate({
+                    rules:{
+                        field1:{
+                            required: true
+
+                        },
+                        field2:{
+                            required: true
+
+                        },
+                        field3:{
+                            required: true
+
+                        }
+                    },
+                    submitHandler: function (form)
+                    { // for demo
+                        alert('valid form submitted'); // for demo
+                        return false; // for demo
+                    }
+                });
+
+            });
+
         })
     </script>
     </body>
