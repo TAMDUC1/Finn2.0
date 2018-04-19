@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="{!! asset('js/dropdown.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('js/slider.js') !!}"></script>
+    <script src="{{asset('js/slider.js')}}"></script>
     <link href="{{ asset('css/web.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -195,7 +197,7 @@
                     </ul>
                 </div>
                 <div class="header-navigation-mid-title">
-                    <a href="">KIDS</a>
+                    <a href="kid">KIDS</a>
 
                 </div>
                 <div class="dropdown header-navigation-mid-title">
@@ -387,7 +389,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="main-content"  >
+            <div class="main-content">
                 <div style="margin-top: 54px">
                     <p>ABOUT US</p>
                     <div style="width: 95%;height: auto;background-color: white;padding: 20px" >
@@ -441,7 +443,6 @@
                                 Express delivery withing 3 days
                             </em>
                         </div>
-
                     </div>
                 </div>
                 <div>
@@ -613,7 +614,7 @@
                                 NEWSLETTER
                             </h3>
                             <form action="">
-                                <div style="border-style: solid;border-color: #e0dedc;border-width: thin; width: 350px;height: 36px;display: grid;grid-template-columns:  71.5% 27.5%">
+                                <div style="border-style: solid;border-color: #e0dedc;border-width: thin; width: 350px;height: 32,55px;display: grid;grid-template-columns:  71.5% 27.5%">
                                     <input type="text" style="border-style:none;padding-left: 10px; width: 270px;background-color: transparent" placeholder="youremail@mail.com">
                                     <span class="input-group-btn">
                                     <button class="btn btn-primary" type="submit" style="background-color: orangered;width: 100px;border-radius: 0px;border-color: transparent">SUBSCRIBE
