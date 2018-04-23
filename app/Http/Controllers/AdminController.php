@@ -59,7 +59,8 @@ class AdminController extends Controller
              'password' => 'required|string|min:6',
             ]
         );
-        $admin['password'] = bcrypt($admin['password']);
+      //  $admin['password'] = bcrypt($admin['password']);
+        $admin['password'] = Hash::make($admin['password']);
         Admin::create($admin);
         return redirect()->route('admins.index');
     }
@@ -116,25 +117,15 @@ class AdminController extends Controller
              'password' => 'required',
             ]
         );
+        $admin->isAdmin    = $request->get('role');
         $admin->name       = $request->get('name');
         $admin->email      = $request->get('email');
         $admin->password   = $request->get('password');
-        $admin['password'] = bcrypt($admin['password']);
+        //$admin['password'] = bcrypt($admin['password']);
+        $admin['password'] = Hash::make($admin['password']);
         $admin->save();
         return redirect()->route('admins.index')->with('success', 'Admin has been updated');
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -9,7 +9,7 @@ class Admin extends Authenticatable
 {
     use Notifiable;
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','isAdmin'
     ];
     /**
      * The attributes that should be hidden for arrays.

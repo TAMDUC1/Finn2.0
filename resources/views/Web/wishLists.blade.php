@@ -89,32 +89,61 @@
                 </div>
             </div>
         </div>
-        <div class="main-content-pivacyPolicy" style="width: 100%!important;margin-top: 20px">
-            <h1>PRIVACY POLICY</h1>
-            <div class="content-page">
-                <h2>How we use your information</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
-
-                <h2>Use and storage of data</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
-
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. </p>
-
-                <h3>Investigationes demonstraverunt</h3>
-                <ul>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Claritas est etiam processus dynamicus</li>
-                    <li>Duis autem vel eum iriure dolor</li>
-                    <li>Eodem modo typi</li>
-                </ul>
-
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
-
-                <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
+        <div class="main-content-wishLists">
+            <div class="goods-page">
+                <div class="goods-data clearfix">
+                    <div class="table-wrapper-responsive">
+                        <table summary="Shopping cart">
+                            <tbody><tr>
+                                <th class="goods-page-image">Image</th>
+                                <th class="goods-page-description">Description</th>
+                                <th class="goods-page-stock">Stock</th>
+                                <th class="goods-page-price" colspan="2">Unit price</th>
+                            </tr>
+                            <tr>
+                                <td class="goods-page-image">
+                                    <a href="javascript:;"><img class="img-responsive" src="../images/products/model3.jpg" alt="Berry Lace Dress" style="width: 100px"></a>
+                                </td>
+                                <td class="goods-page-description">
+                                    <h3><a href="javascript:;">Cool green dress with red bell</a></h3>
+                                    <p><strong>Item 1</strong> - Color: Green; Size: S</p>
+                                    <em>More info is here</em>
+                                </td>
+                                <td class="goods-page-stock">
+                                    In Stock
+                                </td>
+                                <td class="goods-page-price">
+                                    <strong><span>$</span>47.00</strong>
+                                </td>
+                                <td class="del-goods-col">
+                                    <a class="del-goods" href="javascript:;">&nbsp;</a>
+                                    <a class="add-goods" href="javascript:;">&nbsp;</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="goods-page-image">
+                                    <a href="javascript:;"><img class="img-responsive" src="../images/products/model4.jpg" alt="Berry Lace Dress" style="width: 100px"></a>
+                                </td>
+                                <td class="goods-page-description">
+                                    <h3><a href="javascript:;">Cool green dress with red bell</a></h3>
+                                    <p><strong>Item 1</strong> - Color: Green; Size: S</p>
+                                    <em>More info is here</em>
+                                </td>
+                                <td class="goods-page-stock">
+                                    In Stock
+                                </td>
+                                <td class="goods-page-price">
+                                    <strong><span>$</span>47.00</strong>
+                                </td>
+                                <td class="del-goods-col">
+                                    <a class="del-goods" href="javascript:;">&nbsp;</a>
+                                    <a class="add-goods" href="javascript:;">&nbsp;</a>
+                                </td>
+                            </tr>
+                            </tbody></table>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
     <script>

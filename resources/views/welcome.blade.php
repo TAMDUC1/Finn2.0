@@ -29,7 +29,7 @@
             @if(!session('role'))
                 <a href="{{route('profile')}}" class="float-right">Profile</a>
             @endif
-                <a href="webHome">Web</a>
+                <a href="about">Web(can only be opened by Admin via middleware)</a>
         </nav>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -52,7 +52,7 @@
                         Tam Duc Pham
                     </h2>
                 </div>
-                <div class="details">
+                <div class="details" style="height: 500px">
                     <div class="details-left" >
                         <ul class="list-group" style="text-align: left">
                             <li>
@@ -117,7 +117,6 @@
                                 <li>
                                     Hanoi
                                 </li>
-
                             </ul>
                         </div>
                     </div>

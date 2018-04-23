@@ -20,9 +20,51 @@ Route::get('/', function () {
 })->name('root');
 
 
-Route::get('/webHome', function () {
-    return View::make('Web.webHome');
-})->name('webHome');
+Route::get('/about', function () {
+    return View::make('Web.about');
+})->name('about');//->middleware('admin');
+
+Route::get('/kid', function () {
+    return View::make('Web.kid');
+})->name('kid');
+Route::get('/contactUs', function () {
+    return View::make('Web.contactUs');
+})->name('contactUs');
+Route::get('/shopFact', function () {
+    return View::make('Web.shopFact');
+})->name('shopFact');
+
+
+
+
+Route::get('addItemToCart/{id}', 'CartController@addItemsToCart')->name('addItemsToCart');
+Route::get('/wishLists', 'CartController@showCartItems')->name('showCartItems');
+Route::resource('carts', 'CartController');
+
+Route::get('/listItems', function () {
+    return View::make('Web.listItems');
+})->name('listItems');
+//Route::get('/wishLists', function () {
+  //  return View::make('Web.wishLists');
+//})->name('wishLists');
+
+Route::get('/shopCart', function () {
+    return View::make('Web.shopCart');
+})->name('shopCart');
+Route::get('/privacyPolicy', function () {
+    return View::make('Web.PrivacyPolicy');
+})->name('PrivacyPolicy');
+Route::get('/checkout', function () {
+    return View::make('Web.checkout');
+})->name('checkout');
+
+Route::get('/main', function () {
+    return View::make('Web.main');
+})->name('main');
+
+Route::get('create', 'ProductController@create')->name('productCreate');
+Route::get('ProductIndex', 'ProductController@index1')->name('ProductIndex');
+Route::resource('products','ProductController');
 Route::get('redirectToProvider', 'UserController@redirectToProvider')->name('redirectToProvider');
 Route::get('handleProviderCallback', 'UserController@handleProviderCallback')->name('handleProviderCallback');
 Route::get('redirect', 'UserController@redirect')->name('redirect');
@@ -33,6 +75,10 @@ Route::get('signUp', 'UserController@create')->name('signUp');
 Route::get('login', 'UserController@login')->name('login');
 Route::post('signin', 'UserController@signin')->name('signin');
 Route::post('signin1', 'UserController@signin1')->name('signin1');
+//Route::post('signin1', ['middleware' => 'CheckAge', function () {
+//}])->name('signin1');
+//Route::get('admin/routes', 'HomeController@admin')->middleware('admin');
+//Route::get('/webHome', 'HomeController@admin')->middleware('admin');
 Route::post('changePass', 'UserController@changePass')->name('changePass');
 Route::get('profile', 'UserController@profile')->name('profile');
 Route::resource('users', 'UserController');

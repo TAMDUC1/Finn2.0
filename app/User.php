@@ -14,7 +14,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','isAdmin'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -32,5 +32,8 @@ class User extends Authenticatable
     }
     public function emotions(){
         return $this->hasMany('App\Comment');
+    }
+    public function carts(){
+        return $this->hasOne('App\Cart');
     }
 }

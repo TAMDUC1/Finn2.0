@@ -35,6 +35,7 @@
                         <div>
                             <label for="password">Password</label>
                         </div>
+
                         <div>
                             <input id="viewPwdLogin" type="password" class="form-control" placeholder="Password" name="password"style="border-color: #5bc0de;border-radius: 5px">
                         </div>

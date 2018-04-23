@@ -12,6 +12,8 @@
         "laravel/framework": "5.5.*",
         "laravel/socialite": "~3.0.0",
         "laravel/tinker": "~1.0",
+        "laravelcollective/html": "^5.4.0",
+        "league/flysystem-aws-s3-v3": "^1.0",
         "pragmarx/laravelcs": "^0.1.0"
     },
     "require-dev": {
@@ -57,4 +59,5 @@
         "sort-packages": true,
         "optimize-autoloader": true
     }
+
 }

@@ -15,6 +15,7 @@ use Laravel\Socialite\Facades\Socialite;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -27,14 +28,24 @@ class BlogController extends Controller
     {
        // $blog = Blog::paginate(4);
         $blog = Blog::paginate(4);
+        //$blog = Blog->get();
 
+       // foreach ($blog as $b){
+              //  $b['content'] = Storage::get($b['content']);
+         //   }
+
+        //   $first = $blog->firstItem();
+        //var_dump($first);die();
         //$blog = Blog::all()->paginate(4);
         // var_dump($comment["blog_id"]);die();
         //$comment = Comment::all()->toArray();
         //$blog = DB :: table('blogs')->paginate(4);
         $comment = DB :: table('comments');
-        //var_dump($blogs);die();
-
+       // var_dump($blog->content);die();
+        //$contents = Storage::get($blog['content']);
+        //if($contents){
+          //  var_dump($contents);die();
+        //}
         //$blog->id = session('blog_id');
         return view('blog.index', compact('blog'),compact('comment'),compact('blogs'));
     }
@@ -67,7 +78,13 @@ class BlogController extends Controller
                 'content'=>'required'
             ]);
             $blog['author']=$user['name'];
+            $fileName = $blog['title'].'.txt';// make the fileName
+            Storage::disk('local')->put( $fileName, $blog['content']);//store info to the file
+           // $blog['content']=$fileName; // rename the content
             $user->blogs()->create($blog);
+            //  $myFile = fopen("newfile.txt", "w") or die("Unable to open file!");
+           // fwrite($myFile,$blog['content']);
+          //  var_dump($myFile);die();
             return response()->json($blog);
         }
         else{

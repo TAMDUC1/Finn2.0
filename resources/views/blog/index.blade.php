@@ -21,7 +21,6 @@
         <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
         <link href="{{ asset('css/classic.css') }}" rel="stylesheet">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
     </head>
     <body>
         <nav class="clearfix" style="background-color: #cac8c6">
@@ -98,9 +97,12 @@
                                                        {{$b->title}}
                                                     </span>
                                                 </div>
-                                                <div>
+                                                <div class="blog_content">
                                                     <span>
                                                         {{$b->content}}
+                                                        <div><p txt=newfile.txt></p></div>
+                                                        {{--asset($b->content.'.txt')}}
+                                                        {{asset($b->content.'.txt')--}}
                                                     </span>
                                                 </div>
                                             </div>

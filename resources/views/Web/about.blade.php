@@ -8,11 +8,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="{!! asset('js/dropdown.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('js/slider.js') !!}"></script>
+    <link href="{{ asset('css/bootstrap.touchspin.min.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{!! asset('js/bootstrap.touchspin.js') !!}"></script>
     <script src="{{asset('js/slider.js')}}"></script>
     <link href="{{ asset('css/web.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-touchspin/4.0.0/jquery.bootstrap-touchspin.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-touchspin/4.0.0/jquery.bootstrap-touchspin.js"></script>
 </head>
 <body>
     <div class="super-main">
@@ -56,7 +60,7 @@
                     <a href="" style="display: inline-block">My Wishlist</a>
                 </div>
                 <div class=" additonal-nav-grid"id="additonal-nav-grid3"style="justify-self: start;padding-left: 7px">
-                    <a href="">Checkout</a>
+                    <a href="checkout">Checkout</a>
                 </div>
                 <div class=" additonal-nav-grid"id="additonal-nav-grid4"style="justify-self: start;padding-left: 7px">
                     <a href="login">Log in</a>
@@ -65,14 +69,14 @@
         </div>
         <div class="header" style="padding-left: 10px">
             <div class="header-navigation-left">
-                <a class="site-logo" href="">
+                <a class="site-logo" href="main">
                     <img class="img-responsive" src="../images/logos/logo-shop-red.png" alt="Metronic Shop UI">
                 </a>
             </div>
             <div class="header-navigation-mid">
                 <div class="header-navigation-mid-title dropdown">
                     <li class="list-unstyled dropdown">
-                        <a  data-target="#" href=""aria-haspopup="true" aria-expanded="false">WOMAN</a>
+                        <a  data-target="#" href="products"aria-haspopup="true" aria-expanded="false">WOMAN</a>
                         <ul class="dropdown-menu">
                             <li class=" dropdown-item">
                                 Hi Tops
@@ -87,7 +91,7 @@
                     </li>
                 </div>
                 <div class="header-navigation-mid-title dropdown dropdown-megamenu" >
-                    <a href=""  data-toggle="dropdown" data-target="#" href=""aria-haspopup="true" aria-expanded="false">MAN</a>
+                    <a data-target="#" href="products"  aria-haspopup="true" aria-expanded="false">MAN</a>
                     <ul class="dropdown-menu">
                         <li >
                             <div  class="mega-menu">
@@ -321,7 +325,8 @@
                         <a href="" style="border-style: solid;border-top-color: transparent;border-left-color: transparent;border-bottom: transparent; border-width: thin;padding-right: 2px; text-align: center">3 items</a>
                         <a href="" style="text-align: left">$1260</a>
                     </div>
-                    <i  id="cart" class="fa fa-shopping-cart" style=" float:right; background-color: red;font-size:18px;color: white; border-radius: 60%;padding: 9px;margin: 5px"></i>
+                    <a href="shopCart"><i  id="cart" class="fa fa-shopping-cart" style=" float:right; background-color: red;font-size:18px;color: white; border-radius: 60%;padding: 9px;margin: 5px"></i>
+                    </a>
                 </div>
                 <div class="a.mobi">
                     <i class="fa fa-bars" id="fa" style="display: none"></i>
@@ -375,7 +380,7 @@
                         <li STYLE="background-color: white">
                             <i class="fa fa-angle-right" style="padding-left: 20px;width: 4px">
                             </i>
-                            <a href=""style="margin-left: 20px">WISH LIST</a>
+                            <a href="wishLists"style="margin-left: 20px">WISH LIST</a>
                         </li>
                         <li STYLE="background-color: white">
                             <i class="fa fa-angle-right" style="padding-left: 20px;width: 4px">
@@ -525,7 +530,13 @@
                                 <i class="fa fa-angle-right">
 
                                 </i>
-                                <a href="">Contact Us</a>
+                                <a href="contactUs">Contact Us</a>
+                            </li>
+                            <li class="list-unstyled">
+                                <i class="fa fa-angle-right">
+
+                                </i>
+                                <a href="shopFact">FREQUENTLY ASKED QUESTIONS</a>
                             </li>
                             <li class="list-unstyled">
                                 <i class="fa fa-angle-right">
@@ -537,7 +548,7 @@
                                 <i class="fa fa-angle-right">
 
                                 </i>
-                                <a href="">Payment Methods</a>
+                                <a href="privacyPolicy">PRIVACY POLICY</a>
                             </li>
                         </ul>
                     </div>
@@ -560,7 +571,7 @@
                     </div>
                     <div class="lintinh-main-content-grid">
                         <h2 style="color: #f5f8ff;padding-left: 20px">
-                            Our contacts
+                            <a href="contactUs">Our contacts</a>
                         </h2>
                         <div style="padding-left: 20px">
                             <p style="color: ghostwhite">
@@ -658,6 +669,17 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+                Layout.init();
+                Layout.initOWL();
+                Layout.initTwitter();
+                Layout.initImageZoom();
+                Layout.initTouchspin();
+                Layout.initUniform();
+                Layout.initSliderRange();
+            });
+        </script>
     </div>
 </body>
 

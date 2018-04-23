@@ -15,7 +15,7 @@ class UpdateBlogsTable extends Migration
     public function up()
     {
         Schema::table('blogs', function ( $table) {
-            $table->string('author')->nullable();
+            $table->MEDIUMTEXT('author')->nullable()->change();
         });
     }
 

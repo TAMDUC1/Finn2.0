@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="content">
-                            <div class="title m-b-md">
+                            <div class="title m-b-md" >
                                 Admin
                             </div>
                             <h4>{{session('email')}}</h4>
@@ -42,25 +42,28 @@
                         <div id="admin">
                             <div class="container">
                                 <div class="row">
-                                    @if (session('email')==='tamduc@stud.ntnu.no')
-                                        <div class="alert alert-success">
-                                            <a href="signUp1"class="btn btn-warning">Create a new admin**</a>
-                                            <a href="{{route('admins.index')}}" class=" btn btn-warning">Admin list</a>
-                                        </div>
-                                    @endif
                                     <div class="col-md-6">
+                                        @if (session('email')==='tamduc@stud.ntnu.no')
+                                            <div>
+                                                <a href="signUp1"class="btn btn-warning" style="width: 180px">Create a new admin***</a>
+                                                <a href="{{route('admins.index')}}" class=" btn btn-primary" style="width: 180px">Admin list</a>
+                                                <a href="products/create"class="btn btn-warning" style="width: 180px">Create a new product***</a>
+                                                <a href="ProductIndex" class=" btn btn-primary" style="width: 180px">Product list</a>
+
+                                            </div>
+                                        @endif
                                     </div>
                                     <div class="col-md-6">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <a href="blogs" class="btn btn-warning"style="width: 84px ">Blogs</a>
+                                        <a href="blogs" class="btn btn-danger"style="width: 180px ">Blogs</a>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <a href="{{route('users.index')}}" class=" btn btn-warning">User list</a>
+                                        <a href="{{route('users.index')}}" class=" btn btn-success" style="width: 180px">User list</a>
                                     </div>
                                 </div>
                             </div>

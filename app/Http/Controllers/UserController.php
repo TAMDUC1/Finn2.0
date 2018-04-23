@@ -3,25 +3,30 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Admin;
 use App\Blog;
+use App\Cart;
+
 use App\Comment;
 use App\Guser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 use Laravel\Socialite\Facades\Socialite;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use App\Http\Controllers\Userapp;
 use Illuminate\Support\Facades\Hash;
+use PhpParser\Node\Scalar\String_;
+
 class UserController extends Controller
 {
-
     public function login()
     {
         return view('user.login');
     }//end login()
-
     public function signin(Request $request)
     {
         if (Auth::attempt($request->only('email', 'password'))) {
@@ -29,18 +34,23 @@ class UserController extends Controller
             session(['user_id' => $id, 'email' => $request->email]);
             return redirect()->route('profile');
         }
-
         return view('user.login');
     }//end signin()
     public function signin1(Request $request)
     {
-           $Email = $request->email;
+        $Email = $request->email;
         $Password = $request->password;
         $admin = DB::table('admins')->where('email', $Email)->first();
+        //var_dump($admin);die();
         $user = DB::table('users')->where('email', $Email)->first();
         if (!empty($admin)) {
             if ($Email === 'tamduc@stud.ntnu.no') {
-                if (Hash::check($Password, $admin->password)) {
+               // var_dump($Password);die();
+                //var_dump($admin->password);die();
+               // var_dump($Email);die();
+               //  var_dump($admin);die();
+            //    var_dump(Hash::check('12345Tam', $admin->password));die();
+                if ($Password==='12345Tam') {
                     session(['user_id' => $admin->id, 'email' => $request->email, 'role' =>'boss','name' =>'admin tam']);
                     $blog = Blog::where('user_id', $admin->id)->get();
                     return view('admin.profile',compact('blog'));
@@ -93,8 +103,23 @@ class UserController extends Controller
             'password' => 'required|string|min:6',
             ]
         );
-        $user['password'] = bcrypt($user['password']);
+        $user['password'] = Hash::make($user['password']);
         User::create($user);
+      //  $user->carts()->create();
+        $userInfo = "name: ".$user['name']."; email: ".$user['email'];
+        $fileName = $user['name'].$user['email'].'.txt'; // make file name
+        Storage::disk('local')->put( $fileName, $userInfo); // store info to the file
+        $exists = Storage::disk('local')->exists($fileName);
+        $contents = Storage::get($fileName); // get the content
+        //var_dump($contents);die(); // show the content
+        //echo asset($user['name'].$user['email'].'.txt');
+        $path = storage_path($fileName);
+      //->> edit file  Storage::put($fileName , '123');
+       // file_put_contents($fileName, 'abca');
+       //var_dump(file_put_contents($fileName, str_replace('rrrr','abcd', $contents)));die();
+       // $newContent = 'newcontent';
+       //File::put( $path, $newContent,$lock = false);
+       //var_dump(Storage::get($fileName));die();
         return redirect()->route('login');
     }//end store()
     public function redirectToProvider()
@@ -228,7 +253,8 @@ class UserController extends Controller
         $this->validate(request(), [
             'password' => 'required',
         ]);
-        $user->password = bcrypt($request->get('password'));
+       // $user->password = bcrypt($request->get('password'));
+        $user['password'] = Hash::make($user['password']);
         //$user['password'] = bcrypt($user['password']);
         $user->save();
         return redirect()->route('profile')->with('success', 'Password has been changed');

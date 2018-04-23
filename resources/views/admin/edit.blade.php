@@ -37,23 +37,37 @@
                 {{csrf_field()}}
                 <input name="_method" type="hidden" value="PATCH">
                 <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="form-group col-md-4">
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-3">
+                        <label for="name">Name:</label>
+                        <input type="name" class="form-control" placeholder="Enter your new name" name="name" value="{{$admin->name}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-3">
                         <label for="email">Email:</label>
                         <input type="email" class="form-control" placeholder="Enter your new email" name="email" value="{{$admin->email}}">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4"></div>
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-3">
+                        <label for="role">Role:</label>
+                        <input class="form-control" placeholder="Enter new role" name="role">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
 
-                    <div class="form-group col-md-4">
-                        <label for="password">Password:</label>
+                    <div class="form-group col-md-3">
+                        <label for="password">Password1:</label>
                         <input type="password" class="form-control" placeholder="Enter your new password" name="password" value="{{$admin->password}}">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="form-group col-md-4">
+                    <div class="col-md-3"></div>
+                    <div class="form-group col-md-3">
                         <button type="submit" class="btn btn-success" style="margin-left:100px">Update</button>
                     </div>
                 </div>

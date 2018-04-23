@@ -14,8 +14,7 @@ class UpdateUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->string('name')->nullable()->change();
-            $table->string('password')->nullable()->change();
+            $table->boolean('isAdmin')->nullable();
 
         });
     }
@@ -27,5 +26,6 @@ class UpdateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
+
     }
 }

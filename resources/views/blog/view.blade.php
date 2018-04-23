@@ -186,8 +186,6 @@
               //  event.preventDefault();
                 var _this = $(this);
                 var params = _this.data();
-                //$(this).hide();
-                // $('#comment1'+params.id).append('<input class ="updateComment" id="comment3{{$c->id}}" type="text" name="Comment" placeholder="Edit your comment">');
                 $('#edit'+params.id).css({"visibility":"hidden"});
                 $('#input'+params.id).css({"visibility":"visible"});
                 $('#cancel'+params.id).css({"visibility":"visible"});

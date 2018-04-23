@@ -14,7 +14,7 @@ class UpdateAdminsTable extends Migration
     public function up()
     {
         Schema::table('admins', function (Blueprint $table) {
-            $table->string('name')->nullable()->change();
+            $table->boolean('isAdmin')->nullable();
         });
     }
 
@@ -27,7 +27,7 @@ class UpdateAdminsTable extends Migration
     {
         Schema::table('admins', function (Blueprint $table) {
             //
-            $table->dropColumn('name','email','password');
+            $table->dropColumn('name','email','password','isAdmin');
         });
     }
 }

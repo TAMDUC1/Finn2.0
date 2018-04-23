@@ -77,7 +77,6 @@ nav>button :hover{
 }
 .contentBlog{
     text-align: center;
-    height: 200px;
     border-style: solid;
     border-width: thin;
     border-radius: 2px;
@@ -99,7 +98,6 @@ nav>button :hover{
 }
 .blogDetail{
     text-align: left;
-    height: 50px;
     border-style: solid;
     border-width: thin;
     border-color: #e0dedc;
@@ -195,7 +193,7 @@ section {
     grid-template-columns: 1fr 2fr;
     border-style: solid;
     border-width: thin;
-    height: 500px;
+    height: auto;
 
 }
 .details-left{
@@ -275,3 +273,4 @@ li{
     margin: 5px;
     padding: 10px;
 }
+
