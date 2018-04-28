@@ -117,113 +117,12 @@
                         <option value="#?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
                         <option value="#?sort=p.price&amp;order=ASC">Price (Low &gt; High)</option>
                         <option value="#?sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
-                        <
+
                     </select>
                 </div>
         </div>
 
         <div class="main-content-listItems" style="padding-right: 5%;padding-top: 2%">
-
-                <div class="card" style="width:200px">
-                    <img class="card-img-top img-responsive img-thumbnail" src="../images/products/model1.jpg" alt="Card image">
-                    <div class="card-body">
-                        <h4 class="card-title">John Doe</h4>
-                        <p class="card-text">Some example text.</p>
-                        <a href="#" class="btn btn-primary">See Profile</a>
-                    </div>
-                </div>
-            <div class="card" style="width:200px">
-                <img class="card-img-top img-responsive img-thumbnail" src="../images/products/model2.jpg" alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title">John Doe</h4>
-                    <p class="card-text">Some example text.</p>
-                    <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-            </div>
-            <div class="card" style="width:200px">
-                <img class="card-img-top img-responsive img-thumbnail" src="../images/products/model3.jpg" alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title">John Doe</h4>
-                    <p class="card-text">Some example text.</p>
-                    <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-            </div>
-            <div class="card" style="width:200px">
-                <img class="card-img-top img-responsive img-thumbnail" src="../images/products/model4.jpg" alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title">John Doe</h4>
-                    <p class="card-text">Some example text.</p>
-                    <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-            </div>
-            <div class="card" style="width:200px">
-                <img class="card-img-top img-responsive img-thumbnail" src="../images/products/model5.jpg" alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title">John Doe</h4>
-                    <p class="card-text">Some example text.</p>
-                    <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-            </div> <div class="card" style="width:200px">
-                <img class="card-img-top img-responsive img-thumbnail" src="../images/products/model6.jpg" alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title">John Doe</h4>
-                    <p class="card-text">Some example text.</p>
-                    <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-            </div> <div class="card" style="width:200px">
-                <img class="card-img-top img-responsive img-thumbnail" src="../images/products/model7.jpg" alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title">John Doe</h4>
-                    <p class="card-text">Some example text.</p>
-                    <a href="#" class="btn btn-primary img-thumbnail">See Profile</a>
-                </div>
-            </div> <div class="card" style="width:200px">
-                <img class="card-img-top img-responsive img-thumbnail" src="../images/products/model1.jpg" alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title">John Doe</h4>
-                    <p class="card-text">Some example text.</p>
-                    <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-            </div> <div class="card" style="width:200px">
-                <img class="card-img-top img-responsive img-thumbnail" src="../images/products/model3.jpg" alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title">John Doe</h4>
-                    <p class="card-text">Some example text.</p>
-                    <a href="#" class="btn btn-primary img-thumbnail">See Profile</a>
-                </div>
-            </div>
-            <div class="card" style="width:200px">
-                <img class="card-img-top img-responsive img-thumbnail" src="../images/products/model2.jpg" alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title">John Doe</h4>
-                    <p class="card-text">Some example text.</p>
-                    <a href="#" class="btn btn-primary">See Profile</a>
-                </div>
-            </div>
-            <div class="card" style="width:200px">
-                <img class="card-img-top img-responsive img-thumbnail" src="../images/products/model4.jpg" alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title">John Doe</h4>
-                    <p class="card-text">Some example text.</p>
-                    <a href="#" class="btn btn-primary img-thumbnail">See Profile</a>
-                </div>
-            </div>
-            <div class="card" style="width:200px">
-                <img class="card-img-top img-responsive img-thumbnail" src="../images/products/model5.jpg" alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title">John Doe</h4>
-                    <p class="card-text">Some example text.</p>
-                    <a href="#" class="btn btn-primary img-thumbnail">See Profile</a>
-                </div>
-            </div>
-            <div class="card" style="width:200px">
-                <img class="card-img-top img-responsive img-thumbnail" src="../images/products/model6.jpg" alt="Card image">
-                <div class="card-body">
-                    <h4 class="card-title">John Doe</h4>
-                    <p class="card-text">Some example text.</p>
-                    <a href="#" class="btn btn-primary img-thumbnail">See Profile</a>
-                </div>
-            </div>
             @foreach($product as $p)
                 @if($p->imagePath)
                 <div class="card" style="width:200px">
@@ -232,6 +131,7 @@
                     <div class="card-body">
                         <h4 class="card-title">{{$p->name}}</h4>
                         <p class="card-text">{{$p->description}}</p>
+                        <p class="card-text">Price: {{$p->price}}</p>
                         <a class="btn btn-success" href="{{action('CartController@addItemsToCart',$id=$p->id)}}"> Add to Cart</a>
                     </div>
                 </div>

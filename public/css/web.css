@@ -794,3 +794,8 @@ tr {
      display: block;
      font-style: normal;
  }
+.main-content-cartListItem-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+}

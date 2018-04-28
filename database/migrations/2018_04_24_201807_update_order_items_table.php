@@ -13,10 +13,7 @@ class UpdateOrderItemsTable extends Migration
     public function up()
     {
         Schema::table('order_items', function ($table) {
-            $table->string('imagePath')->nullable();
-            $table->string('type')->nullable();
-            $table->string('name')->nullable();
-            $table->MEDIUMTEXT('description')->nullable();
+            $table->integer('totalPrice')->nullable();
         });
     }
     /**

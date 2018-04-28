@@ -165,14 +165,12 @@
                                     </td>
                                     <td>
                                         {{$b->commentsCount->count()}}
-
                                     </td>
                                 </tr>
                             @endforeach
                         </table>
                     </div>
                 </div>
-
             </div>
             <div class="footer"></div>
     </body>

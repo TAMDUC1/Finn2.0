@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-class UpdateOrderItemsTable extends Migration
+class UpdateCartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class UpdateOrderItemsTable extends Migration
      */
     public function up()
     {
-        Schema::table('order_items', function ($table) {
+        Schema::table('carts', function ($table) {
             $table->integer('totalPrice')->nullable();
         });
     }
@@ -23,6 +23,6 @@ class UpdateOrderItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_items');
+        Schema::dropIfExists('carts');
     }
 }

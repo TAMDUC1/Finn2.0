@@ -38,7 +38,7 @@ Route::get('/shopFact', function () {
 
 
 Route::get('addItemToCart/{id}', 'CartController@addItemsToCart')->name('addItemsToCart');
-Route::get('/wishLists', 'CartController@showCartItems')->name('showCartItems');
+Route::get('/showCartItems/{id}', 'CartController@showCartItems')->name('showCartItems');
 Route::resource('carts', 'CartController');
 
 Route::get('/listItems', function () {

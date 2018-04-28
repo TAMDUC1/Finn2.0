@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
      protected $fillable = [
-    'id'
+    'id','totalPrice'
         ];
     public function user(){
         return $this->belongsTo('App\User');
@@ -16,6 +16,6 @@ class Cart extends Model
         return $this->hasMany('App\OrderItem');
     }
     public  function totalPrice(){
-        // return total price here
+       // return $this->buyDetails()->sum(DB::raw('quantity * price'));
     }
 }

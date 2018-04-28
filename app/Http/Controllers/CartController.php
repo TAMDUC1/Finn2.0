@@ -1,25 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\OrderItem;
 use Illuminate\Http\Request;
 use App\Cart;
 use App\Product;
-
-use App\Comment;
-use App\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
-
-use Laravel\Socialite\Facades\Socialite;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\RequestException;
 use App\Http\Controllers\Userapp;
-use Illuminate\Support\Facades\Hash;
-use PhpParser\Node\Scalar\String_;
 
 class CartController extends Controller
 {
@@ -31,32 +19,105 @@ class CartController extends Controller
     public function index()
     {
 
-
     }
     public function  showCartItems($id){
         //show all orderItem here
         //find cart
+       // var_dump('wg');die();
         $id1 = Session::get('user_id');
+        //var_dump($id1);die();
         $cart = Cart::find($id1);
         // find orderItems with the same cart_id
-        $orderItems = DB::table('order_items')->where('cart_id',$id)->get();
-        return view('Web.wishList',compact($orderItems));
+        $orderItems = DB::table('order_items')->where('cart_id',$id1)->get();
+        $orderItems1 = OrderItem::where('cart_id', $id1)->get();
+        // $orderItems1 = DB::table('order_items')->keyBy('cart_id' , $id1);
+        // var_dump($orderItems);die();
+        return view('/showCartItems',compact('orderItems1'),compact('cart'));
     }
-
     public function addItemsToCart($id){
-        //find an user by session
-        $user =User::find(session('user_id'));
         // find Cart first or create a cart for an user
-        $cart = Cart::firstOrCreate(['id' => session('user_id')]);
-        $cart ->save();
-        // make An OderItem object
-        $orderItem['cart_id'] = $cart->id;
-        var_dump($cart);die();
-        $product =Product::find($id);
-        $product->orderItems()->create($orderItem);
-       // var_dump('wef');die();
-       // $orderItem->save();
-        // create order_items with Cart id and amount
+        $cart = Cart::find(session('user_id'));
+        // tim loai product de add vao cart
+        $product = Product::find($id);
+        // tim order item trung vs loai product_id
+        if($cart){
+            // tim xem item da duoc order truoc day chua neu da duoc order roi thi update amount va gia
+            $orderItem1 = OrderItem::where(
+                ['cart_id'=>$cart->id,
+                  'product_id'=>$id
+                ])->first();
+            if($orderItem1){// tim thay item ->update
+                $orderItem1->amount =  $orderItem1->amount +1 ;
+                $deltaPrice = $orderItem1->totalPrice ;
+                $orderItem1->totalPrice = $orderItem1['amount'] * $product->price;
+                $deltaPrice = $orderItem1->totalPrice - $deltaPrice;
+                $orderItem1['imagePath'] = $product->imagePath;
+                $orderItem1->cart_id = session('user_id') ;
+                $orderItem1->save();
+                $this->updateCartTotalPrice(session('user_id'),$deltaPrice);
+
+               // var_dump($orderItem1->amount);die();
+            }
+            //neu khong tim duoc item trong gio hang thi tao ra item moi voi don vi la 1
+            else{
+                $orderItem['amount'] = 1;
+                $orderItem['cart_id'] = $cart->id;
+                $orderItem['imagePath'] = $product->imagePath;
+                $orderItem['name'] = $product->name;
+                $orderItem['type'] = $product->type;
+                $orderItem['description'] = $product->description;
+                $orderItem['totalPrice'] = $product->price;
+                $product->orderItems()->create($orderItem);
+                $this->updateCartTotalPrice(session('user_id'),$product->price);
+            }
+            // neu co cart thi tao order item
+           // var_dump($orderItem);die();
+        }
+        else{
+            //neu khong co cart thi tao cart
+            $cart['id'] = session('user_id');
+            Cart::create($cart);
+            $orderItem['amount'] = 1;
+            $orderItem['product_id'] = $id;
+            $orderItem['cart_id'] = $cart['id'];
+            $orderItem['imagePath'] = $product->imagePath;
+            $orderItem['name'] = $product->name;
+            $orderItem['type'] = $product->type;
+            $orderItem['description'] = $product->description;
+            $orderItem['totalPrice'] = $product->price;
+            $product->orderItems()->create($orderItem);
+           // OrderItem::create($orderItem);
+            $this->updateCartTotalPrice(session('user_id'),$product->price);
+        }
+        return redirect(route('products.index'));
+    }
+    // calculate Total Price of the cart
+    public function cartTotalPrice($id){
+        $cart = Cart::find($id);
+        $orderItems = DB::table('order_items')->where('cart_id',$id)->get();
+        foreach ($orderItems as $O){
+            $cart->totalPrice = $cart->totalPrice + $O->totalPrice;
+        }
+        session(['cartTotalPrice' => $cart->totalPrice]);
+        return $cart->totalPrice;
+    }
+    public function updateCartTotalPrice($id,$deltaPrice){
+        // tinh tong gia thanh cua Cart $id
+        // tim trong database cart nhung item co cung $id
+        //$orderItems = DB::table('order_items')->where('cart_id',$id)->get();
+        // tinh tong so tien tu order item!
+        //  foreach ($orderItems as $O){
+        // var_dump('sdfaf');die();
+        //    $cart->totalPrice = $cart->totalPrice + $O->totalPrice;
+        // }
+        //var_dump($cart->totalPrice);die();
+        $cart = Cart::find($id);
+        if($cart->totalPrice >=0){
+            $cart->totalPrice = $cart->totalPrice +$deltaPrice;
+        }
+        $cart->save();
+        session(['cartTotalPrice' => $cart->totalPrice]);
+        return $cart->totalPrice;
     }
     public function removeItemsFromCart(){
         //find Cart

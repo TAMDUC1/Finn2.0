@@ -13,8 +13,10 @@ class UpdateOrderItemsTable extends Migration
     public function up()
     {
         Schema::table('order_items', function ($table) {
-            $table->integer('cart_id')->nullable()->change();
-
+            $table->string('imagePath')->nullable();
+            $table->string('type')->nullable();
+            $table->string('name')->nullable();
+            $table->MEDIUMTEXT('description')->nullable();
         });
     }
     /**
