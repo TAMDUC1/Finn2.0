@@ -107,49 +107,49 @@
                     <i class="fa fa-angle-right">
 
                     </i>
-                    <a href="">Delivery Information</a>
+                    <a href="#">Delivery Information</a>
                 </li>
                 <li class="list-unstyled">
                     <i class="fa fa-angle-right">
 
                     </i>
-                    <a href="">Customer Service</a>
+                    <a href="#">Customer Service</a>
                 </li>
                 <li class="list-unstyled">
                     <i class="fa fa-angle-right">
 
                     </i>
-                    <a href="">Order Tracking</a>
+                    <a href="#">Order Tracking</a>
                 </li>
                 <li class="list-unstyled">
                     <i class="fa fa-angle-right">
 
                     </i>
-                    <a href="">Shipping & Return</a>
+                    <a href="#">Shipping & Return</a>
                 </li>
                 <li class="list-unstyled">
                     <i class="fa fa-angle-right">
 
                     </i>
-                    <a href="contactUs">Contact Us</a>
+                    <a href="{{route('contactUs') }}">Contact Us</a>
                 </li>
                 <li class="list-unstyled">
                     <i class="fa fa-angle-right">
 
                     </i>
-                    <a href="shopFact">FREQUENTLY ASKED QUESTIONS</a>
+                    <a href="{{route('shopFact') }}">FREQUENTLY ASKED QUESTIONS</a>
                 </li>
                 <li class="list-unstyled">
                     <i class="fa fa-angle-right">
 
                     </i>
-                    <a href="">Careers</a>
+                    <a href="#">Careers</a>
                 </li>
                 <li class="list-unstyled">
                     <i class="fa fa-angle-right">
 
                     </i>
-                    <a href="privacyPolicy">PRIVACY POLICY</a>
+                    <a href="{{route('PrivacyPolicy')}}">PRIVACY POLICY</a>
                 </li>
 
             </ul>
@@ -177,16 +177,15 @@
             </h2>
             <div style="padding-left: 20px">
                 <p style="color: ghostwhite">
-                    35, Lorem Lis Street, Park Ave
-                    California, US
+                    Trondheim , Norway
                     <br>
-                    Phone: 300 323 3456
+                    Phone: +84 934465283
                     <br>
-                    Fax: 300 323 1456
+                    Fax: +47 40143382
                     <br>
-                    Email: <a href="">info@metronic.com</a>
+                    Email: <a href="">phamductam2004@gmail.com</a>
                     <br>
-                    Skype: <a href="">metronic</a>
+                    Skype: <a href="">tamduc</a>
                 </p>
 
             </div>

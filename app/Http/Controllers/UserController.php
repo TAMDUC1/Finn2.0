@@ -39,11 +39,6 @@ class UserController extends Controller
         $user = DB::table('users')->where('email', $Email)->first();
         if (!empty($admin)) {
             if ($Email === 'tamduc@stud.ntnu.no') {
-               // var_dump($Password);die();
-                //var_dump($admin->password);die();
-               // var_dump($Email);die();
-               //  var_dump($admin);die();
-            //    var_dump(Hash::check('12345Tam', $admin->password));die();
                 if ($Password==='12345Tam') {
                     session(['user_id' => $admin->id, 'email' => $request->email, 'role' =>'boss','name' =>'admin tam']);
                     $blog = Blog::where('user_id', $admin->id)->get();
@@ -178,7 +173,8 @@ class UserController extends Controller
             // The user denied the request
             exit;
         }
-        return redirect()->route('profile');
+        return view('user.profile',compact('blog'));
+       // return redirect()->route('profile');
     }//end callback()
 
     public function logout()
@@ -259,4 +255,5 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index');
     }//end destroy()
+
 }

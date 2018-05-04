@@ -45,9 +45,11 @@
                                         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
                                     </label>
                                 </div>
+                                <div>
+                                    <a href="{{url('/redirect')}}" class="btn btn-primary">Login with Facebook</a>
+                                </div>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
@@ -65,4 +67,5 @@
         </div>
     </div>
 </div>
+
 @endsection
