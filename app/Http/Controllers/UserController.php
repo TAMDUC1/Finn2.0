@@ -142,8 +142,9 @@ class UserController extends Controller
             'default_graph_version' => 'v2.3',
             ]
         );
-        $response = $fb->get('/me?fields=id,name,email', 'EAAMqXbARnh4BAJdQU5WlkS2iT5OYXXkExl2P0XHAz2sMadG6VZCO8YSZCYM9cCSPASF2kdh71z33oLB4S2kX3MBLAbawlH19ZCqTWN8ShRADCryI0XCiM7GYbudyCZCCOdkii80fzQuFITv43y8l1W0ZAZAEk306BjbvMtz5RGdgZDZD');
-            $user = $response->getGraphUser();
+        $response = $fb->get('/me?fields=id,name,email', 'EAAMqXbARnh4BAMBsFYi6uxujiCii5ll5HQvRIvZB8ZANOhCaZAAZCCPw8wZASDJoRf1ydIwBzqc6MFowEmiFV58XIHDfPP8YJKDgDZBueSFaWSOZAEX5cxtJMDyXi3ZCwCupqPE5DNGlfzTtireJjKpGTXMUyan6x51SB6SbKUjMmLMxM6ZCu0nIzPdnymd5ahGQZD
+');
+        $user = $response->getGraphUser();
         echo 'Name: ' . $user['name'].'</br>';
         echo 'ID: ' . $user['id'].'</br>';
         echo 'Email: ' . $user['email'].'</br>';

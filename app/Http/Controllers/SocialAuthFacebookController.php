@@ -16,7 +16,6 @@ class SocialAuthFacebookController extends Controller
     {
         return Socialite::driver('facebook')->redirect();
     }
-
     /**
      * Return a callback method from facebook api.
      *
@@ -28,6 +27,18 @@ class SocialAuthFacebookController extends Controller
         auth()->login($user);
         session(['user_id' => $user->id, 'email' => $user->email,'name' => $user->name]);
         $blog = Blog::where('user_id', $user->id)->get();
+        $fb = new \Facebook\Facebook(
+            [
+                'app_id' => '891006804401694',
+                'app_secret' => '941e8f3c67e282a0ec6f4453f5637411',
+                'default_graph_version' => 'v2.3',
+            ]
+        );
+        $response = $fb->get('/me?fields=id,name,email', 'EAAMqXbARnh4BAMBsFYi6uxujiCii5ll5HQvRIvZB8ZANOhCaZAAZCCPw8wZASDJoRf1ydIwBzqc6MFowEmiFV58XIHDfPP8YJKDgDZBueSFaWSOZAEX5cxtJMDyXi3ZCwCupqPE5DNGlfzTtireJjKpGTXMUyan6x51SB6SbKUjMmLMxM6ZCu0nIzPdnymd5ahGQZD');
+        $user1 = $response->getGraphUser();
+        $avatar = 'http://graph.facebook.com/'.$user1['id'].'/picture';
+        session(['avatar' => $avatar]);
+
         return view('user.profile',compact('blog'));
        // return redirect()->to('/home');
     }

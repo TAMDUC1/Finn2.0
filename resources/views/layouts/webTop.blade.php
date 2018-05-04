@@ -52,18 +52,21 @@
                     <a href="{{route('profile')}}" style="margin-left: 20px">My Account</a>
                 @endif
             </div>
-            <div class=" additonal-nav-grid"id="additonal-nav-grid2"style="justify-self: end;padding-right: 7px">
-                <a href="wishLists" style="display: inline-block">My Wishlist</a>
-            </div>
             <div class=" additonal-nav-grid"id="additonal-nav-grid3"style="justify-self: start;padding-left: 7px">
                 <a href="checkout">Checkout</a>
             </div>
+
             <div class=" additonal-nav-grid"id="additonal-nav-grid4"style="justify-self: start;padding-left: 7px">
                 <a href="login">Log in</a>
             </div>
             <div class=" additonal-nav-grid"id="additonal-nav-grid5"style="justify-self: start;padding-left: 7px">
                 <a href="{{route('about')}}">About</a>
             </div>
+            @if(session('avatar'))
+                <div>
+                    <img class="img-responsive" style="width:20px " src="{{Session::get('avatar')}}" alt="">
+                </div>
+            @endif
         </div>
     </div>
     <div class="header" style="padding-left: 10px">
