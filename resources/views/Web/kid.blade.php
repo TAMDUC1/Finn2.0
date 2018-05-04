@@ -1,6 +1,5 @@
 
 @extends('layouts.webBottom')
-
 @section('web')
     <div class="main">
         <div class="main-sidebar" >
@@ -95,15 +94,12 @@
             </div>
         </div>
         <div class="main-content-kid" style="width: 80%;background-color: white!important;margin-top: 20px">
-
             <div style="margin-top: 30px">
                 <div style="margin: 2%" >
                     <img class="card-img-top img-thumbnail img-responsive" src="{{ url('storage/images/productImages/'.$product->imagePath) }}" alt="Card image" title="" />
                 </div>
-
             </div>
             <div class="main-content-kid-subRight" style="margin-top: 30px;margin-left: 5%">
-
                 <div>
                     COOL GREEN DRESS WITH RED BELL
                 </div>
@@ -140,7 +136,7 @@
 
                 </div>
                 <div class="product-page-cart" style="display: block">
-                    <button class="btn btn-primary" type="submit">Add to cart</button>
+                    <a class="btn btn-success" href="{{action('CartController@addItemsToCart',$id=$product->id)}}"> Add to Cart</a>
                 </div>
                 <div>
                     Reviews

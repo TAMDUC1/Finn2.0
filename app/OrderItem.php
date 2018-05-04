@@ -3,8 +3,9 @@
 namespace App;
 use App\Product;
 use Illuminate\Database\Eloquent\Model;
+use PhpParser\Node\Expr\AssignOp\Mod;
 
-class OrderItem extends Product
+class OrderItem extends Model
 {
     protected $fillable = [
         'amount','salgPriceUnit','cart_id','description','name','type','imagePath','product_id','totalPrice'

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\OrderItem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -22,7 +23,7 @@ class ProductController extends Controller
     public function index1()
     {
         $product = DB :: table('products')->paginate(10);
-        return view('products.index', compact('product'));
+        return view('Web.listItems', compact('product'));
     }
     /**
      * Show the form for creating a new resource.

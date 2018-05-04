@@ -80,7 +80,6 @@
                 </div>
                 @endif
             </div>
-
             <div>
                 <table class="table table-responsive table-striped table table-hover data-table">
                     <thead>
@@ -97,7 +96,7 @@
                                     <div id="comment2{{$c->id}}" data-id="{{$c->id}}" style="visibility: visible">
                                         {{$c->comment}}
                                     </div>
-                                    <form class="editForm"  id="editForm{{$c->id}}" method="POST" data-id="{{$c->id}}">
+                                    <form class="editForm" id="editForm{{$c->id}}" method="POST" data-id="{{$c->id}}">
                                         {{csrf_field()}}
                                         {{ method_field('PATCH')}}
                                         <input name="_method" value="PATCH" type="hidden">
@@ -200,7 +199,6 @@
                 $('#input'+params.id).css({"visibility":"hidden"});
                 $('#edit'+params.id).css({"visibility":"visible"});
             });
-
             $('.editForm').submit(function (event)// save comments
             {
                 event.preventDefault();
@@ -220,9 +218,6 @@
                             data: { comment: bComment },
                             success: function (data)
                             {
-                                console.log(params.id);
-                                console.log(bComment);
-                                console.log(data);
                                 if(!bComment){
                                     console.log('wrong');
                                   //  console.log($('#input'+params.id));
@@ -248,7 +243,6 @@
                             $(".comment").trigger("reset");
                         });
                 }
-
             });
             $('.editTitleBlog').submit(function(){
                 event.preventDefault();

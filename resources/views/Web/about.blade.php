@@ -9,14 +9,14 @@
     <script type="text/javascript" src="{!! asset('js/dropdown.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('js/slider.js') !!}"></script>
     <link href="{{ asset('css/bootstrap.touchspin.min.css') }}" rel="stylesheet">
-    <script type="text/javascript" src="{!! asset('js/bootstrap.touchspin.js') !!}"></script>
     <script src="{{asset('js/slider.js')}}"></script>
     <link href="{{ asset('css/web.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-touchspin/4.0.0/jquery.bootstrap-touchspin.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-touchspin/4.0.0/jquery.bootstrap-touchspin.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 <body>
     <div class="super-main">
@@ -69,14 +69,14 @@
         </div>
         <div class="header" style="padding-left: 10px">
             <div class="header-navigation-left">
-                <a class="site-logo" href="main">
+                <a class="site-logo" href="{{route('main')}}">
                     <img class="img-responsive" src="../images/logos/logo-shop-red.png" alt="Metronic Shop UI">
                 </a>
             </div>
             <div class="header-navigation-mid">
                 <div class="header-navigation-mid-title dropdown">
                     <li class="list-unstyled dropdown">
-                        <a  data-target="#" href="products"aria-haspopup="true" aria-expanded="false">WOMAN</a>
+                        <a  data-target="#" href="{{route('products.index')}}"aria-haspopup="true" aria-expanded="false">PTS</a>
                         <ul class="dropdown-menu">
                             <li class=" dropdown-item">
                                 Hi Tops
@@ -201,7 +201,7 @@
                     </ul>
                 </div>
                 <div class="header-navigation-mid-title">
-                    <a href="kid">KIDS</a>
+                    <a href="#">KIDS</a>
 
                 </div>
                 <div class="dropdown header-navigation-mid-title">
@@ -322,10 +322,10 @@
             <div class="header-navigation-right">
                 <div class="top-cart-info">
                     <div class="mini" >
-                        <a href="" style="border-style: solid;border-top-color: transparent;border-left-color: transparent;border-bottom: transparent; border-width: thin;padding-right: 2px; text-align: center">3 items</a>
+                        <a href="" style="border-style: solid;border-top-color: transparent;border-left-color: transparent;border-bottom: transparent; border-width: thin;padding-right: 2px; text-align: center">Totals</a>
                         <a href="" style="text-align: left">{{Session::get('cartTotalPrice')}}</a>
                     </div>
-                    <a href="showCartItems/{{Session::get('user_id')}}">
+                    <a href="{{action('CartController@showCartItems', $id = Session::get('user_id'))}}">
                         <i id="cart" class="fa fa-shopping-cart" style=" float:right; background-color: red;font-size:18px;color: white; border-radius: 60%;padding: 9px;margin: 5px"></i>
                     </a>
                 </div>

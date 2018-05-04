@@ -33,20 +33,16 @@ Route::get('/contactUs', function () {
 Route::get('/shopFact', function () {
     return View::make('Web.shopFact');
 })->name('shopFact');
-
-
-
-
+Route::get('carts/{id}/editOrderItemAmount', 'CartController@editOrderItemAmount');
+Route::get('carts/{id}/edit', 'CartController@edit')->name('editOrder');
 Route::get('addItemToCart/{id}', 'CartController@addItemsToCart')->name('addItemsToCart');
-Route::get('/showCartItems/{id}', 'CartController@showCartItems')->name('showCartItems');
+Route::get('showCartItems/{id}', 'CartController@showCartItems')->name('showCartItems');
 Route::resource('carts', 'CartController');
 
 Route::get('/listItems', function () {
     return View::make('Web.listItems');
 })->name('listItems');
-//Route::get('/wishLists', function () {
-  //  return View::make('Web.wishLists');
-//})->name('wishLists');
+
 
 Route::get('/shopCart', function () {
     return View::make('Web.shopCart');
@@ -61,6 +57,11 @@ Route::get('/checkout', function () {
 Route::get('/main', function () {
     return View::make('Web.main');
 })->name('main');
+
+
+
+Route::resource('order_items', 'OrderItemController');
+
 
 Route::get('create', 'ProductController@create')->name('productCreate');
 Route::get('ProductIndex', 'ProductController@index1')->name('ProductIndex');
