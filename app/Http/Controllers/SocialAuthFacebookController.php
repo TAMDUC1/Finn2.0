@@ -34,7 +34,7 @@ class SocialAuthFacebookController extends Controller
                 'default_graph_version' => 'v2.3',
             ]
         );
-        $response = $fb->get('/me?fields=id,name,email', 'EAAMqXbARnh4BAMBsFYi6uxujiCii5ll5HQvRIvZB8ZANOhCaZAAZCCPw8wZASDJoRf1ydIwBzqc6MFowEmiFV58XIHDfPP8YJKDgDZBueSFaWSOZAEX5cxtJMDyXi3ZCwCupqPE5DNGlfzTtireJjKpGTXMUyan6x51SB6SbKUjMmLMxM6ZCu0nIzPdnymd5ahGQZD');
+        $response = $fb->get('/me?fields=id,name,email', 'EAAMqXbARnh4BADpOfPWVk2VnkpT2pOEHNArn9iJDwNybZC2S5masQZAkZCVEnSSIhk6xiInejcohyQfnkDcyFaVRdZBrYZCGzCHQnCvMgRaIaSp8lenJT94ZCHXZCpJtSM1ZBYskSDfkEiNTf0WNPk2cc2tbnjgWcyaAoq4NmpEqqD21MCbiywgxxwua3ZBbmmQwZD');
         $user1 = $response->getGraphUser();
         $avatar = 'http://graph.facebook.com/'.$user1['id'].'/picture';
         session(['avatar' => $avatar]);
@@ -42,4 +42,9 @@ class SocialAuthFacebookController extends Controller
         return view('user.profile',compact('blog'));
        // return redirect()->to('/home');
     }
+
+
+
+
+
 }

@@ -8,10 +8,124 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <link href="{{ asset('css/welcome.css') }}" rel ="stylesheet">
+        <link href="{{ asset('css/welcome.css')}}" rel ="stylesheet">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body>
-        <nav class = "clearfix" style="background-color: #cac8c6"style="margin:1px ">
+    <div id="fb-root"></div>
+    <div id="fb-root"></div>
+    <div id="fb-root"></div>
+    <script>
+        var name = '';
+        var email = '';
+        var id='';
+        function statusChangeCallback(response) {
+            console.log('statusChangeCallback');
+            console.log(response);
+            // The response object is returned with a status field that lets the
+            // app know the current login status of the person.
+            // Full docs on the response object can be found in the documentation
+            // for FB.getLoginStatus().
+            if (response.status === 'connected') {
+                // Logged into your app and Facebook.
+                testAPI();
+            } else {
+                // The person is not logged into your app or we are unable to tell.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                    'into this app.';
+            }
+        }
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        }
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '{891006804401694}',
+                cookie     : true,  // enable cookies to allow the server to access
+                                    // the session
+                xfbml      : true,  // parse social plugins on this page
+                version    : 'v2.8' // use graph api version 2.8
+            });
+
+            // Now that we've initialized the JavaScript SDK, we call
+            // FB.getLoginStatus().  This function gets the state of the
+            // person visiting this page and can return one of three states to
+            // the callback you provide.  They can be:
+            //
+            // 1. Logged into your app ('connected')
+            // 2. Logged into Facebook, but not your app ('not_authorized')
+            // 3. Not logged into Facebook and can't tell if they are logged into
+            //    your app or not.
+            //
+            // These three cases are handled in the callback function.
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        };
+        // Load the SDK asynchronously
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.0&appId=891006804401694&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        function testAPI()
+        {
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function(response)
+            {
+                name = response.name;
+                id = response.id;
+                console.log('Successful login for: ' + response.name);
+                document.getElementById('status').innerHTML =
+                    'Thanks for logging in, ' + response.name + '!';
+            });
+            FB.api('/me', {fields: 'last_name'}, function(response) {
+                console.log(response);
+            });
+            FB.api('/me', {fields: 'email'}, function(response) {
+                 email = response.email;
+                console.log(response.email);
+            });
+            $.post('check',{name: name, mail: email, facebookId: id }, function()
+            {
+                console.log(data);
+               // $('#postRequestData').html(data);
+            });
+        }
+        $('#facebook').click(function (event) {
+            console.log('sf');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: "post",
+                url: "check",
+                data: {name: name,mail : email, facebookId: id},
+                success: function (data) {
+                },
+                error: function (data) {
+                    var errors = $.parseJSON(data.responseText);
+                    $.each(errors, function (key, value) {
+                        $('#' + key).parent().addClass('error');
+                    });
+                }
+            });
+        });
+    </script>
+    <nav class = "clearfix" style="background-color: #cac8c6"style="margin:1px ">
+        <fb:login-button size="medium" max_rows="1" auto_logout_link="true" scope="public_profile,email" onlogin="checkLoginState();">
+        </fb:login-button>
+        <div id="status" >
+        </div>
+        <div>
+            <button id="facebook"class="btn btn-danger">save info</button>
+        </div>
             @if (!session('email'))
                 <a href = "signUp" class="float-right">SignUp</a>
                 <a href="login" class="float-right">Login</a>
@@ -63,7 +177,6 @@
                             </li>
                             <li>
                                 <a href="" class="live">Places i have lived</a>
-
                             </li>
                             <li>
                                 <a href="">Detail about me</a>
@@ -78,7 +191,6 @@
                                 <a href=""></a>
                             </div>
                             <div id="studie">
-
                                 <ul>
                                     <li>
                                     </li>
@@ -88,20 +200,16 @@
                                     </li>
                                     <li>
                                         <a href="">
-
                                         </a>
                                     </li>
                                     <li>
                                         <a href="https://www.ntnu.no">
-
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                             <div id="live">
-
                             </div>
-
                         </div>
                         <div class="details-container-right"style="margin-right: 12px">
                             <ul style="margin-top: 10px">
@@ -125,12 +233,10 @@
         </div>
         <div class="footer"></div>
         <script>
-            console.log('wet');
             $(document).ready(function () {
                 $('.work').click(function(e)
                 {
                     e.preventDefault();
-                  //¢  location.reload();
                     $('#studie').replaceWith("<div id='studie'>"+
                             "<ul>"+
                                 "<li>"+ "<a href='http://humg.edu.vn/Pages/home.aspx'>"+ "Hanoi mining and geology "+"</a>" +"</li>"
@@ -141,12 +247,29 @@
             $(document).ready(function () {
                 $('.live').click(function(e)
                 {
-                    //location.reload();
                     e.preventDefault();
-                   // $('#studie').hide();
                     $('#live').replaceWith("<div id='#live'>" + "Hanoi and Norway "+"</div>");
-                   // $('.details-container-left').toggle();
                 })
+                $('#facebook').click(function (e) {
+                    console.log(email);
+                    e.preventDefault();
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        method: "POST",
+                        url: "/check",
+                        data: {
+                            name: name,
+                            mail: email,
+                            facebookId: id
+                        },
+                        success: function(result){
+                            console.log('done');
+                        }});
+                });
             })
         </script>
     </body>

@@ -53,6 +53,8 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $user =User::find(session('user_id'));
+        $email = Session::get('email');
+
         if($user){
             $blog = $this->validate(request(), [
                 'title' => 'required',
@@ -64,7 +66,20 @@ class BlogController extends Controller
             $user->blogs()->create($blog);
             return response()->json($blog);
         }
+        elseif ($email){
+            $user1 = User::where('email',$email)->first();
+            $blog = $this->validate(request(), [
+                'title' => 'required',
+                'content'=>'required'
+            ]);
+            $blog['author']=Session::get('name');
+            $fileName = $blog['title'].'.txt';// make the fileName
+            Storage::disk('local')->put( $fileName, $blog['content']);//store info to the file
+            $user1->blogs()->create($blog);
+            return response()->json($blog);
+        }
         else{
+
             return redirect()->route('login');
         }
 

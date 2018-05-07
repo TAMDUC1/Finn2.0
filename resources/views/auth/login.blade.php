@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
+
+    <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -47,6 +48,16 @@
                                 </div>
                                 <div>
                                     <a href="{{url('/redirect')}}" class="btn btn-primary">Login with Facebook</a>
+                                </div>
+                                <div>
+                                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                                    </fb:login-button>
+
+                                    <div id="status">
+
+                                    </div>
+                                    <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="true">
+                                    </div>
                                 </div>
                             </div>
                         </div>

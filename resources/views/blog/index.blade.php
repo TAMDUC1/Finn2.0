@@ -110,7 +110,7 @@
                                         <div class="frame-comment" data-postid = "d">
                                             <div class="blog-comment" data-postid = "e">
                                                 <div style="padding: 0.3em;" data-postid = "f">
-                                                    @if(session('user_id'))
+                                                    @if(session('email'))
                                                         <tr data-postid = "t">
                                                             <td data-postid = "g">
                                                                 <form  class="comment" id="comment{{$b->id}}" data-id="{{$b->id}}" method="post" type="hidden">

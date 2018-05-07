@@ -67,10 +67,16 @@ class UserController extends Controller
     }//end signin1()
     public function profile()
     {
+        $email = Session::get('email');
         $id = Session::get('user_id');
         $user = User::find($id);
         $blog = Blog::where('user_id', $id)->get();
         if (empty($id)) {
+            if($email){
+                $user1 = User::where('email',$email)->first();
+                $blog = Blog::where('user_id', $user1->id)->get();
+                return view('user.profile',compact('blog'));
+            }
             return redirect()->route('login');
         }
        // var_dump($blog);die();
@@ -257,4 +263,10 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }//end destroy()
 
+
+    public function checkAvailable(Request $request){
+        $newUser = User::firstOrCreate(['email' => $request->get('mail')], ['name' => $request->get('name')]);
+        $avatar = 'http://graph.facebook.com/'.$request->get('id').'/picture';
+        session(['email'=>$request->get('mail'),'name' => $request->get('name'), 'avatar' => $avatar], ['user_id' => $newUser['id']]);
+    }
 }

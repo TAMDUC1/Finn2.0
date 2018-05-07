@@ -83,6 +83,7 @@ Route::post('signin1', 'UserController@signin1')->name('signin1');
 Route::post('changePass', 'UserController@changePass')->name('changePass');
 Route::get('profile', 'UserController@profile')->name('profile');
 Route::get('callback1', 'UserController@callback')->name('callback1');
+Route::post('/check', 'UserController@checkAvailable')->name('check');
 Route::resource('users', 'UserController');
 
 
