@@ -166,7 +166,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
         /*
          * Package Service Providers...
          */

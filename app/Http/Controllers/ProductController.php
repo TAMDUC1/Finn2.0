@@ -7,6 +7,7 @@ use App\OrderItem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+
 class ProductController extends Controller
 {
     /**
@@ -16,12 +17,16 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = DB :: table('products')->paginate(100);
-        return view('Web.listItems', compact('product'));
+        $product = Product::paginate(100);
+        $sorted = $product->sortBy('price');
+        $sorted->values()->all();
+        //$product = DB :: table('products')->paginate(100);
+        return view('Web.listItems', compact('sorted'));
     }
     public function index1()
     {
-        $product = DB :: table('products')->paginate(10);
+        $product = Product::sortable()->paginate(100);
+        // $product = DB :: table('products')->paginate(10);
         return view('Web.listItems', compact('product'));
     }
     /**
@@ -68,15 +73,10 @@ class ProductController extends Controller
         //$product->save();
       //
         return back() ->with('nice');
-
       //  $image = $request->file('image');
       //  $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
-
        // $image->move($destinationPath, $input['imagename']);
-
      //   $this->postImage->add($input);
-
-
         // todo: upload image here
      /*   $file = $_FILES['photo'];
         $fileName = $_FILES['photo']['name'];

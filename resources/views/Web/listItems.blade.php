@@ -72,68 +72,56 @@
                         <img class="mySlides img-fluid"  src="../images/products/k3.jpg" alt="">
                     </a>
                     <div style="margin: 4%">
-
                     </div>
-
                 </div>
                 <div class="best-seller"  style="margin: 5px">
                     <a href="#">
                     </a>
                     <div style="margin: 4%">
-
                     </div>
                 </div>
                 <div class="best-seller" style="margin: 5px">
                     <a href="#">
                     </a>
                     <div style="margin: 4%">
-
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="main-content-listItems-top pull-right" style="padding-right: 9%">
             <div></div>
                 <div>
                     <label class="control-label">Sort&nbsp;By:</label>
-                    <select class="form-control input-sm" style="width: 100px">
-                        <option value="#?sort=p.sort_order&amp;order=ASC" selected="selected">Default</option>
-                        <option value="#?sort=pd.name&amp;order=ASC">Name (A - Z)</option>
-                        <option value="#?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
-                        <option value="#?sort=p.price&amp;order=ASC">Price (Low &gt; High)</option>
-                        <option value="#?sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
-                        <option value="#?sort=rating&amp;order=DESC">Rating (Highest)</option>
-                        <option value="#?sort=rating&amp;order=ASC">Rating (Lowest)</option>
-                        <option value="#?sort=p.model&amp;order=ASC">Model (A - Z)</option>
-                        <option value="#?sort=p.model&amp;order=DESC">Model (Z - A)</option>
+                    <select id="mySelect" class="form-control input-sm" style="width: 100px">
+                        <option value="default"></option>
+                        <option value="name-desc">nameDesc</option>
+                        <option value="name">NameAsc</option>
                     </select>
                 </div>
                 <div>
                     <label class="control-label">Show</label>
                     <select class="form-control input-sm" style="width: 100px">
-                        <option value="#?sort=p.sort_order&amp;order=ASC" selected="selected">24</option>
-                        <option value="#?sort=pd.name&amp;order=ASC">Name (A - Z)</option>
-                        <option value="#?sort=pd.name&amp;order=DESC">Name (Z - A)</option>
-                        <option value="#?sort=p.price&amp;order=ASC">Price (Low &gt; High)</option>
-                        <option value="#?sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
+                        <option value="24">24</option>
+                        <option value="48">48</option>
+                        <option value="96">96</option>
 
                     </select>
                 </div>
         </div>
-
         <div class="main-content-listItems" style="padding-right: 5%;padding-top: 2%">
-            @foreach($product as $p)
+            @foreach($sorted as $p)
                 @if($p->imagePath)
-                <div class="card" style="width:200px">
-                    <a href="{{action('ProductController@show', $id = $p->id)}}" style="margin:1px "> <img class="card-img-top img-thumbnail img-responsive" src="{{ url('storage/images/productImages/'.$p->imagePath) }}" alt="Card image" title="" />
-                    </a>
-                    <div class="card-body">
-                        <h4 class="card-title">{{$p->name}}</h4>
-                        <p class="card-text">{{$p->description}}</p>
-                        <p class="card-text">Price: {{$p->price}}</p>
-                        <a class="btn btn-success" href="{{action('CartController@addItemsToCart',$id=$p->id)}}"> Add to Cart</a>
-                    </div>
+                <div id="test1" class="card" style="width:200px" data-name="{{$p->name}}" data-price="{{$p->price}}">
+                    <span data-name="{{$p->name}}" data-price="{{$p->price}}>
+                             <a href="{{action('ProductController@show', $id = $p->id)}}" style="margin:1px "> <img class="card-img-top img-thumbnail img-responsive" src="{{ url('storage/images/productImages/'.$p->imagePath) }}" alt="Card image" title="" />
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title">{{$p->name}}</h4>
+                            <p class="card-text">{{$p->description}}</p>
+                            <p class="card-text">Price: {{$p->price}}</p>
+                            <a class="btn btn-success" href="{{action('CartController@addItemsToCart',$id=$p->id)}}"> Add to Cart</a>
+                        </div>
+                    </span>
                 </div>
             @endif
             @endforeach
@@ -153,6 +141,18 @@
             x[slideIndex-1].style.display = "block";
             setTimeout(carousel, 2000); // Change image every 2 seconds
         }
+        $('#mySelect').on('change', function() {
+            var value = $(this).val();
+            switch (value) {
+                case 'name':
+                    tinysort('div#test1>span');
+                    break;
+                case 'name-desc':
+                    tinysort('div#test1>span',{attr:'data-name',order:'desc'});
+                    break;
+                default:
+            }
+        });
     </script>
 @endsection
 @extends('layouts.webTop')
