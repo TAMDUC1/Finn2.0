@@ -13,10 +13,8 @@
     </head>
     <body>
     <div id="fb-root"></div>
-    <div id="fb-root"></div>
-    <div id="fb-root"></div>
     <script>
-        var name = '';
+        var name ='';
         var email = '';
         var id='';
         function statusChangeCallback(response) {
@@ -29,10 +27,43 @@
             if (response.status === 'connected') {
                 // Logged into your app and Facebook.
                 testAPI();
-            } else {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    method: "POST",
+                    url: "/check",
+                    data: {
+                        name: name,
+                        email: email,
+                        facebookId: id
+                    },
+                    success: function(result){
+                        console.log('done1');
+                    }});
+            }
+            else {
                 // The person is not logged into your app or we are unable to tell.
                 document.getElementById('status').innerHTML = 'Please log ' +
                     'into this app.';
+                if(response.status ==='unknown')
+                {
+                    console.log('chua connect');
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                      //  $.ajax({
+                      //  method: "POST",
+                      // url: "/logout",
+                      //data: {},
+                      // success: function(result){
+                      // console.log('done2');
+                    //}});
+                }
             }
         }
         function checkLoginState() {
@@ -48,7 +79,6 @@
                 xfbml      : true,  // parse social plugins on this page
                 version    : 'v2.8' // use graph api version 2.8
             });
-
             // Now that we've initialized the JavaScript SDK, we call
             // FB.getLoginStatus().  This function gets the state of the
             // person visiting this page and can return one of three states to
@@ -77,54 +107,26 @@
             console.log('Welcome!  Fetching your information.... ');
             FB.api('/me', function(response)
             {
-                name = response.name;
-                id = response.id;
+               name = response.name;
+               id = response.id;
+             // var email = response.email;
                 console.log('Successful login for: ' + response.name);
                 document.getElementById('status').innerHTML =
                     'Thanks for logging in, ' + response.name + '!';
             });
-            FB.api('/me', {fields: 'last_name'}, function(response) {
+            FB.api('/me', {fields: 'name'}, function(response) {
                 console.log(response);
             });
             FB.api('/me', {fields: 'email'}, function(response) {
                  email = response.email;
                 console.log(response.email);
             });
-            $.post('check',{name: name, mail: email, facebookId: id }, function()
-            {
-                console.log(data);
-               // $('#postRequestData').html(data);
-            });
         }
-        $('#facebook').click(function (event) {
-            console.log('sf');
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                method: "post",
-                url: "check",
-                data: {name: name,mail : email, facebookId: id},
-                success: function (data) {
-                },
-                error: function (data) {
-                    var errors = $.parseJSON(data.responseText);
-                    $.each(errors, function (key, value) {
-                        $('#' + key).parent().addClass('error');
-                    });
-                }
-            });
-        });
     </script>
     <nav class = "clearfix" style="background-color: #cac8c6"style="margin:1px ">
         <fb:login-button size="medium" max_rows="1" auto_logout_link="true" scope="public_profile,email" onlogin="checkLoginState();">
         </fb:login-button>
         <div id="status" >
-        </div>
-        <div>
-            <button id="facebook"class="btn btn-danger">save info</button>
         </div>
             @if (!session('email'))
                 <a href = "signUp" class="float-right">SignUp</a>
@@ -135,7 +137,8 @@
                     {{ csrf_field() }}
                     <button type = "submit" class = "btn btn-danger float-right"style="margin:1px " >Log out</button>
                 </form>
-            @endif
+            <img class="img-responsive float-right"  src="{{session('avatar')}}" alt="profile Pic" style="border-radius: 5px; width: 38px" >
+        @endif
                 <a href="blogs" class="float-right">Blogs</a>
             @if(session('role'))
                 <a href="{{route('profile1')}}" class="float-right">Profile</a>
@@ -244,32 +247,13 @@
                             +"</ul>" +"</div>");
                 })
             })
-            $(document).ready(function () {
+            $(document).ready(function ()
+            {
                 $('.live').click(function(e)
                 {
                     e.preventDefault();
                     $('#live').replaceWith("<div id='#live'>" + "Hanoi and Norway "+"</div>");
                 })
-                $('#facebook').click(function (e) {
-                    console.log(email);
-                    e.preventDefault();
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    $.ajax({
-                        method: "POST",
-                        url: "/check",
-                        data: {
-                            name: name,
-                            mail: email,
-                            facebookId: id
-                        },
-                        success: function(result){
-                            console.log('done');
-                        }});
-                });
             })
         </script>
     </body>

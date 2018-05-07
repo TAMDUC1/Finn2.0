@@ -70,7 +70,7 @@ Route::get('redirectToProvider', 'UserController@redirectToProvider')->name('red
 Route::get('handleProviderCallback', 'UserController@handleProviderCallback')->name('handleProviderCallback');
 Route::get('redirect', 'UserController@redirect')->name('redirect');
 Route::get('callback', 'UserController@callback')->name('callback');
-Route::post('logout', 'UserController@logout')->name('logout');
+Route::post('/logout', 'UserController@logout')->name('logout');
 Route::get('home', 'UserController@home')->name('home');
 Route::get('signUp', 'UserController@create')->name('signUp');
 Route::get('login', 'UserController@login')->name('login');

@@ -34,6 +34,11 @@
                         <button type="submit" class="btn btn-danger float-right" style="margin:1px ">Log out</button>
                 </form>
             @endif
+                @if(session('avatar'))
+                    <div class=" additonal-nav-grid" >
+                        <img class="img-responsive float-right" style="width:28px;border-radius: 2px " src="{{Session::get('avatar')}}" alt="">
+                    </div>
+                @endif
         </nav>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">

@@ -16,10 +16,16 @@
     <body>
         <div >
             <nav class="clearfix" style="background-color: #8b8987" role="navigation">
+
                 <form method="post" action="{{route('logout')}}">
                     {{ csrf_field() }}
                     <button type="submit" class="btn btn-danger float-right" style="margin:1px ">Log out</button>
                 </form>
+                    @if(session('avatar'))
+                        <div class=" additonal-nav-grid" >
+                            <img class="img-responsive float-right" style="width:38px;border-radius: 2px " src="{{Session::get('avatar')}}" alt="">
+                        </div>
+                    @endif
             </nav>
         </div>
         <div>

@@ -45,6 +45,7 @@
 
     };
 
+    // Load the SDK asynchronously
     (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
@@ -106,9 +107,11 @@
                 <a href="checkout">Checkout</a>
             </div>
 
-            <div class=" additonal-nav-grid"id="additonal-nav-grid4"style="justify-self: start;padding-left: 7px">
-                <a href="login">Log in</a>
-            </div>
+            @if(!session('email'))
+                <div class=" additonal-nav-grid"id="additonal-nav-grid4"style="justify-self: start;padding-left: 7px">
+                    <a href="login">Log in</a>
+                </div>
+            @endif
             <div class=" additonal-nav-grid"id="additonal-nav-grid5"style="justify-self: start;padding-left: 7px">
                 <a href="{{route('about')}}">About</a>
             </div>

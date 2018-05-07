@@ -68,19 +68,20 @@ class UserController extends Controller
     public function profile()
     {
         $email = Session::get('email');
+        if($email){
+            $user1 = User::where('email',$email)->first();
+            $blog = Blog::where('user_id', $user1->id)->get();
+            return view('user.profile',compact('blog'));
+        }
         $id = Session::get('user_id');
-        $user = User::find($id);
-        $blog = Blog::where('user_id', $id)->get();
-        if (empty($id)) {
-            if($email){
-                $user1 = User::where('email',$email)->first();
-                $blog = Blog::where('user_id', $user1->id)->get();
-                return view('user.profile',compact('blog'));
-            }
+        if($id){
+            $user = User::find($id);
+            $blog = Blog::where('user_id', $id)->get();
+            return view('user.profile',compact('blog'));
+        }
+        else {
             return redirect()->route('login');
         }
-       // var_dump($blog);die();
-        return view('user.profile',compact('blog'));
     }//end profile()
     public function create()
     {
@@ -262,11 +263,21 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index');
     }//end destroy()
-
-
     public function checkAvailable(Request $request){
-        $newUser = User::firstOrCreate(['email' => $request->get('mail')], ['name' => $request->get('name')]);
-        $avatar = 'http://graph.facebook.com/'.$request->get('id').'/picture';
-        session(['email'=>$request->get('mail'),'name' => $request->get('name'), 'avatar' => $avatar], ['user_id' => $newUser['id']]);
+        $user = User::where('email',$request->get('email'))->first();
+        $avatar = 'http://graph.facebook.com/'.$request->get('facebookId').'/picture';
+        if($user){
+            session(['email'=>$user->email,'name' => $user->name, 'avatar' => $avatar,'user_id' => $user->id]);
+        }
+        elseif(!$user){
+            $newUser = new User();
+            $newUser['name'] = $request->get('name');
+            $newUser['email'] = $request->get('email');
+            $newUser->save();
+            session(['email'=>$request->get('email'),'name' => $request->get('name'), 'avatar' => $avatar,'user_id' => $newUser->id]);
+        }
+
+
+
     }
 }

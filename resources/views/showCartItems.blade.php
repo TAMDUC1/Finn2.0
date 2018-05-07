@@ -161,14 +161,19 @@
                     </table>
                 </div>
                 <div>
-                    <h4>
-                        Cart Total Price
-                    </h4>
-                    <div id="totalPrice1">
-                       <strong><span>$</span>{{$cart->totalPrice}}</strong>
-                    </div>
-                    <div>
-                        <a href="products">Continue shopping</a>
+                    <div class="card" style="width: 300px">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                Order Summary
+                            </h4>
+                            <div class="card-text" id="totalPrice1">
+                                <strong><span>$</span>{{$cart->totalPrice}}</strong>
+                            </div>
+                            <div class="card-text">
+                                <a href="products" class="btn btn-success">Confirm</a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

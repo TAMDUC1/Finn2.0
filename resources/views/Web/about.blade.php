@@ -62,9 +62,16 @@
                 <div class=" additonal-nav-grid"id="additonal-nav-grid3"style="justify-self: start;padding-left: 7px">
                     <a href="checkout">Checkout</a>
                 </div>
+                @if(!session('email'))
                 <div class=" additonal-nav-grid"id="additonal-nav-grid4"style="justify-self: start;padding-left: 7px">
                     <a href="login">Log in</a>
                 </div>
+                @endif
+                @if(session('avatar'))
+                    <div class=" additonal-nav-grid" >
+                        <img class="img-responsive" style="width:30px;border-radius: 2px " src="{{Session::get('avatar')}}" alt="">
+                    </div>
+                @endif
             </div>
         </div>
         <div class="header" style="padding-left: 10px">

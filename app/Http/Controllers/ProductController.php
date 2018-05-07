@@ -19,7 +19,6 @@ class ProductController extends Controller
         $product = DB :: table('products')->paginate(100);
         return view('Web.listItems', compact('product'));
     }
-
     public function index1()
     {
         $product = DB :: table('products')->paginate(10);
