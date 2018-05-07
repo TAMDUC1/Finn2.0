@@ -166,6 +166,15 @@
                             <h4 class="card-title">
                                 Order Summary
                             </h4>
+                            @foreach($orderItems1 as $O)
+                                @if($O->imagePath)
+                                    @if($O->totalPrice)
+                                        <div class="card-text">
+                                            <span>{{$O->product->name}} : ${{$O->totalPrice}}</span>
+                                        </div>
+                                    @endif
+                                @endif
+                            @endforeach
                             <div class="card-text" id="totalPrice1">
                                 <strong><span>$</span>{{$cart->totalPrice}}</strong>
                             </div>
@@ -173,7 +182,23 @@
                                 <a href="products" class="btn btn-success">Confirm</a>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="card" style="width: 300px">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                Delivery informations
+                            </h4>
+                            <div class="card-text">
+                               <span>
+                                   Street nr: <input class="input-group-btn-vertical" type="text" style="width: 100%">
+                               </span> 
+                            </div>
+                            <div class="card-text">
+                                <span>
+                                    Post nr: <input class="" type="text" style="width: 100%">
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

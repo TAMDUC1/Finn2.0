@@ -124,9 +124,9 @@
         }
     </script>
     <nav class = "clearfix" style="background-color: #cac8c6"style="margin:1px ">
-        <fb:login-button size="medium" max_rows="1" auto_logout_link="true" scope="public_profile,email" onlogin="checkLoginState();">
+        <fb:login-button size="large" max_rows="1" auto_logout_link="true" scope="public_profile,email" onlogin="checkLoginState();" class="float-right">
         </fb:login-button>
-        <div id="status" >
+        <div id="status1" >
         </div>
             @if (!session('email'))
                 <a href = "signUp" class="float-right">SignUp</a>
@@ -146,7 +146,7 @@
             @if(!session('role'))
                 <a href="{{route('profile')}}" class="float-right">Profile</a>
             @endif
-                <a href="about">Web(can only be opened by Admin via middleware)</a>
+                <a class="float-right" href="about">Web</a>
         </nav>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
