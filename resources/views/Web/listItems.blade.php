@@ -89,14 +89,17 @@
             </div>
         </div>
         <div class="main-content-listItems-top pull-right" style="padding-right: 9%">
-            <div></div>
-                <div>
-                    <label class="control-label">Sort&nbsp;By:</label>
-                    <select id="mySelect" class="form-control input-sm" style="width: 100px">
-                        <option value="default"></option>
-                        <option value="name-desc">nameDesc</option>
-                        <option value="name">NameAsc</option>
-                    </select>
+            <div>
+                <label class="control-label" for="">Search</label>
+                <input id="myInput" class="form-control input-sm" type="text" style="width: 300px" placeholder="Search..">
+            </div>
+            <div>
+                <label class="control-label">Sort&nbsp;By:</label>
+                <select id="mySelect" class="form-control input-sm" style="width: 100px">
+                    <option value="default"></option>
+                    <option value="name-desc">nameDesc</option>
+                    <option value="name">NameAsc</option>
+                </select>
                 </div>
                 <div>
                     <label class="control-label">Show</label>
@@ -104,16 +107,15 @@
                         <option value="24">24</option>
                         <option value="48">48</option>
                         <option value="96">96</option>
-
                     </select>
                 </div>
         </div>
-        <div class="main-content-listItems" style="padding-right: 5%;padding-top: 2%">
+        <div id="search" class="main-content-listItems" style="padding-right: 5%;padding-top: 2%">
             @foreach($sorted as $p)
                 @if($p->imagePath)
                 <div id="test1" class="card" style="width:200px" data-name="{{$p->name}}" data-price="{{$p->price}}">
                     <span data-name="{{$p->name}}" data-price="{{$p->price}}>
-                             <a href="{{action('ProductController@show', $id = $p->id)}}" style="margin:1px "> <img class="card-img-top img-thumbnail img-responsive" src="{{ url('storage/images/productImages/'.$p->imagePath) }}" alt="Card image" title="" />
+                             <a href = "{{action('ProductController@show', $id = $p->id)}}" style="margin:1px "> <img class="card-img-top img-thumbnail img-responsive" src="{{ url('storage/images/productImages/'.$p->imagePath) }}" alt="Card image" title="" />
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">{{$p->name}}</h4>
@@ -152,6 +154,14 @@
                     break;
                 default:
             }
+        });
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#search div").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
         });
     </script>
 @endsection
