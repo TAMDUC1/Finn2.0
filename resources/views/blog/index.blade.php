@@ -57,12 +57,16 @@
             <div class="container-fluid">
                 <div class="row" style="background-color: transparent" >
                     <div class="col-sm-4" style="background-color: transparent">
+                        <div>
+                            <label class="control-label" for="">Search Blogs</label>
+                            <input id="myInput" class="form-control input-sm" type="text" style="width: 300px" placeholder="Search..">
+                        </div>
                     </div>
-                    <div class="col-sm-4" style="background-color: transparent">
+                    <div id="search" class="col-sm-4" style="background-color: transparent">
                         @foreach($blog as $b)
                             <div id="post" data-postid = "{{ $b->id }}">
                                 @if($b->content)
-                                    <div class="contentBlog" data-postid = "a">
+                                    <div  class="contentBlog" data-postid = "a">
                                         <div class="comment-header" data-postid = "b">
                                             <div class="pull-left" data-postid = "c">
                                                 blog {{$b->id}}
@@ -298,6 +302,14 @@
                     }
                 });
             });
+           $(document).ready(function(){
+               $("#myInput").on("keyup", function() {
+                   var value = $(this).val().toLowerCase();
+                   $("#search div").filter(function() {
+                       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                   });
+               });
+           });
         </script>
         </div>
     </body>

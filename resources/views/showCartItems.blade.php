@@ -1,92 +1,8 @@
 
 @extends('layouts.webBottom')
 @section('web')
-    <div class="main">
+    <div class="main-showCartItems">
         <div class="main-sidebar" >
-            <div class="main-sidebar-content" style="background-color: #f9f7f5">
-                <div aria-label="breadcrumb" style="background-color: #f9f7f5">
-                    <ol class="breadcrumb" style="background-color: #e0dedc;">
-                        <li class="breadcrumb-item">
-                            <a href="">Home</a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="">Store</a>
-                        </li >
-                        <li class="breadcrumb-item">
-                            <a href="">Term and condition</a>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-            <div>
-                <ul class="sidebar-list" style="padding-left: 5px">
-                    <li STYLE="background-color: white">
-                        <i class="fa fa-angle-right" style="padding-left: 20px;width: 4px">
-                        </i>
-                        <a href="login" style="margin-left: 20px">LOGIN/REGISTER</a>
-                    </li>
-                    <li STYLE="background-color: white">
-                        <i class="fa fa-angle-right" style="padding-left: 20px;width: 4px">
-                        </i>
-                        <a href="{{ route('password.request') }}"style="margin-left: 20px">RESTORE PASSWORD</a>
-                    </li>
-                    <li STYLE="background-color: white">
-                        <i class="fa fa-angle-right" style="padding-left: 20px;width: 4px">
-                        </i>
-                        @if(session('role'))
-                            <a href="{{route('profile1')}}" style="margin-left: 20px">MY ACCOUNT</a>
-                        @endif
-                        @if(!session('role'))
-                            <a href="{{route('profile')}}" style="margin-left: 20px">MY ACCOUNT</a>
-                        @endif
-                    </li>
-                    <li STYLE="background-color: white">
-                        <i class="fa fa-angle-right" style="padding-left: 20px;width: 4px">
-                        </i>
-                        <a href=""style="margin-left: 20px">ADDRESS BOOK</a>
-                    </li>
-                    <li STYLE="background-color: white">
-                        <i class="fa fa-angle-right" style="padding-left: 20px;width: 4px">
-                        </i>
-                        <a href=""style="margin-left: 20px">WISH LIST</a>
-                    </li>
-                    <li STYLE="background-color: white">
-                        <i class="fa fa-angle-right" style="padding-left: 20px;width: 4px">
-                        </i>
-                        <a href=""style="margin-left: 20px">RETURNS</a>
-                    </li>
-                    <li STYLE="background-color: white">
-                        <i class="fa fa-angle-right" style="padding-left: 20px;width: 4px">
-                        </i>
-                        <a href=""style="margin-left: 20px">NEWSLETTER</a></li>
-                </ul>
-            </div>
-            <div style="width: 100%">
-                <strong>
-                    Best Seller1
-                </strong>
-                <div class="best-seller" style="margin: 5px">
-                    <a href="#">
-                        <img class="mySlides img-fluid"  src="../images/products/k1.jpg" alt="">
-                        <img class="mySlides img-fluid"  src="../images/products/k2.jpg" alt="">
-                        <img class="mySlides img-fluid"  src="../images/products/k3.jpg" alt="">
-                    </a>
-                    <div style="margin: 4%">
-                    </div>
-                </div>
-                <div class="best-seller"  style="margin: 5px">
-                    <a href="#">
-                    </a>
-                    <div style="margin: 4%">
-                    </div>
-                </div>
-                <div class="best-seller" style="margin: 5px">
-                    <a href="#">
-                    </a>
-                    <div style="margin: 4%">
-                    </div>
-                </div>
-            </div>
         </div>
         <div>
             <div class="main-content-showCartItems">
@@ -160,8 +76,59 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="main-content-checkoutForm">
+                    <div>
+                        <strong><h3>Billing Address</h3></strong>
+                        <div>
+                            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                            <input class="form-control input-sm" type="text" id="fname" name="firstname" placeholder="{{session('name')}}">
+                        </div>
+                        <div>
+                            <label for="fname"><i class="fa fa-envelope"></i> Email</label>
+                            <input class="form-control input-sm" type="text" id="fname" name="firstname" placeholder="{{session('email')}}">
+                        </div>
+                        <div>
+                            <label for="fname"><i class="fa fa-address-card-o"></i> Address</label>
+                            <input class="form-control input-sm" type="text" id="fname" name="firstname" placeholder="">
+                        </div>
+                        <div>
+                            <label for="fname"><i class="fa fa-institution"></i> city</label>
+                            <input class="form-control input-sm" type="text" id="fname" name="firstname" placeholder="">
+                        </div>
+                        <div style="padding-top: 20px">
+                            <button class="btn btn-success">Continue to check out</button>
+                        </div>
+                    </div>
+                    <div>
+                        <strong><h3>Payment</h3></strong>
+                        <div>
+                            <div>
+                                <label for="fname">Accepted Cards</label>
+                                <div class="icon-container">
+                                    <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                    <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                    <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                    <i class="fa fa-cc-discover" style="color:orange;"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-top: 12px">
+                            <label for="cname">Name on Card</label>
+                            <input class="form-control input-sm" type="text" id="cname" name="cardname" placeholder="{{session('name')}}">
+                        </div>
+                        <div>
+                            <label for="ccnum">Credit card number</label>
+                            <input class="form-control input-sm" type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+                        </div>
+                        <div>
+                            <label for="expmonth">Exp Month</label>
+                            <input class="form-control input-sm"type="text" id="expmonth" name="expmonth" placeholder="September">
+                        </div>
+
+                    </div>
+                </div>
                 <div>
-                    <div class="card" style="width: 300px">
+                    <div class="card" style="width: 200px">
                         <div class="card-body">
                             <h4 class="card-title">
                                 Order Summary
@@ -177,26 +144,6 @@
                             @endforeach
                             <div class="card-text" id="totalPrice1">
                                 <strong><span>$</span>{{$cart->totalPrice}}</strong>
-                            </div>
-                            <div class="card-text">
-                                <a href="products" class="btn btn-success">Confirm</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 300px">
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                Delivery informations
-                            </h4>
-                            <div class="card-text">
-                               <span>
-                                   Street nr: <input class="input-group-btn-vertical" type="text" style="width: 100%">
-                               </span> 
-                            </div>
-                            <div class="card-text">
-                                <span>
-                                    Post nr: <input class="" type="text" style="width: 100%">
-                                </span>
                             </div>
                         </div>
                     </div>

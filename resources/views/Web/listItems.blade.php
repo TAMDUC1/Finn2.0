@@ -90,7 +90,7 @@
         </div>
         <div class="main-content-listItems-top pull-right" style="padding-right: 9%">
             <div>
-                <label class="control-label" for="">Search</label>
+                <label class="control-label" for="">Search Products</label>
                 <input id="myInput" class="form-control input-sm" type="text" style="width: 300px" placeholder="Search..">
             </div>
             <div>
@@ -100,15 +100,7 @@
                     <option value="name-desc">nameDesc</option>
                     <option value="name">NameAsc</option>
                 </select>
-                </div>
-                <div>
-                    <label class="control-label">Show</label>
-                    <select class="form-control input-sm" style="width: 100px">
-                        <option value="24">24</option>
-                        <option value="48">48</option>
-                        <option value="96">96</option>
-                    </select>
-                </div>
+            </div>
         </div>
         <div id="search" class="main-content-listItems" style="padding-right: 5%;padding-top: 2%">
             @foreach($sorted as $p)
