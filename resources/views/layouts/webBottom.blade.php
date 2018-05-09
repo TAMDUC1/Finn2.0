@@ -240,7 +240,7 @@
     <div class="linhtinh-footer">
         <div class="col-md-4 col-sm-4 padding-top-10" style="justify-self: center;padding-top: 20px">
             <p style="color: ghostwhite">
-                2015 © Keenthemes. ALL Rights Reserved.
+                2018 ©TamDuc. ALL Rights Reserved.
             </p>
         </div>
         <div style="padding-top: 20px">
@@ -265,7 +265,7 @@
         <div >
             <p class="pull-right" style="padding-top: 20px;color: ghostwhite">
                 "Powered by: "
-                <a href="http://www.keenthemes.com/" style="color:#e6400c; text-decoration: none ">KeenThemes.com</a>
+                <a href="" style="color:#e6400c; text-decoration: none ">phamductam2004@gmail.com</a>
             </p>
         </div>
     </div>

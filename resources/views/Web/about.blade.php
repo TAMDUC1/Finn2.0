@@ -52,9 +52,6 @@
                     @if(session('role'))
                         <a href="{{route('profile1')}}" style="margin-left: 20px">My Account</a>
                     @endif
-                    @if(!session('role'))
-                        <a href="{{route('profile')}}" style="margin-left: 20px">My Account</a>
-                    @endif
                 </div>
                 <div class=" additonal-nav-grid"id="additonal-nav-grid2"style="justify-self: end;padding-right: 7px">
                     <a href="" style="display: inline-block">My Wishlist</a>
@@ -69,7 +66,9 @@
                 @endif
                 @if(session('avatar'))
                     <div class=" additonal-nav-grid" >
-                        <img class="img-responsive" style="width:30px;border-radius: 2px " src="{{Session::get('avatar')}}" alt="">
+                        <a href="{{route('profile')}}">
+                            <img class="img-responsive" style="width:30px;border-radius: 2px " src="{{Session::get('avatar')}}" alt="">
+                        </a>
                     </div>
                 @endif
             </div>
@@ -647,7 +646,7 @@
             <div class="linhtinh-footer">
                 <div class="col-md-4 col-sm-4 padding-top-10" style="justify-self: center;padding-top: 20px">
                     <p style="color: ghostwhite">
-                        2015 © Keenthemes. ALL Rights Reserved.
+                        2018 © TamDuc. ALL Rights Reserved.
                     </p>
                 </div>
                 <div style="padding-top: 20px">
@@ -672,7 +671,7 @@
                 <div >
                     <p class="pull-right" style="padding-top: 20px;color: ghostwhite">
                         "Powered by: "
-                        <a href="http://www.keenthemes.com/" style="color:#e6400c; text-decoration: none ">KeenThemes.com</a>
+                        <a href="http://www.keenthemes.com/" style="color:#e6400c; text-decoration: none ">phamductam2004@gmail.com</a>
                     </p>
                 </div>
             </div>

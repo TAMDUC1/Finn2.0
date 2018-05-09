@@ -105,15 +105,16 @@
         <div id="search" class="main-content-listItems" style="padding-right: 5%;padding-top: 2%">
             @foreach($sorted as $p)
                 @if($p->imagePath)
-                <div id="test1" class="card" style="width:200px" data-name="{{$p->name}}" data-price="{{$p->price}}">
+                <div id="test1{{$p->id}}" class="card" style="width:200px" data-name="{{$p->name}}" data-price="{{$p->price}}">
                     <span data-name="{{$p->name}}" data-price="{{$p->price}}>
-                             <a href = "{{action('ProductController@show', $id = $p->id)}}" style="margin:1px "> <img class="card-img-top img-thumbnail img-responsive" src="{{ url('storage/images/productImages/'.$p->imagePath) }}" alt="Card image" title="" />
+                        <a href="{{action('ProductController@show', $id = $p->id)}}"><img class="card-img-top img-thumbnail img-responsive" src="{{ url('storage/images/productImages/'.$p->imagePath) }}"alt="Card image" title="" />
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">{{$p->name}}</h4>
                             <p class="card-text">{{$p->description}}</p>
                             <p class="card-text">Price: {{$p->price}}</p>
-                            <a class="btn btn-success" href="{{action('CartController@addItemsToCart',$id=$p->id)}}"> Add to Cart</a>
+                            <a class="btn btn-success" style="width: 150px" href="{{action('CartController@addItemsToCart',$id=$p->id)}}"> Add to Cart PHP</a>
+                            <a class="btn btn-success addToCart" style="width: 150px" href="#" data-id="{{$p->id}}"data-token="{{ csrf_token() }}">Add via Javascript</a>
                         </div>
                     </span>
                 </div>
@@ -152,6 +153,31 @@
                 var value = $(this).val().toLowerCase();
                 $("#search div").filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+            $('.addToCart').click(function (e) {
+                e.preventDefault();
+                var _this = $(this);
+                var params = _this.data();
+                var token = $(this).data('token');
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    method: "get",
+                    url: "/addItemToCart/" + params.id,
+                    data: {},
+                    success: function (data) {
+                        $("#myDiv").load(location.href + " #myDiv");
+                    },
+                    error: function (data) {
+                        var errors = $.parseJSON(data.responseText);
+                        $.each(errors, function (key, value) {
+                            $('#' + key).parent().addClass('error');
+                        });
+                    }
                 });
             });
         });

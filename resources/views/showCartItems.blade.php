@@ -62,11 +62,11 @@
                                             <strong> <div id="orderItemTotalPrice{{$O->product->id}}"><span>$</span>{{$O->totalPrice}}</div></strong>
                                         </td>
                                         <td class="del-goods-col">
-                                            <button class="btn btn-danger delete"  name="_method" id="delete{{$O->product->id}}" data-id="{{$O->product->id}}" data-token="{{ csrf_token() }}" >remove via Javascript</button>
+                                            <button class="btn btn-success delete"  name="_method" style="margin:1px;width: 168px "id="delete{{$O->product->id}}" data-id="{{$O->product->id}}" data-token="{{ csrf_token() }}" >remove via Javascript</button>
                                             <form action="{{action('OrderItemController@destroy', $id = $O->product->id)}}" method="post">
                                                 {{csrf_field()}}
                                                 <input name="_method" type="hidden" value="DELETE">
-                                                <button class="btn btn-danger" type="submit" style="margin:1px;width: 168px ">Remove via PHP</button>
+                                                <button class="btn btn-success" type="submit" style="margin:1px;width: 168px ">Remove via PHP</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -129,14 +129,14 @@
                 </div>
                 <div>
                     <div class="card" style="width: 200px">
-                        <div class="card-body">
+                        <div class="card-body" style="background-color: lightgrey">
                             <h4 class="card-title">
                                 Order Summary
                             </h4>
                             @foreach($orderItems1 as $O)
                                 @if($O->imagePath)
                                     @if($O->totalPrice)
-                                        <div class="card-text">
+                                        <div data-name="{{$O->name}}" id="orderItemTotalPrice2{{$O->product->id}}" class="card-text">
                                             <span>{{$O->product->name}} : ${{$O->totalPrice}}</span>
                                         </div>
                                     @endif
@@ -174,11 +174,18 @@
                         data: { quantity: productQuantity },
                         success: function (data)
                         {
-
                             var price = "<span>$</span>"+data.orderItemsPrice;
+                            var price2 = data.name+" : <span>$</span>"+data.orderItemsPrice;
                             var totalPrice = " <strong><span>$</span>"+data.totalPrice+"</strong>";
                             $('#totalPrice1').html(totalPrice);
+
                             $('#orderItemTotalPrice'+params.id).html(price);
+                            $('#orderItemTotalPrice2'+params.id).html(price2);
+
+                            var priceItem = "<span>$</span>"+data.orderItemsPrice;
+                            $("#myDiv").load(location.href + " #myDiv");
+                            $("#card-text").load(location.href + " #card-text");
+
                         },
                         error: function (data)
                         {
@@ -187,7 +194,6 @@
                             {
                             });
                         }
-
                     })
                 }
             });

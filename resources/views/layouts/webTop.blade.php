@@ -99,25 +99,23 @@
                 @if(session('role'))
                     <a href="{{route('profile1')}}" style="margin-left: 20px">My Account</a>
                 @endif
-                @if(!session('role'))
-                    <a href="{{route('profile')}}" style="margin-left: 20px">My Account</a>
-                @endif
             </div>
-            <div class=" additonal-nav-grid"id="additonal-nav-grid3"style="justify-self: start;padding-left: 7px">
-                <a href="checkout">Checkout</a>
-            </div>
-
+                <div class=" additonal-nav-grid"id="additonal-nav-grid3"style="justify-self: start;padding-left: 7px">
+                    <a href="checkout">Checkout</a>
+                </div>
             @if(!session('email'))
                 <div class=" additonal-nav-grid"id="additonal-nav-grid4"style="justify-self: start;padding-left: 7px">
                     <a href="login">Log in</a>
                 </div>
             @endif
-            <div class=" additonal-nav-grid"id="additonal-nav-grid5"style="justify-self: start;padding-left: 7px">
-                <a href="{{route('about')}}">About</a>
-            </div>
+                <div class=" additonal-nav-grid"id="additonal-nav-grid5"style="justify-self: start;padding-left: 7px">
+                    <a href="{{route('about')}}">About</a>
+                </div>
             @if(session('avatar'))
                 <div class=" additonal-nav-grid" >
-                    <img class="img-responsive" style="width:30px;border-radius: 2px " src="{{Session::get('avatar')}}" alt="">
+                    <a href="{{route('profile')}}">
+                        <img class="img-responsive" style="width:30px;border-radius: 2px " src="{{Session::get('avatar')}}" alt="">
+                    </a>
                 </div>
             @endif
         </div>
@@ -376,7 +374,7 @@
             <div class="top-cart-info">
                 <div class="mini" >
                     <a href="" style=" border-width: thin;padding-right: 2px; text-align: center">Total</a>
-                    <a href="" style="text-align: left"><span>$</span>{{Session::get('cartTotalPrice')}}</a>
+                    <a id="myDiv" href="" style="text-align: left"><span>$</span>{{Session::get('cartTotalPrice')}}</a>
                 </div>
                 <a href="{{action('CartController@showCartItems', $id = Session::get('user_id'))}}">
                     <i id="cart" class="fa fa-shopping-cart" style=" float:right; background-color: red;font-size:18px;color: white; border-radius: 10%;padding: 9px;margin: 5px"></i>

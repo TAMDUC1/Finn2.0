@@ -49,7 +49,6 @@
                                                 <a href="{{route('admins.index')}}" class=" btn btn-primary" style="width: 180px">Admin list</a>
                                                 <a href="products/create"class="btn btn-warning" style="width: 180px">Create a new product***</a>
                                                 <a href="ProductIndex" class=" btn btn-primary" style="width: 180px">Product list</a>
-
                                             </div>
                                         @endif
                                     </div>

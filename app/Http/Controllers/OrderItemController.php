@@ -34,20 +34,22 @@ class OrderItemController extends Controller
             'product_id'=>$id
         ])->first();
         if($orderItem){
-            $orderItem->amount = (int)$_GET['quantity'];
-            $orderItem->totalPrice = $orderItem->amount * $product->price;
-            $orderItem->save();
-            $this->cartTotalPrice(session('user_id'));
+            if((int)$_GET['quantity']>=0){
+                $orderItem->amount = (int)$_GET['quantity'];
+                $orderItem->totalPrice = $orderItem->amount * $product->price;
+                $orderItem->save();
+                $this->cartTotalPrice(session('user_id'));
+                $cart = Cart::find(Session::get('user_id'));
+                $response = array(
+                    'totalPrice' => $cart->totalPrice,
+                    'orderItemsPrice' => $orderItem->amount * $product->price,
+                    'name' => $orderItem->name
+                );
+                $amount = $cart->orderItems->count();
+                session(['amount' => $amount]);
+                return \Response::json($response);
+            }
         }
-        $cart = Cart::find(Session::get('user_id'));
-        $response = array(
-            'totalPrice' => $cart->totalPrice,
-            'orderItemsPrice' => $orderItem->amount * $product->price
-        );
-        $amount = $cart->orderItems->count();
-        session(['amount' => $amount]);
-        return \Response::json($response);
-
     }
     public function update(Request $request, $id)
     {

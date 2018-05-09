@@ -27,6 +27,8 @@
             if (response.status === 'connected') {
                 // Logged into your app and Facebook.
                 testAPI();
+                var access_token =   FB.getAuthResponse(['accessToken']);
+                console.log(access_token);
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -159,7 +161,6 @@
             <div class="">
                 <div class = "content">
                     <div class = "title m-b-md">
-                        Finn 2.0
                     </div>
                 </div>
             </div>
