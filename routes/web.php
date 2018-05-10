@@ -38,18 +38,27 @@ Route::get('carts/{id}/edit', 'CartController@edit')->name('editOrder');
 Route::get('addItemToCart/{id}', 'CartController@addItemsToCart')->name('addItemsToCart');
 Route::get('showCartItems/{id}', 'CartController@showCartItems')->name('showCartItems');
 Route::resource('carts', 'CartController');
+Route::resource('order', 'OrderController');
 
 Route::get('/listItems', function () {
     return View::make('Web.listItems');
 })->name('listItems');
 
 
-Route::get('/shopCart', function () {
+Route::get('/shopCart', function ()
+{
     return View::make('Web.shopCart');
 })->name('shopCart');
-Route::get('/privacyPolicy', function () {
+
+Route::get('/privacyPolicy', function ()
+{
     return View::make('Web.PrivacyPolicy');
 })->name('PrivacyPolicy');
+
+Route::get('/confirmation', function () {
+        return View::make('Web.confirmation');
+});
+
 Route::get('/checkout', function () {
     return View::make('Web.checkout');
 })->name('checkout');

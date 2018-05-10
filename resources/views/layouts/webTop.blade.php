@@ -129,7 +129,7 @@
         <div class="header-navigation-mid">
             <div class="header-navigation-mid-title dropdown">
                 <li class="list-unstyled dropdown">
-                    <a  data-target="#" href="{{route('products.index')}}"aria-haspopup="true" aria-expanded="false">PTS</a>
+                    <a  data-target="#" href="{{route('products.index')}}"aria-haspopup="true" aria-expanded="false">Items</a>
                     <ul class="dropdown-menu">
                         <li class=" dropdown-item">
                             Hi Tops
@@ -253,8 +253,6 @@
                     </li>
                 </ul>
             </div>
-            <div class="header-navigation-mid-title">
-            </div>
             <div class="dropdown header-navigation-mid-title">
                 <a href="products">NEW</a>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -362,12 +360,6 @@
                         </li>
                     </ul>
                 </li>
-            </div>
-            <div class="header-navigation-mid-title" style="border-style: solid; border-width: thin; border-left-color: transparent;border-top-color: transparent;border-bottom-color: transparent; padding-right: 5px ">
-                <a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes&amp;utm_source=download&amp;utm_medium=banner&amp;utm_campaign=metronic_frontend_freebie" target="_blank">ADMIN THEMES</a>
-            </div>
-            <div id="search" >
-                <i class="fa fa-search"></i>
             </div>
         </div>
         <div class="header-navigation-right">

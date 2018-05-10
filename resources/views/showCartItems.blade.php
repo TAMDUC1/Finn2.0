@@ -77,56 +77,64 @@
                     </table>
                 </div>
                 <div class="main-content-checkoutForm">
-                    <div>
-                        <strong><h3>Billing Address</h3></strong>
+                    <form method="POST" action="{{url('order')}}" id="register" >
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        {{csrf_field()}}
                         <div>
-                            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-                            <input class="form-control input-sm" type="text" id="fname" name="firstname" placeholder="{{session('name')}}">
+                            <strong><h3>Billing Address</h3></strong>
+
+                                <div>
+                                    <label for="receiverName"><i class="fa fa-user"></i> Full Name</label>
+                                    <input class="form-control input-sm" type="text" id="receiverName" name="receiverName" placeholder="{{session('name')}}">
+                                </div>
+                                <div>
+                                    <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                                    <input class="form-control input-sm" type="text" id="email" name="email" placeholder="{{session('email')}}">
+                                </div>
+                                <div>
+                                    <label for="receiverPhone"><i class="fa fa-phone"></i> Phone</label>
+                                    <input class="form-control input-sm" type="text" id="receiverPhone" name="receiverPhone" placeholder="phone number">
+                                </div>
+                                <div>
+                                    <label for="deliveryAddress"><i class="fa fa-address-card-o"></i> Address</label>
+                                    <input class="form-control input-sm" type="text" id="deliveryAddress" name="deliveryAddress" placeholder="">
+                                </div>
+                                <div>
+                                    <label for="city"><i class="fa fa-institution"></i> city</label>
+                                    <input class="form-control input-sm" type="text" id="city" name="city" placeholder="">
+                                </div>
                         </div>
                         <div>
-                            <label for="fname"><i class="fa fa-envelope"></i> Email</label>
-                            <input class="form-control input-sm" type="text" id="fname" name="firstname" placeholder="{{session('email')}}">
-                        </div>
-                        <div>
-                            <label for="fname"><i class="fa fa-address-card-o"></i> Address</label>
-                            <input class="form-control input-sm" type="text" id="fname" name="firstname" placeholder="">
-                        </div>
-                        <div>
-                            <label for="fname"><i class="fa fa-institution"></i> city</label>
-                            <input class="form-control input-sm" type="text" id="fname" name="firstname" placeholder="">
-                        </div>
-                        <div style="padding-top: 20px">
-                            <button class="btn btn-success">Continue to check out</button>
-                        </div>
-                    </div>
-                    <div>
-                        <strong><h3>Payment</h3></strong>
-                        <div>
+                            <strong><h3>Payment</h3></strong>
                             <div>
-                                <label for="fname">Accepted Cards</label>
-                                <div class="icon-container">
-                                    <i class="fa fa-cc-visa" style="color:navy;"></i>
-                                    <i class="fa fa-cc-amex" style="color:blue;"></i>
-                                    <i class="fa fa-cc-mastercard" style="color:red;"></i>
-                                    <i class="fa fa-cc-discover" style="color:orange;"></i>
+                                <div>
+                                    <label for="fname">Accepted Cards</label>
+                                    <div class="icon-container">
+                                        <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                        <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                        <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                        <i class="fa fa-cc-discover" style="color:orange;"></i>
+                                    </div>
                                 </div>
                             </div>
+                            <div style="padding-top: 12px">
+                                <label for="nameOnCard">Name on Card</label>
+                                <input class="form-control input-sm" type="text" id="nameOnCard" name="nameOnCard" placeholder="{{session('name')}}">
+                            </div>
+                            <div>
+                                <label for="cardNumber">Credit card number</label>
+                                <input class="form-control input-sm" type="text" id="cardNumber" name="cardNumber" placeholder="1111-2222-3333-4444">
+                            </div>
+                            <div>
+                                <label for="dateExpCard">Exp Month</label>
+                                <input class="form-control input-sm"type="date" id="dateExpCard" name="dateExpCard" placeholder="September">
+                            </div>
                         </div>
-                        <div style="padding-top: 12px">
-                            <label for="cname">Name on Card</label>
-                            <input class="form-control input-sm" type="text" id="cname" name="cardname" placeholder="{{session('name')}}">
+                        <div style="padding-top: 20px">
+                            <button class="btn btn-success" value="Register" type="submit">Continue to check out</button>
                         </div>
-                        <div>
-                            <label for="ccnum">Credit card number</label>
-                            <input class="form-control input-sm" type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-                        </div>
-                        <div>
-                            <label for="expmonth">Exp Month</label>
-                            <input class="form-control input-sm"type="text" id="expmonth" name="expmonth" placeholder="September">
-                        </div>
-
-                    </div>
-                </div>
+                </form>
+            </div>
                 <div>
                     <div class="card" style="width: 200px">
                         <div class="card-body" style="background-color: lightgrey">

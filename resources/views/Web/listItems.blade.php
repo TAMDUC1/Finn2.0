@@ -105,7 +105,7 @@
         <div id="search" class="main-content-listItems" style="padding-right: 5%;padding-top: 2%">
             @foreach($sorted as $p)
                 @if($p->imagePath)
-                <div id="test1{{$p->id}}" class="card" style="width:200px" data-name="{{$p->name}}" data-price="{{$p->price}}">
+                <div id="test1" class="card" style="width:200px" data-name="{{$p->name}}" data-price="{{$p->price}}">
                     <span data-name="{{$p->name}}" data-price="{{$p->price}}>
                         <a href="{{action('ProductController@show', $id = $p->id)}}"><img class="card-img-top img-thumbnail img-responsive" src="{{ url('storage/images/productImages/'.$p->imagePath) }}"alt="Card image" title="" />
                         </a>

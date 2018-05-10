@@ -16,7 +16,6 @@
     <body>
         <div >
             <nav class="clearfix" style="background-color: #8b8987" role="navigation">
-
                 <form method="post" action="{{route('logout')}}">
                     {{ csrf_field() }}
                     <button type="submit" class="btn btn-danger float-right" style="margin:1px ">Log out</button>
@@ -37,47 +36,49 @@
                     </li>
                 </ol>
                 <div class="text-info">
-                    <h6>{{session('email')}}</h6>
-                </div>
-                <div>
-                    <a href="{{action('UserController@edit',$id = session('user_id'))}}" class="btn" style="margin-left: 1em"> change Password</a>
                 </div>
             </nav>
-
         </div>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="content">
-                            <div>
-                                <form id="register">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    {{csrf_field()}}
-                                    <div class="left-form" >
-                                        <label for="title"style = "color: #1c679c">Title</label>
-                                        <div>
-                                            <input
-                                                type="text"
-                                                class="form-control"
-                                                name="title"
-                                                id="title"
-                                                style="border-color: #1c679c">
-                                            </input>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div>
-                                            <label for="content"style = "color: #1c679c">Content</label>
-                                        <textarea rows="4" cols="55"name="content" id="content"style="border-color: #1c679c">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong><h5>Post Blog</h5></strong>
+                            </div>
+                            <div class="card-body">
+                                <div class="content">
+                                    <div>
+                                        <form id="register">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            {{csrf_field()}}
+                                            <div class="left-form" >
+                                                <label for="title"style = "color: #1c679c">Title</label>
+                                                <div>
+                                                    <input
+                                                            type="text"
+                                                            class="form-control"
+                                                            name="title"
+                                                            id="title"
+                                                            style="border-color: #1c679c">
+                                                    </input>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div>
+                                                    <label for="content"style = "color: #1c679c">Content</label>
+                                                    <textarea class="form-control" name="content" id="content"style="border-color: #1c679c">
                                         </textarea>
-                                        </div>
-                            </div>
-                                    <div class="submit-button">
-                                        <button type="submit" class="btn btn-warning " id="sm" ONCLICK="myFunction()">Submit</button>
+                                                </div>
+                                            </div>
+                                            <div class="submit-button">
+                                                <button type="submit" class="btn btn-warning " id="sm" ONCLICK="myFunction()">Submit</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
+                                    <div id="blogPost"></div>
+                                </div>
                             </div>
-                            <div id="blogPost"></div>
                         </div>
                         <script type="text/javascript">
                             console.log('123');
@@ -130,51 +131,82 @@
                             })
                         </script>
                     </div>
-                    <div class="col-md-8">
-                        <table  class="table table-striped table table-hover data-table">
-                            <tr>
-                                <th>
-                                    Blog
-                                </th>
-                                <th>
-                                    Tittle
-                                </th>
-                                <th>
-                                    Content
-                                </th>
-                                <th>
-                                    Author
-                                </th>
-                                <th>
-                                    Date
-                                </th>
-                                <th>
-                                    Comments
-                                </th>
-                            </tr>
-                            @foreach($blog as $b)
-                                <tr>
-                                    <td>
-                                        {{$b->id}}
-                                    </td>
-                                    <td>
-                                        {{$b->title}}
-                                    </td>
-                                    <td>
-                                        {{$b->content}}
-                                    </td>
-                                    <td>
-                                        {{$b->author}}
-                                    </td>
-                                    <td>
-                                        {{$b->created_at}}
-                                    </td>
-                                    <td>
-                                        {{$b->commentsCount->count()}}
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </table>
+                    <div class="col-md-5">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong><h5>Your Blogs</h5></strong>
+                            </div>
+                            <div class="card-body">
+                                <div style="padding-top: 30px">
+                                    <table  class="table table-responsive table-striped table-hover data-table" style="border-style: solid;border-width: thin">
+                                        <tr>
+                                            <th>
+                                                Blog
+                                            </th>
+                                            <th>
+                                                Tittle
+                                            </th>
+                                            <th>
+                                                Content
+                                            </th>
+                                            <th>
+                                                Author
+                                            </th>
+                                            <th>
+                                                Date
+                                            </th>
+                                            <th>
+                                                Comments
+                                            </th>
+                                        </tr>
+                                        @foreach($blog as $b)
+                                            <tr>
+                                                <td>
+                                                    {{$b->id}}
+                                                </td>
+                                                <td>
+                                                    {{$b->title}}
+                                                </td>
+                                                <td>
+                                                    {{$b->content}}
+                                                </td>
+                                                <td>
+                                                    {{$b->author}}
+                                                </td>
+                                                <td>
+                                                    {{$b->created_at}}
+                                                </td>
+                                                <td>
+                                                    {{$b->commentsCount->count()}}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="card" style="width: 300px" >
+                            <div class="card-header">
+                                <strong><h5>Personal Info</h5></strong>
+                            </div>
+                            <div class="card-body">
+                                <h6>{{session('email')}}</h6>
+                                <div class="card-text">
+                                    <a href="{{action('UserController@edit',$id = session('user_id'))}}" class="card-link" style="margin-left: 1em"> change Password</a>
+                                </div>
+                                <div>
+                                    <a href="{{route('order.show',$id= session('user_id'))}}" class="card-link" style="margin-left: 1em">Your previous order</a>
+                                </div>
+                                <blockquote class="blockquote mb-0">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                    <footer class="blockquote-footer">Tam Pham <cite title="Source Title">Source Facebook</cite></footer>
+                                </blockquote>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

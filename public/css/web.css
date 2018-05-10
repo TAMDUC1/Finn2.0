@@ -112,7 +112,7 @@ ul, menu, dir {
 .additonal-nav{
     padding-top: 8px;
     display: grid;
-    grid-template-columns: auto 100px 100px 100px auto;
+    grid-template-columns: auto 100px 100px 100px 1px;
     justify-items: end;
 
 }
