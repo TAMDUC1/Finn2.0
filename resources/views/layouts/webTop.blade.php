@@ -366,7 +366,7 @@
             <div class="top-cart-info">
                 <div class="mini" >
                     <a href="" style=" border-width: thin;padding-right: 2px; text-align: center">Total</a>
-                    <a id="myDiv" href="" style="text-align: left"><span>$</span>{{Session::get('cartTotalPrice')}}</a>
+                        <a id="myDiv" href="" style="text-align: left"><span>$</span>{{Session::get('cartTotalPrice')}}</a>
                 </div>
                 <a href="{{action('CartController@showCartItems', $id = Session::get('user_id'))}}">
                     <i id="cart" class="fa fa-shopping-cart" style=" float:right; background-color: red;font-size:18px;color: white; border-radius: 10%;padding: 9px;margin: 5px"></i>

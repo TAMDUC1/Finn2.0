@@ -35,19 +35,14 @@ class OrderController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //create new Order
-        //luu thong tin delivery
-        //dien thong tin order_id vao order_items->id
-        //lay thong tin
         $user =User::find(session('user_id'));
         $cart = Cart::find(session('user_id'));
-        $orderItems1 = OrderItem::where('cart_id', session('user_id'))->get();
+        //tao order
         $order = $this->validate(
             request(),
             [
@@ -61,15 +56,23 @@ class OrderController extends Controller
             ]
         );
         $order['totalPrice'] = $cart['totalPrice'];
-        $user->orders()->create($order);
-        $order1 = Order::where('totalPrice',$cart->totalPrice)->first();
-        return view('Web.confirmation',compact('user','cart','orderItems1','order1'));
-       // return redirect()->route('profile')->with(compact('orderItems1'));
-       // return redirect()->route('profile',compact('orderItems1'),compact('cart'),compact('order'));
+        $order['cart_id'] = session('user_id');
+        $id = $user->orders()->create($order)->id;
+        $order1 = Order::where('cart_id', session('user_id'))->get();
+        $orderItems = OrderItem::where('cart_id', session('user_id'))->get();
+        foreach ($orderItems as $O){
+            $O->order_id = $id;
+            $O->cart_id = null;
+            $O->save();
+        }
+        $cart -> delete();//done
+        $request->session()->forget('cartTotalPrice');
+        //$orderItems2 = OrderItem::where('user_id', session('user_id'))->get();
+        return view('Web.confirmation',compact('orderItems','order1','user'));
     }
+
     /**
      * Display the specified resource.
-     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -77,9 +80,9 @@ class OrderController extends Controller
     {
         $user =User::find($id);
         $cart = Cart::find($id);
-        $orderItems1 = OrderItem::where('cart_id', $id)->get();
-        $order1 = Order::where('totalPrice',$cart->totalPrice)->first();
-        return view('Web.confirmation',compact('user','cart','orderItems1','order1'));
+        $orderItems = OrderItem::where('user_id', session('user_id'))->get();
+        $order1 = Order::where('user_id',session('user_id'))->get();
+        return view('Web.confirmation',compact('orderItems','user','order1'));
     }
     /**
      * Show the form for editing the specified resource.

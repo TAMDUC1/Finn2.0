@@ -21,110 +21,119 @@
         <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
         <link href="{{ asset('css/classic.css') }}" rel="stylesheet">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
     </head>
     <body>
         <div class="main">
-            <div class="blog-comment">
-                <div>
-                  Blog-id:  {{$blog->id}}
-                </div>
-                <div id="titleBlog">
-                  Title:  {{$blog->title}}
-                </div>
-                <div id="contentBlog">
-                  Content: {{$blog->content}}
-                </div>
-                <div>
-                    {{$blog->author}}
-                </div>
-                <div>
-                    Created at: {{$blog->created_at}}
-                </div>
-                <div>
-                    {{$blog->author_id}}
-                </div>
-                <div>
-                   Total like: {{$blog->emotions()->count()}}
-                </div>
-                <div>
-                    Total comments :  {{$blog->comments()->count()}} Comment
-                </div>
-                @if($blog->user_id === session('user_id')||(session('role')))
-                <div>
-                    <form  action="{{action('BlogController@update', $id=$blog->id)}}" id="blogEdit" method="POST">
-                        {{csrf_field()}}
-                        {{ method_field('PATCH')}}
-                        <input name="_method" value="PATCH" type="hidden">
+            <div>
+                <div class="card" style="">
+                    <div class="card-header" id="titleBlog">
+                        Title:  {{$blog->title}}
+                    </div>
+                    <div class="blog-comment card-body" >
                         <div>
-                            <input type="text" class="form-control" name="title" id="title" style="border-color: #5bc0de;border-radius: 5px" placeholder="Edit Title php"/>
+                            Blog-id:  {{$blog->id}}
+                        </div>
+                        <div id="contentBlog">
+                            Content: {{$blog->content}}
                         </div>
                         <div>
-                            <input type="text" class="form-control" name="content" id="content" style="border-color: #5bc0de;border-radius: 5px" placeholder="Edit Content php"/>
-                        </div>
-                        <button class="btn btn-primary" type="submit" form="blogEdit" style="border-radius: 5px">Submit
-                        </button>
-                    </form>
-                </div>
-                <div style="padding-top: 5px" >
-                        <div>
-                            <form class="editTitleBlog" type="hidden" method="POST"  data-id="{{$blog->id}}">
-                                <input type="text" placeholder="Edit title Jquery" id="inputEditTitle{{$blog->id}}"style="border-color: #5bc0de;border-radius: 5px">
-                            </form>
+                            {{$blog->author}}
                         </div>
                         <div>
-                            <form class="editContentBlog" type="hidden" method="POST" id="" data-id="{{$blog->id}}">
-                                <input class="editContent" type="text" placeholder="Edit Content Jquery" id="inputEditContent{{$blog->id}}" style="border-color: #5bc0de;border-radius: 5px">
-                            </form>
+                            Created at: {{$blog->created_at}}
                         </div>
+                        <div>
+                            {{$blog->author_id}}
+                        </div>
+                        <div>
+                            Total like: {{$blog->emotions()->count()}}
+                        </div>
+                        <div>
+                            Total comments :  {{$blog->comments()->count()}} Comment
+                        </div>
+                        @if($blog->user_id === session('user_id')||(session('role')))
+                            <div>
+                                <form  action="{{action('BlogController@update', $id=$blog->id)}}" id="blogEdit" method="POST">
+                                    {{csrf_field()}}
+                                    {{ method_field('PATCH')}}
+                                    <input name="_method" value="PATCH" type="hidden">
+                                    <div>
+                                        <input type="text" class="form-control" name="title" id="title" style="border-color: #5bc0de;border-radius: 5px" placeholder="Edit Title php"/>
+                                    </div>
+                                    <div>
+                                        <input type="text" class="form-control" name="content" id="content" style="border-color: #5bc0de;border-radius: 5px" placeholder="Edit Content php"/>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit" form="blogEdit" style="border-radius: 5px">Submit
+                                    </button>
+                                </form>
+                            </div>
+                            <div style="padding-top: 5px" >
+                                <div>
+                                    <form class="editTitleBlog" type="hidden" method="POST"  data-id="{{$blog->id}}">
+                                        <input type="text" placeholder="Edit title Jquery" id="inputEditTitle{{$blog->id}}"style="border-color: #5bc0de;border-radius: 5px">
+                                    </form>
+                                </div>
+                                <div>
+                                    <form class="editContentBlog" type="hidden" method="POST" id="" data-id="{{$blog->id}}">
+                                        <input class="editContent" type="text" placeholder="Edit Content Jquery" id="inputEditContent{{$blog->id}}" style="border-color: #5bc0de;border-radius: 5px">
+                                    </form>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
                 </div>
-                @endif
             </div>
             <div>
-                <table class="table table-responsive table-striped table table-hover data-table">
-                    <thead>
-                    <tr>
-                        <th>Comment</th>
-                        <th>Delete</th>
-                        <th>Edit</th>
-                    </tr>
-                    </thead>
-                    @foreach($comment as $c)
-                        <tr id="comment{{$c->id}}">
-                            <td >
-                                <div id="comment1{{$c->id}}">
-                                    <div id="comment2{{$c->id}}" data-id="{{$c->id}}" style="visibility: visible">
-                                        {{$c->comment}}
-                                    </div>
-                                    <form class="editForm" id="editForm{{$c->id}}" method="POST" data-id="{{$c->id}}">
-                                        {{csrf_field()}}
-                                        {{ method_field('PATCH')}}
-                                        <input name="_method" value="PATCH" type="hidden">
-                                        <input type="text" id="input{{$c->id}}" style="visibility: hidden" placeholder="{{$c->comment}}">
-                                    </form>
-                                    <button class= "btn-primary cancel" id="cancel{{$c->id}}" style="border-radius: 5px;visibility: hidden" data-id="{{$c->id}}">cancel</button>
-                                </div>
-                            </td>
-                            <td>
-                                @if((session('role')))
-                                    <form action="{{action('CommentController@destroy', $id = $c->id)}}" method="post">
-                                        {{csrf_field()}}
-                                        <input name="_method" type="hidden" value="DELETE">
-                                        <button class="btn btn-danger pull-right" type="submit" style="margin:1px;width: 168px ">Delete via PHP</button>
-                                    </form>
-                                    <button class="btn btn-primary delete"  name="_method" id="{{$c->id}}" data-id="{{$c->id}}" data-token="{{ csrf_token() }}" > Delete via javascript</button>
-                                @endif
-                            </td>
-                            @if($c->author_id === session('user_id'))
-                            <td>
-                                <button class="btn btn-primary edit" id="edit{{$c->id}}" data-id="{{$c->id}}" style="visibility: visible">Edit via javascript</button>
-                            </td>
-                                @endif
+                <div class="card" style="width: 600px">
+                    <div class = "card-header">
+                        <strong><h5>Comments of this blog</h5> </strong>
+                    </div>
+                    <table class="table table-responsive table table-hover data-table ">
+                        <thead>
+                        <tr  >
+                            <th>Comment</th>
+                            <th>Delete</th>
+                            <th>Edit</th>
                         </tr>
-                    @endforeach
-                    {{$comment->links()}}
+                        </thead>
+                        @foreach($comment as $c)
+                            <tr id="comment{{$c->id}}">
+                                <td >
+                                    <div id="comment1{{$c->id}}">
+                                        <div id="comment2{{$c->id}}" data-id="{{$c->id}}" style="visibility: visible">
+                                            {{$c->comment}}
+                                        </div>
+                                        <form class="editForm" id="editForm{{$c->id}}" method="POST" data-id="{{$c->id}}">
+                                            {{csrf_field()}}
+                                            {{ method_field('PATCH')}}
+                                            <input name="_method" value="PATCH" type="hidden">
+                                            <input type="text" id="input{{$c->id}}" style="visibility: hidden" placeholder="{{$c->comment}}">
+                                        </form>
+                                        <button class= "btn-primary cancel" id="cancel{{$c->id}}" style="border-radius: 5px;visibility: hidden" data-id="{{$c->id}}">cancel</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    @if((session('role')))
+                                        <form action="{{action('CommentController@destroy', $id = $c->id)}}" method="post">
+                                            {{csrf_field()}}
+                                            <input name="_method" type="hidden" value="DELETE">
+                                            <button class="btn btn-danger pull-right" type="submit" style="margin:1px;width: 168px ">Delete via PHP</button>
+                                        </form>
+                                        <button class="btn btn-primary delete"  name="_method" id="{{$c->id}}" data-id="{{$c->id}}" data-token="{{ csrf_token() }}" > Delete via javascript</button>
+                                    @endif
+                                </td>
+                                @if($c->author_id === session('user_id'))
+                                    <td>
+                                        <button class="btn btn-primary edit" id="edit{{$c->id}}" data-id="{{$c->id}}" style="visibility: visible">Edit via javascript</button>
+                                    </td>
+                                @endif
+                            </tr>
+                        @endforeach
+                        {{$comment->links()}}
 
-                </table>
+                    </table>
+
+                </div>
             </div>
         </div>
         <script type="text/javascript">

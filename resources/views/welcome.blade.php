@@ -126,9 +126,11 @@
         }
     </script>
     <nav class = "clearfix" style="background-color: #cac8c6"style="margin:1px ">
-        <fb:login-button size="large" max_rows="1" auto_logout_link="true" scope="public_profile,email" onlogin="checkLoginState();" class="float-right">
-        </fb:login-button>
-        <div id="status1" >
+        <div class="pull-left">
+            <fb:login-button size="large" max_rows="1" auto_logout_link="true" scope="public_profile,email" onlogin="checkLoginState();" class="float-right">
+            </fb:login-button>
+            <div id="status1" >
+        </div>
         </div>
             @if (!session('email'))
                 <a href = "signUp" class="float-right">SignUp</a>
@@ -149,175 +151,176 @@
                 <a href="{{route('profile')}}" class="float-right">Profile</a>
             @endif
                 <a class="float-right" href="about">Web</a>
-        </nav>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current = "page">
-                    Home
-                </li>
-            </ol>
-        </nav>
-        <div class="main">
-            <div class="">
-                <div class = "content">
-                    <div class = "title m-b-md">
-                    </div>
+    </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current = "page">
+                Home
+            </li>
+        </ol>
+
+    </nav>
+    <div class="main">
+        <div class="">
+            <div class = "content">
+                <div class = "title m-b-md">
                 </div>
             </div>
-            <div class="intro" style="">
-                <div id="name">
-                    <h2>
-                    </h2>
+        </div>
+        <div class="intro" style="">
+            <div id="name">
+                <h2>
+                </h2>
+            </div>
+            <div class="details" style="height: 500px">
+                <div class="details-left" >
+                    <ul class="list-group" style="text-align: left">
+                        <strong>Intro</strong>
+                        <li>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aperiam, consectetur ea expedita fuga illo labore omnis velit! Ab amet atque iure magni maiores nemo non nostrum sed tempora velit? Animi aspernatur autem et explicabo facere hic illum incidunt, itaque laborum, odit ratione unde velit voluptatum? Aliquam blanditiis eum placeat?
+                        </li>
+                    </ul>
                 </div>
-                <div class="details" style="height: 500px">
-                    <div class="details-left" >
-                        <ul class="list-group" style="text-align: left">
-                            <strong>Intro</strong>
+                <div class="details-container" >
+                    <div class="details-container-left">
+                        <div>
+                            <ul>
+                                <h4>
+                                    <strong>Experience</strong>
+                                </h4>
+                                <li>
+                                    Software Developer
+                                    <p>
+                                        Web Freelancer Developer
+                                    </p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi asperiores dicta dolore doloribus exercitationem facere fugiat harum, illo praesentium tempore.</p>
+                                </li>
+                                <li>IT support officer at NTNU
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum cupiditate distinctio doloremque enim maiores minus molestiae molestias nam odit, officia quas quasi ullam voluptas!
+                                    </p>
+                                </li>
+                                <li>
+                                    <a href="http://humg.edu.vn/Pages/home.aspx">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ntnu.no">
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul>
+                                <h4>
+                                    <strong>Education</strong>
+                                </h4>
+                                <li>
+                                    <div style="margin: 5px">
+                                        <strong> ASP.Net MVC Certificate, Aptech</strong>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div style="margin: 5px">
+                                        <strong>NTNU</strong>
+                                        <a href="https://www.ntnu.no">
+                                        </a>
+                                        <strong>Bachelor of Petroleum Geology, Norwegian University of Science and Technology</strong>
+                                        <p>Have some IT Courses : Web Technology,Information Technology, Object oriented Programming,Communication Service and Internet, Datamodelling Database-system, Algorithm Datastructure </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div style="margin: 5px">
+                                        <strong>Hanoi mining and geologi University</strong>
+                                        <a href="http://humg.edu.vn/Pages/home.aspx">
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                </li>
+                                <li>
+                                </li>
+                                <li>
+                                </li>
+                            </ul>
+                            <ul >
+                                <h4>
+                                    <strong>Languages</strong>
+                                </h4>
+                                <li>
+                                    English
+                                </li>
+                                <li>
+                                    Norsk
+                                </li>
+                                <li>
+                                    Vietnamese
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="live">
+                        </div>
+                    </div>
+                    <div class="details-container-right"style="margin-right: 12px; background-color: #5bc0de">
+                        <ul style="margin-top: 10px">
+                            <li><h4>Personal Info</h4></li>
                             <li>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aperiam, consectetur ea expedita fuga illo labore omnis velit! Ab amet atque iure magni maiores nemo non nostrum sed tempora velit? Animi aspernatur autem et explicabo facere hic illum incidunt, itaque laborum, odit ratione unde velit voluptatum? Aliquam blanditiis eum placeat?
+                               <span><strong>Tam Duc Pham</strong><img class="img-responsive" src="{{URL::asset('/images/profile.jpg')}}" alt="profile Pic" width="50" style="border-radius: 10px;margin-left: 20px" ></span>
+                            </li>
+                            <li>
+                                Web Developer
+                            </li>
+                            <li>
+                                mobile: 0934465283
+                            </li>
+                            <li>
+                                Email:phamductam2004@gmail.com
+                            </li>
+                            <li>
+                                LinkedIn:
+                            </li>
+                            <li>
+                              <p>   Address: 53 Martin Kregnes vei, 7091 Tiller , Norway
+                              </p>
+                            </li>
+                        </ul>
+                        <ul style="margin-top: 10px">
+                            <li><div><h4>Skill</h4></div></li>
+                            <li>
+                                Project Scheduling
+                            </li>
+                            <li>Sale Analysis
+                            </li>
+                            <li>Strategi Planning
+                            </li>
+                            <li>Communication Skills
+                            </li>
+                            <li>Business Process Improvement
+                            </li>
+                        </ul>
+                        <ul style="margin-top: 10px">
+                            <li><div><h4>Software</h4></div></li>
+                            <li>
+                               PHP,C#,Javascrip
+                            </li>
+                            <li>Linux/Unix
+                            </li>Apache
+                            <li>Laravel
+                            </li>
+                            <li>Mysql
+                            </li>
+                            <li>git
                             </li>
                         </ul>
                     </div>
-                    <div class="details-container" >
-                        <div class="details-container-left">
-                            <div>
-                                <ul>
-                                    <h4>
-                                        <strong>Experience</strong>
-                                    </h4>
-                                    <li>
-                                        Software Developer
-                                        <p>
-                                            Web Freelancer Developer
-                                        </p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi asperiores dicta dolore doloribus exercitationem facere fugiat harum, illo praesentium tempore.</p>
-                                    </li>
-                                    <li>IT support officer at NTNU
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum cupiditate distinctio doloremque enim maiores minus molestiae molestias nam odit, officia quas quasi ullam voluptas!
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <a href="http://humg.edu.vn/Pages/home.aspx">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.ntnu.no">
-                                        </a>
-                                    </li>
-                                </ul>
-                                <ul>
-                                    <h4>
-                                        <strong>Education</strong>
-                                    </h4>
-                                    <li>
-                                        <div style="margin: 5px">
-                                            <strong> ASP.Net MVC Certificate, Aptech</strong>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div style="margin: 5px">
-                                            <strong>NTNU</strong>
-                                            <a href="https://www.ntnu.no">
-                                            </a>
-                                            <strong>Bachelor of Petroleum Geology, Norwegian University of Science and Technology</strong>
-                                            <p>Have some IT Courses : Web Technology,Information Technology, Object oriented Programming,Communication Service and Internet, Datamodelling Database-system, Algorithm Datastructure </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div style="margin: 5px">
-                                            <strong>Hanoi mining and geologi University</strong>
-                                            <a href="http://humg.edu.vn/Pages/home.aspx">
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                    </li>
-                                    <li>
-                                    </li>
-                                    <li>
-                                    </li>
-                                </ul>
-                                <ul >
-                                    <h4>
-                                        <strong>Languages</strong>
-                                    </h4>
-                                    <li>
-                                        English
-                                    </li>
-                                    <li>
-                                        Norsk
-                                    </li>
-                                    <li>
-                                        Vietnamese
-                                    </li>
-                                </ul>
-                            </div>
-                            <div id="live">
-                            </div>
-                        </div>
-                        <div class="details-container-right"style="margin-right: 12px; background-color: #5bc0de">
-                            <ul style="margin-top: 10px">
-                                <li><h4>Personal Info</h4></li>
-                                <li>
-                                   <span><strong>Tam Duc Pham</strong><img class="img-responsive" src="{{URL::asset('/images/profile.jpg')}}" alt="profile Pic" width="50" style="border-radius: 10px;margin-left: 20px" ></span>
-                                </li>
-                                <li>
-                                    Web Developer
-                                </li>
-                                <li>
-                                    mobile: 0934465283
-                                </li>
-                                <li>
-                                    Email:phamductam2004@gmail.com
-                                </li>
-                                <li>
-                                    LinkedIn:
-                                </li>
-                                <li>
-                                  <p>   Address: 53 Martin Kregnes vei, 7091 Tiller , Norway
-                                  </p>
-                                </li>
-                            </ul>
-                            <ul style="margin-top: 10px">
-                                <li><div><h4>Skill</h4></div></li>
-                                <li>
-                                    Project Scheduling
-                                </li>
-                                <li>Sale Analysis
-                                </li>
-                                <li>Strategi Planning
-                                </li>
-                                <li>Communication Skills
-                                </li>
-                                <li>Business Process Improvement
-                                </li>
-                            </ul>
-                            <ul style="margin-top: 10px">
-                                <li><div><h4>Software</h4></div></li>
-                                <li>
-                                   PHP,C#,Javascrip
-                                </li>
-                                <li>Linux/Unix
-                                </li>Apache
-                                <li>Laravel
-                                </li>
-                                <li>Mysql
-                                </li>
-                                <li>git
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-        <div class="footer">
-        </div>
+    </div>
+    <div class="footer">
+    </div>
         <script>
             $(document).ready(function () {
                 $('.work').click(function(e)

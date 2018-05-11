@@ -3,57 +3,56 @@
         <div class="main-sidebar" >
         </div>
         <div>
-            <div class="main-content-showCartItems">
-                <div class="table-wrapper-responsive">
-                    <div class="card" >
-                        <div class="card-body" style="background-color: lightgrey">
-                            <h4 class="card-title">
-                                Order Summary
-                            </h4>
-                        </div>
-                        <div style="padding-left: 20px" >
-                            @foreach($orderItems1 as $O)
-                                @if($O->imagePath)
-                                    @if($O->totalPrice)
-                                        <div data-name="{{$O->name}}" id="orderItemTotalPrice2{{$O->product->id}}" class="card-text">
-                                            <span>{{$O->product->name}} : ${{$O->totalPrice}}</span>
+            <div class="main-content-showCartItems" >
+                @if($order1)
+                    @foreach($order1 as $R)
+                        <div class="table-wrapper-responsive" style="margin-bottom: 10px">
+                               <div class="card" style="margin-bottom: 10px" >
+                                    <div class="card-body" style="background-color: lightgrey;">
+                                        <h4 class="card-title" style="color: black">
+                                            Order {{$R->id}} Summary
+                                        </h4>
+                                    </div>
+                                   <div style="padding-left: 20px">
+                                       @foreach($orderItems as $O)
+                                           @if($O->order_id === $R->id)
+                                               <img style="width: 50px" class="img-responsive" src="{{ url('storage/images/productImages/'.$O->imagePath) }}" alt="" title="" />
+                                               <strong>    {{$O->name}} ( {{$O->amount}} pieces )</strong> <br>
+                                           @endif
+                                       @endforeach
+                                   </div>
+                                    <div style="padding-left: 20px" >
+                                        <div class="card-text" id="totalPrice1">
+                                            @if($R)
+                                                <strong>Total Prices :<span>$</span>{{$R->totalPrice}}</strong>
+                                            @endif
                                         </div>
-                                    @endif
-                                @endif
-                            @endforeach
-                            <div class="card-text" id="totalPrice1">
-                                <strong><span>$</span>{{$cart->totalPrice}}</strong>
-                            </div>
+                                    </div>
+
+                                   <h4 class="card-title card-body" style="color: black">
+                                       Delivery Info
+                                   </h4>
+                                   <div style="padding-left: 20px">
+                                       <div class="card-text">
+                                           <strong>Name :</strong>   {{$R->receiverName}}
+                                       </div>
+                                       <div class="card-text">
+                                           <strong>Phone :</strong> {{$R->receiverPhone}}
+                                       </div>
+                                       <div class="card-text">
+                                           <strong>Delivery Address :</strong> {{$R->deliveryAddress}}
+                                       </div>
+                                       <div class="card-text">
+                                           <strong>City :</strong>  {{$R->city}}
+                                       </div>
+                                       <div class="card-text">
+                                           <strong>Email :</strong> {{$R->email}}
+                                       </div>
+
+                                </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <h4 class="card-title" style="background-color: lightgrey">
-                            Delivery Info
-                        </h4>
-                        <div style="padding-left: 20px">
-                            <div class="card-text">
-                                {{$order1->receiverName}}
-
-                            </div>
-                            <div class="card-text">
-                                {{$order1->receiverPhone}}
-
-                            </div>
-                            <div class="card-text">
-
-                                {{$order1->deliveryAddress}}
-
-                            </div>
-                            <div class="card-text">
-
-                                {{$order1->city}}
-                            </div>
-                            <div class="card-text">
-
-                                {{$order1->email}}
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+               @endif
                 </div>
                 <div class="main-content-checkoutForm">
                 </div>

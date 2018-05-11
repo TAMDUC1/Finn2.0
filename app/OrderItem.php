@@ -8,7 +8,7 @@ use PhpParser\Node\Expr\AssignOp\Mod;
 class OrderItem extends Model
 {
     protected $fillable = [
-        'amount','salgPriceUnit','cart_id','description','name','type','imagePath','product_id','totalPrice'
+        'amount','salgPriceUnit','cart_id','description','name','type','imagePath','product_id','totalPrice','order_id','user_id'
 
     ];
     public function product(){

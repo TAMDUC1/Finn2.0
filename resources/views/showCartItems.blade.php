@@ -22,57 +22,50 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($orderItems1 as $O)
-                            @if($O->imagePath)
-                                @if($O->totalPrice)
-                                    <tr id="orderItem{{$O->product->id}}">
-                                        <td>
-                                            <a href="{{action('ProductController@show', $id = $O->product->id)}}" style="margin:1px ">
-                                            <img style="width: 100px" class="img-responsive" src="{{ url('storage/images/productImages/'.$O->imagePath) }}" alt="" title="" />
-                                            </a>
-                                        </td>
-                                        <td>
-                                            {{$O->name}}
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                            <div class="product-quantity">
-                                                <form class="editQuantity" id="editQuantity{{$O->id}}" data-id="{{$O->product->id}}" method="POST" type="hidden">
-                                                    {{csrf_field()}}
-                                                    {{ method_field('PATCH')}}
-                                                    <input name="_method" value="PATCH" type="hidden">
-                                                    <input class="form-control input-sm" id="product-quantity{{$O->product->id}}" type="text" value={{$O->amount}}>
-                                                </form>
-                                            </div>
-                                        </td>
-                                         <!--
-                                               <td>
-                                                   <div class="product-quantity">
-                                                       <form method="POST" action="{{action('OrderItemController@update',$O->product_id)}}">
-                                                           {{csrf_field()}}
-                                                    <input name="_method" type="hidden" value="PATCH">
-                                                    <input type="number" class="form-control" name="amount">
-                                                    <button type="submit" class="btn btn-success" style="width: 70px">Change</button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                        -->
-                                        <td>
-                                            <strong> <div id="orderItemTotalPrice{{$O->product->id}}"><span>$</span>{{$O->totalPrice}}</div></strong>
-                                        </td>
-                                        <td class="del-goods-col">
-                                            <button class="btn btn-success delete"  name="_method" style="margin:1px;width: 168px "id="delete{{$O->product->id}}" data-id="{{$O->product->id}}" data-token="{{ csrf_token() }}" >remove via Javascript</button>
-                                            <form action="{{action('OrderItemController@destroy', $id = $O->product->id)}}" method="post">
-                                                {{csrf_field()}}
-                                                <input name="_method" type="hidden" value="DELETE">
-                                                <button class="btn btn-success" type="submit" style="margin:1px;width: 168px ">Remove via PHP</button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                        @if($cart)
+                            @foreach($orderItems1 as $O)
+                                @if($O->cart_id = $cart->id)
+                                    @if($O->imagePath)
+                                        @if($O->totalPrice)
+                                            <tr id="orderItem{{$O->product->id}}">
+                                                <td>
+                                                    <a href="{{action('ProductController@show', $id = $O->product->id)}}" style="margin:1px ">
+                                                        <img style="width: 100px" class="img-responsive" src="{{ url('storage/images/productImages/'.$O->imagePath) }}" alt="" title="" />
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    {{$O->name}}
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                    <div class="product-quantity">
+                                                        <form class="editQuantity" id="editQuantity{{$O->id}}" data-id="{{$O->product->id}}" method="POST" type="hidden">
+                                                            {{csrf_field()}}
+                                                            {{ method_field('PATCH')}}
+                                                            <input name="_method" value="PATCH" type="hidden">
+                                                            <input class="form-control input-sm" id="product-quantity{{$O->product->id}}" type="text" value={{$O->amount}}>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <strong> <div id="orderItemTotalPrice{{$O->product->id}}"><span>$</span>{{$O->totalPrice}}</div></strong>
+                                                </td>
+                                                <td class="del-goods-col">
+                                                    <button class="btn btn-success delete"  name="_method" style="margin:1px;width: 168px "id="delete{{$O->product->id}}" data-id="{{$O->product->id}}" data-token="{{ csrf_token() }}" >remove via Javascript</button>
+                                                    <form action="{{action('OrderItemController@destroy', $id = $O->product->id)}}" method="post">
+                                                        {{csrf_field()}}
+                                                        <input name="_method" type="hidden" value="DELETE">
+                                                        <button class="btn btn-success" type="submit" style="margin:1px;width: 168px ">Remove via PHP</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endif
+
                                 @endif
-                            @endif
-                        @endforeach
+                            @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>
@@ -141,17 +134,21 @@
                             <h4 class="card-title">
                                 Order Summary
                             </h4>
-                            @foreach($orderItems1 as $O)
-                                @if($O->imagePath)
-                                    @if($O->totalPrice)
-                                        <div data-name="{{$O->name}}" id="orderItemTotalPrice2{{$O->product->id}}" class="card-text">
-                                            <span>{{$O->product->name}} : ${{$O->totalPrice}}</span>
-                                        </div>
+                            @if($cart)
+                                @foreach($orderItems1 as $O)
+                                    @if($O->imagePath)
+                                        @if($O->totalPrice)
+                                            <div data-name="{{$O->name}}" id="orderItemTotalPrice2{{$O->product->id}}" class="card-text">
+                                                <span>{{$O->product->name}} : ${{$O->totalPrice}}</span>
+                                            </div>
+                                        @endif
                                     @endif
-                                @endif
-                            @endforeach
+                                @endforeach
+                            @endif
                             <div class="card-text" id="totalPrice1">
-                                <strong><span>$</span>{{$cart->totalPrice}}</strong>
+                                @if($cart)
+                                    <strong><span>$</span>{{$cart->totalPrice}}</strong>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -212,7 +209,6 @@
                 var token = $(this).data('token');
                 console.log(params.id);
                 console.log(token);
-                var price0 = "<strong><span>$</span>{{$cart->totalPrice}}</strong>";
                 $.ajax( {
                     type : 'post',
                     url  : "/order_items/"+params.id,

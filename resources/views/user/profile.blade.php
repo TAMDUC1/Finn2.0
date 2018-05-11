@@ -196,10 +196,10 @@
                             <div class="card-body">
                                 <h6>{{session('email')}}</h6>
                                 <div class="card-text">
-                                    <a href="{{action('UserController@edit',$id = session('user_id'))}}" class="card-link" style="margin-left: 1em"> change Password</a>
+                                    <a href="{{action('UserController@edit',$id = session('user_id'))}}" class="card-link" style="margin-left: 1em;color: #2ab27b"> change Password</a>
                                 </div>
                                 <div>
-                                    <a href="{{route('order.show',$id= session('user_id'))}}" class="card-link" style="margin-left: 1em">Your previous order</a>
+                                    <a href="{{route('order.show',$id= session('user_id'))}}" class="card-link" style="margin-left: 1em;color: #0000F0">Your previous order</a>
                                 </div>
                                 <blockquote class="blockquote mb-0">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>

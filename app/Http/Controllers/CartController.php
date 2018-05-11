@@ -22,10 +22,15 @@ class CartController extends Controller
     }
     public function  showCartItems($id){
         $id1 = Session::get('user_id');
-        $cart = Cart::find($id1);
-        $orderItems = DB::table('order_items')->where('cart_id',$id1)->get();
-        $orderItems1 = OrderItem::where('cart_id', $id1)->get();
-        return view('/showCartItems',compact('orderItems1'),compact('cart'));
+        if(Cart::find($id1)){
+            $cart = Cart::find($id1)->first();
+            $orderItems = DB::table('order_items')->where('cart_id',$id1)->get();
+            $orderItems1 = OrderItem::where('cart_id', $id1)->get();
+
+            return view('/showCartItems',compact('orderItems1'),compact('cart'));
+        }
+
+
     }
     public function addItemsToCart($id){
         $personId = Session::get('user_id');
@@ -46,6 +51,7 @@ class CartController extends Controller
                 $deltaPrice = $orderItem1->totalPrice - $deltaPrice;
                 $orderItem1['imagePath'] = $product->imagePath;
                 $orderItem1->cart_id = session('user_id') ;
+                $orderItem1->user_id = session('user_id') ;
                 $orderItem1->save();
                 $this->updateCartTotalPrice(session('user_id'),$deltaPrice);
             }
@@ -57,6 +63,7 @@ class CartController extends Controller
                 $orderItem['type'] = $product->type;
                 $orderItem['description'] = $product->description;
                 $orderItem['totalPrice'] = $product->price;
+                $orderItem['user_id'] = session('user_id') ;
                 $product->orderItems()->create($orderItem);
                 $this->updateCartTotalPrice(session('user_id'),$product->price);
             }
@@ -72,6 +79,7 @@ class CartController extends Controller
             $orderItem['type'] = $product->type;
             $orderItem['description'] = $product->description;
             $orderItem['totalPrice'] = $product->price;
+            $orderItem['user_id'] = session('user_id') ;
             $product->orderItems()->create($orderItem);
             $this->updateCartTotalPrice(session('user_id'),$product->price);
         }
