@@ -166,7 +166,7 @@
                             <div id="show{{$b->id}}">
                             </div>
                         @endforeach
-                        <div id="ngoaiTe" >
+                        <div class="btn btn-success" id="ngoaiTe" >
                         </div>
                         <div id="time" >
                         </div>
@@ -331,7 +331,7 @@
                    success: function(json) {
 
                        $("#ngoaiTe").html("ty gia USD lay tren apilayer : "+json.quotes.USDVND);
-                       $("#time").html("At "+json.quotes);
+                       $("#time").html(""+json.source);
 
                        // exchange rata data is stored in json.quotes
                       // alert(json.quotes.USDGBP);
