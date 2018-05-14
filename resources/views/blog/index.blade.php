@@ -23,7 +23,15 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body>
-        <nav class="clearfix" style="background-color: #cac8c6">
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.0&appId=891006804401694&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <nav class="clearfix" style="background-color: #cac8c6">
             @if (!session('email'))
                 <a href="signUp" class="btn  float-right" style="margin:1px ">SignUp</a>
                 <a href="login" class="btn  float-right" style="margin:1px ">Login</a>
@@ -124,7 +132,7 @@
                                                             <td data-postid = "g">
                                                                 <form  class="comment" id="comment{{$b->id}}" data-id="{{$b->id}}" method="post" type="hidden">
                                                                     {{csrf_field()}}
-                                                                        <input type="text"  name="comment" id="input{{$b->id}}" style="border-color: #669fe0;border-radius: 5px;width: 100%"/>
+                                                                        <input type="text"  name="comment" id="input{{$b->id}}" style="border-color: #cac8c9;border-radius: 5px;width: 100%"/>
                                                                 </form>
                                                             </td>
                                                         </tr>
@@ -138,10 +146,12 @@
                                                                 <div id="com" class="collapse"></div>
                                                             </div>
                                                         </div>
-                                                        <div style="float: left" >
+                                                        <div style="float: left;margin-bottom: 20px" >
                                                             <span>{{$b->emotions()->count()}}</span>
                                                             <a href="#" class="like10" id="register10" data-id="{{$b->id}}">Likes</a>
                                                         </div>
+                                                        <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="400px" data-numposts="1"></div>
+                                                        <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -156,6 +166,10 @@
                             <div id="show{{$b->id}}">
                             </div>
                         @endforeach
+                        <div id="ngoaiTe" >
+                        </div>
+                        <div id="time" >
+                        </div>
                     </div>
                 </div>
             <div class="content">
@@ -275,6 +289,8 @@
             document.cookie = "pageurl=" + encodeURIComponent(window.location['search']);
         </script>
         <script>
+            $endpoint = 'live';
+            $access_key ='9b0014310065c13b40247e73fe5732a4';
            //var token = '{{Session::token() }}';
            // var urlLike = '{{ route('like') }}';
          //var id = event.target.parentNode.parentNode.parentNode.dataset['postid'];
@@ -308,6 +324,25 @@
                    $("#search div").filter(function() {
                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                    });
+               });
+               $.ajax({
+                   url: 'http://www.apilayer.net/api/live?access_key=9b0014310065c13b40247e73fe5732a4&format=1',
+                   dataType: 'jsonp',
+                   success: function(json) {
+
+                       $("#ngoaiTe").html("ty gia USD lay tren apilayer : "+json.quotes.USDVND);
+                       $("#time").html("At "+json.quotes);
+
+                       // exchange rata data is stored in json.quotes
+                      // alert(json.quotes.USDGBP);
+
+                       // source currency is stored in json.source
+                       //alert(json.source);
+
+                       // timestamp can be accessed in json.timestamp
+                       //alert(json.timestamp);
+
+                   }
                });
            });
         </script>
