@@ -20,7 +20,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $order = Order::paginate(10);
+       // $comment = DB :: table('comments');
+        return view('order.index', compact('order'));
     }
 
     /**
@@ -115,6 +117,8 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::find($id);
+            $order->delete();
+        return redirect()->route('order');
     }
 }

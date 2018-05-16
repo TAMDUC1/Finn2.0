@@ -93,7 +93,7 @@
 
             </div>
         </div>
-        <div class="main-content-kid" style="width: 80%;background-color: white!important;margin-top: 20px">
+        <div class="main-content-kid" style="width: 80%;background-color: #f5f8ff!important;margin-top: 20px">
             <div style="margin-top: 30px">
                 <div style="margin: 2%" >
                     <img class="card-img-top img-thumbnail img-responsive" src="{{ url('storage/images/productImages/'.$product->imagePath) }}" alt="Card image" title="" />
@@ -136,7 +136,9 @@
 
                 </div>
                 <div class="product-page-cart" style="display: block">
-                    <a class="btn btn-success" href="{{action('CartController@addItemsToCart',$id=$product->id)}}"> Add to Cart</a>
+                   <!-- <a class="btn btn-success"  href="{{action('CartController@addItemsToCart',$id=$product->id)}}"> Add to Cart</a>-->
+                    <a class="btn btn-success addToCart" data-id="{{$product->id}}" href="#"> Add to Cart </a>
+
                 </div>
                 <div>
                     Reviews
@@ -266,6 +268,32 @@
             x[slideIndex-1].style.display = "block";
             setTimeout(carousel, 2000); // Change image every 2 seconds
         }
+        $('.addToCart').click(function (e) {
+            e.preventDefault();
+            console.log('er');
+            var _this = $(this);
+            var params = _this.data();
+            var token = $(this).data('token');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                method: "get",
+                url: "/addItemToCart/" + params.id,
+                data: {},
+                success: function (data) {
+                    $("#myDiv").load(location.href + " #myDiv");
+                },
+                error: function (data) {
+                    var errors = $.parseJSON(data.responseText);
+                    $.each(errors, function (key, value) {
+                        $('#' + key).parent().addClass('error');
+                    });
+                }
+            });
+        });
 
     </script>
 

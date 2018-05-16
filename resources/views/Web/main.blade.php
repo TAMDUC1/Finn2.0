@@ -69,4 +69,4 @@
     </script>
 
 @endsection
-@extends('layouts.webTop')
+@extends('layouts.webTop2')

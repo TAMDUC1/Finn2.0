@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Category;
 use App\OrderItem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -16,12 +17,14 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
+        $categories = Category::all();
         $product = Product::paginate(100);
         $sorted = $product->sortBy('price');
         $sorted->values()->all();
         //$product = DB :: table('products')->paginate(100);
-        return view('Web.listItems', compact('sorted'));
+        return view('Web.listItems', compact('sorted'),compact('categories'));
     }
     public function index1()
     {

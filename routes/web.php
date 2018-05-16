@@ -13,7 +13,7 @@
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Support\Facades\Response;
 use App\User;
-
+use App\Category;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,10 +38,16 @@ Route::get('carts/{id}/edit', 'CartController@edit')->name('editOrder');
 Route::get('addItemToCart/{id}', 'CartController@addItemsToCart')->name('addItemsToCart');
 Route::get('showCartItems/{id}', 'CartController@showCartItems')->name('showCartItems');
 Route::resource('carts', 'CartController');
+
+
+
+Route::get('order', 'OrderController@index')->name('order');
+
+
 Route::resource('order', 'OrderController');
 
 Route::get('/listItems', function () {
-    return View::make('Web.listItems');
+    return View::make('Web.listItems')->with('categories');
 })->name('listItems');
 
 
@@ -69,8 +75,12 @@ Route::get('/main', function () {
 
 
 
-Route::resource('order_items', 'OrderItemController');
+Route::get('/category/{id}', 'CategoryController@getCategory')->name('getCategory');
 
+
+
+Route::resource('categories', 'CategoryController');
+Route::resource('order_items', 'OrderItemController');
 
 Route::get('create', 'ProductController@create')->name('productCreate');
 Route::get('ProductIndex', 'ProductController@index1')->name('ProductIndex');

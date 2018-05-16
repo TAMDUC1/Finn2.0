@@ -2,6 +2,8 @@
 
 namespace App;
 use App\Product;
+use App\Cart;
+
 use Illuminate\Database\Eloquent\Model;
 use PhpParser\Node\Expr\AssignOp\Mod;
 

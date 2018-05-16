@@ -144,12 +144,13 @@
                                         @endif
                                     @endif
                                 @endforeach
+                                    <div class="card-text" id="totalPrice1">
+                                        @if($cart->id = session('user_id'))
+                                            <strong><span>$</span>{{$cart['totalPrice']}}</strong>
+                                        @endif
+                                    </div>
                             @endif
-                            <div class="card-text" id="totalPrice1">
-                                @if($cart)
-                                    <strong><span>$</span>{{$cart->totalPrice}}</strong>
-                                @endif
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -242,4 +243,4 @@
         }
     </script>
 @endsection
-@extends('layouts.webTop')
+@extends('layouts.webTop2')

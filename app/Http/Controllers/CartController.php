@@ -23,14 +23,10 @@ class CartController extends Controller
     public function  showCartItems($id){
         $id1 = Session::get('user_id');
         if(Cart::find($id1)){
-            $cart = Cart::find($id1)->first();
-            $orderItems = DB::table('order_items')->where('cart_id',$id1)->get();
+            $cart = Cart::where('id', $id1)->first();
             $orderItems1 = OrderItem::where('cart_id', $id1)->get();
-
             return view('/showCartItems',compact('orderItems1'),compact('cart'));
         }
-
-
     }
     public function addItemsToCart($id){
         $personId = Session::get('user_id');

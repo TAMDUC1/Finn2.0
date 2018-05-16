@@ -131,15 +131,15 @@
                 <li class="list-unstyled dropdown">
                     <a  data-target="#" href="{{route('products.index')}}"aria-haspopup="true" aria-expanded="false">Items</a>
                     <ul class="dropdown-menu">
-                        <li class=" dropdown-item">
-                            Hi Tops
-                        </li>
-                        <li class="dropdown-item">
-                            Running shoes
-                        </li>
-                        <li class="dropdown-item">
-                            Jackets and Coats
-                        </li>
+                        @if($categories)
+                            @foreach($categories as $C)
+                                <li class=" dropdown-item">
+                                    <a class="category1" href="{{route('categories.show',['id'=> $C->id])}}" data-id="{{$C->id}}">
+                                        {{$C->name}}
+                                    </a>
+                                </li>
+                            @endforeach
+                        @endif
                     </ul>
                 </li>
             </div>

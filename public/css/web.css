@@ -299,7 +299,6 @@ div, input, select, textarea, span, img, table, label, td, th, p, a, button, ul,
     grid-template-columns: 100%;
 }
 .main-content-kid{
-    grid-area: top;
     display: grid;
     background-color: yellow!important;
     grid-template-columns:  50% 50% ;
