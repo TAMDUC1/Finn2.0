@@ -18,8 +18,8 @@
         var email = '';
         var id='';
         function statusChangeCallback(response) {
-            console.log('statusChangeCallback');
-            console.log(response);
+            //console.log('statusChangeCallback');
+           // console.log(response);
             // The response object is returned with a status field that lets the
             // app know the current login status of the person.
             // Full docs on the response object can be found in the documentation
@@ -28,7 +28,7 @@
                 // Logged into your app and Facebook.
                 testAPI();
                 var access_token =   FB.getAuthResponse(['accessToken']);
-                console.log(access_token);
+               // console.log(access_token);
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -52,7 +52,7 @@
                     'into this app.';
                 if(response.status ==='unknown')
                 {
-                    console.log('chua connect');
+                  //  console.log('chua connect');
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -106,22 +106,22 @@
         }(document, 'script', 'facebook-jssdk'));
         function testAPI()
         {
-            console.log('Welcome!  Fetching your information.... ');
+          //  console.log('Welcome!  Fetching your information.... ');
             FB.api('/me', function(response)
             {
                name = response.name;
                id = response.id;
              // var email = response.email;
-                console.log('Successful login for: ' + response.name);
+            //    console.log('Successful login for: ' + response.name);
                 document.getElementById('status').innerHTML =
                     'Thanks for logging in, ' + response.name + '!';
             });
             FB.api('/me', {fields: 'name'}, function(response) {
-                console.log(response);
+              //  console.log(response);
             });
             FB.api('/me', {fields: 'email'}, function(response) {
                  email = response.email;
-                console.log(response.email);
+                //console.log(response.email);
             });
         }
     </script>
@@ -163,7 +163,8 @@
     <div class="main">
         <div class="">
             <div class = "content">
-                <div class = "title m-b-md">
+                <div class = "News" style="margin: 10px; padding: 10px;">
+                    NEWS
                 </div>
             </div>
         </div>
@@ -173,14 +174,6 @@
                 </h2>
             </div>
             <div class="details" style="height: 500px">
-                <div class="details-left" >
-                    <ul class="list-group" style="text-align: left">
-                        <strong>Intro</strong>
-                        <li>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aperiam, consectetur ea expedita fuga illo labore omnis velit! Ab amet atque iure magni maiores nemo non nostrum sed tempora velit? Animi aspernatur autem et explicabo facere hic illum incidunt, itaque laborum, odit ratione unde velit voluptatum? Aliquam blanditiis eum placeat?
-                        </li>
-                    </ul>
-                </div>
                 <div class="details-container" >
                     <div class="details-container-left">
                         <div>
@@ -323,6 +316,48 @@
     </div>
         <script>
             $(document).ready(function () {
+                var main;
+                var obj;
+                var url = 'https://newsapi.org/v2/top-headlines?' +
+                    'country=us&' +
+                    'apiKey=2d06707112a240938a6bd58670d0f1ed';
+                var req = new Request(url);
+
+                fetch(req).then(function (response) {
+
+                    var promise1 = Promise.resolve(response.json());
+                    promise1.then(function(value) {
+                        console.log(value.articles);
+                        var i;
+                        for (i = 0; i < value.articles.length; ++i) {
+                            var post = value.articles[i];
+                            var title = post.title;
+                            var img = post.urlToImage;
+                            var source = post.source;
+                            var author = post.author;
+
+                            console.log(post);
+                            var div =
+                                "<div>"+
+                                    "<h6>"+ post.title +"</h6>"+
+                                    "<div>"
+                                        +"<div id="+ post.title +" ></div>"
+                                        +"<img src='"+img+"  ' alt='' class='img-responsive' style='width: 130px;vertical-align:left'>"
+                                        +"<span>"
+                                            + post.description +
+                                        +"</span>"
+                                    +"</div>"
+                                +"</div>";
+
+                            $('.News').append(div);
+                        }
+                    });
+                })
+                    //.then(function(response) {
+                    //  console.log('begin');
+                    //console.log(response.json());
+                    // })
+
                 $('.work').click(function(e)
                 {
                     e.preventDefault();

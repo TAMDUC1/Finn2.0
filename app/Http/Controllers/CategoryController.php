@@ -54,11 +54,14 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
+
        // var_dump('test');die();
         $categories = Category::all();
         $product = Product::where('category_id',$id)->get();
         $sorted = $product->sortBy('price');
         $sorted->values()->all();
+
+        //print_r($sorted);die();
         //$product = DB :: table('products')->paginate(100);
         return view('Web.listItems', compact('sorted'),compact('categories'));
 
