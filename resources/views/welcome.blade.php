@@ -48,8 +48,6 @@
             }
             else {
                 // The person is not logged into your app or we are unable to tell.
-                document.getElementById('status').innerHTML = 'Please log ' +
-                    'into this app.';
                 if(response.status ==='unknown')
                 {
                   //  console.log('chua connect');
@@ -127,8 +125,7 @@
     </script>
     <nav class = "clearfix" style="background-color: #cac8c6"style="margin:1px ">
         <div class="pull-left">
-            <fb:login-button size="large" max_rows="1" auto_logout_link="true" scope="public_profile,email" onlogin="checkLoginState();" class="float-right">
-            </fb:login-button>
+
             <div id="status1" >
         </div>
         </div>
@@ -142,6 +139,7 @@
                     <button type = "submit" class = "btn btn-danger float-right"style="margin:1px " >Log out</button>
                 </form>
             <img class="img-responsive float-right"  src="{{session('avatar')}}" alt="profile Pic" style="border-radius: 5px; width: 38px" >
+
         @endif
                 <a href="blogs" class="float-right">Blogs</a>
             @if(session('role'))
@@ -163,16 +161,11 @@
     <div class="main">
         <div class="">
             <div class = "content">
-                <div class = "News" style="margin: 10px; padding: 10px;">
-                    NEWS
+                <div class = "News" style="margin: 10px; padding: 10px">
                 </div>
             </div>
         </div>
         <div class="intro" style="">
-            <div id="name">
-                <h2>
-                </h2>
-            </div>
             <div class="details" style="height: 500px">
                 <div class="details-container" >
                     <div class="details-container-left">
@@ -186,12 +179,8 @@
                                     <p>
                                         Web Freelancer Developer
                                     </p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi asperiores dicta dolore doloribus exercitationem facere fugiat harum, illo praesentium tempore.</p>
                                 </li>
                                 <li>IT support officer at NTNU
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum cupiditate distinctio doloremque enim maiores minus molestiae molestias nam odit, officia quas quasi ullam voluptas!
-                                    </p>
                                 </li>
                                 <li>
                                     <a href="http://humg.edu.vn/Pages/home.aspx">
@@ -260,7 +249,11 @@
                         <ul style="margin-top: 10px">
                             <li><h4>Personal Info</h4></li>
                             <li>
-                               <span><strong>Tam Duc Pham</strong><img class="img-responsive" src="{{URL::asset('/images/profile.jpg')}}" alt="profile Pic" width="50" style="border-radius: 10px;margin-left: 20px" ></span>
+                               <span><strong>Tam Duc Pham</strong><img class="img-responsive icon-img" src="{{URL::asset('/images/profile.jpg')}}" alt="profile Pic" width="50" style="border-radius: 10px;margin-left: 20px" ></span>
+                            </li>
+                            <li>
+                                <fb:login-button size="large" max_rows="1" auto_logout_link="true" scope="public_profile,email" onlogin="checkLoginState();">
+                                </fb:login-button>
                             </li>
                             <li>
                                 Web Developer
@@ -324,7 +317,7 @@
                 var req = new Request(url);
 
                 fetch(req).then(function (response) {
-
+                    //console.log(response.json());
                     var promise1 = Promise.resolve(response.json());
                     promise1.then(function(value) {
                         console.log(value.articles);
@@ -333,31 +326,34 @@
                             var post = value.articles[i];
                             var title = post.title;
                             var img = post.urlToImage;
-                            var source = post.source;
-                            var author = post.author;
-
+                            var url = post.url;
+                            if(post.source){
+                                var source = post.source;
+                            }
+                            if(post.author){
+                                var author = post.author;
+                            }
+                            if(!post.author){
+                                var author = "You will find more information in the link bellow.";
+                            }
                             console.log(post);
                             var div =
-                                "<div>"+
-                                    "<h6>"+ post.title +"</h6>"+
-                                    "<div>"
-                                        +"<div id="+ post.title +" ></div>"
-                                        +"<img src='"+img+"  ' alt='' class='img-responsive' style='width: 130px;vertical-align:left'>"
-                                        +"<span>"
-                                            + post.description +
-                                        +"</span>"
+                                "<div class='newsPost'  >"
+                                        +"<div id='postInfo' style='width: 100%'>" +
+                                            "<h6 class='panel-title'>"+title +"</h6>"+
+                                             "<h8> Reporter : "+ author +"</h8>"+"</br>"+
+                                        "</div >"+
+                                        "<div class='zoom'>"
+                                            +"<a href='"+url+"'><img class='img-responsive' style='width: 100%' src="+img+"></a>"
+                                            +"<span style='float: left;padding-left: 10px;margin: 20px'>"
+                                                + post.description
+                                            +"</span>"+"</br>"
                                     +"</div>"
                                 +"</div>";
-
                             $('.News').append(div);
                         }
                     });
                 })
-                    //.then(function(response) {
-                    //  console.log('begin');
-                    //console.log(response.json());
-                    // })
-
                 $('.work').click(function(e)
                 {
                     e.preventDefault();

@@ -8,8 +8,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="ha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <script src="{{asset('js/jquery-ui.js')}}"></script>
         <script src="{{asset('js/jquery-ui.min.js')}}"></script>
         <script src="{{asset('js/jquery.columns.min.js')}}"></script>
@@ -39,12 +37,12 @@
             @if (session('email'))
                 <form method="post" action="{{route('logout')}}">
                     {{ csrf_field() }}
-                        <button type="submit" class="btn btn-danger float-right" style="margin:1px ">Log out</button>
+                        <button type="submit" class="btn btn-danger pull-right" style="margin:1px ">Log out</button>
                 </form>
             @endif
                 @if(session('avatar'))
                     <div class=" additonal-nav-grid" >
-                        <img class="img-responsive float-right" style="width:28px;border-radius: 2px " src="{{Session::get('avatar')}}" alt="">
+                        <img class="img-responsive pull-right" style="width:35px;border-radius: 2px " src="{{Session::get('avatar')}}" alt="">
                     </div>
                 @endif
         </nav>

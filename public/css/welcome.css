@@ -101,6 +101,7 @@ nav>button :hover{
     border-style: solid;
     border-width: thin;
     border-color: #e0dedc;
+
     border-left-color:transparent ;
     border-right-color:transparent ;
     border-bottom-color:transparent ;
@@ -174,7 +175,7 @@ section {
 .main{
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 45% 55%;
     grid-auto-rows: 60px;
     grid-auto-flow: dense;
 }
@@ -194,9 +195,11 @@ section {
     border-style: solid;
     border-width: thin;
     height: auto;
+    border-left-color: transparent;
     border-right-color: transparent;
     border-top-color: transparent;
     border-bottom-color: transparent;
+
 
 }
 .details-left{
@@ -219,7 +222,9 @@ section {
     display: grid;
     grid-gap: 10px;
     grid-template-columns: 1fr;
-    height: 1200px;
+    height: 1000px;
+    border-style: solid;
+    border-width: thin;
 
 }
 .details-container-left #adding {
@@ -252,10 +257,8 @@ section {
     grid-template-columns: 1fr;
     border-style: solid;
     border-width: thin;
-    border-right-color: transparent;
-    border-top-color: transparent;
-    border-bottom-color: transparent;
-    height: 800px;
+
+    height: 1000px;
 
 }
 .details-container-right #mobile{
@@ -286,9 +289,34 @@ li{
 .News>div{
     border-style: solid;
     border-width: thin;
+    border-color: #e2e0e1;
     border-top-color: transparent;
     border-left-color: transparent;
     border-right-color: transparent;
 
 }
 
+.newsPost{
+    padding: 1em;
+    display: grid;
+    grid-template-columns:  30% 70%;
+    grid-column-gap: 10px;
+    grid-row-gap: 1px;
+    grid-template-areas:
+            "title title "
+            "side main";
+}
+
+
+.zoom:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    transition: transform 1s;
+    text-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.icon-img:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transform: scale(2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    transition: transform 1s;
+}
