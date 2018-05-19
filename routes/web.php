@@ -23,7 +23,9 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return View::make('Web.about');
 })->name('about');//->middleware('admin');
-
+Route::get('/news', function () {
+    return View::make('news');
+})->name('news');//->middleware('admin');
 Route::get('/kid', function () {
     return View::make('Web.kid');
 })->name('kid');

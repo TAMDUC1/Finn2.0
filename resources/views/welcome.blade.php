@@ -149,6 +149,8 @@
                 <a href="{{route('profile')}}" class="float-right">Profile</a>
             @endif
                 <a class="float-right" href="about">Web</a>
+                <a class="float-right" href="news">News</a>
+
     </nav>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -307,7 +309,7 @@
     </div>
     <div class="footer">
     </div>
-        <script>
+        <script type="text/javascript">
             $(document).ready(function () {
                 var main;
                 var obj;
@@ -325,7 +327,9 @@
                         for (i = 0; i < value.articles.length; ++i) {
                             var post = value.articles[i];
                             var title = post.title;
-                            var img = post.urlToImage;
+                            if(post.urlToImage){
+                               var img = post.urlToImage
+                            }
                             var url = post.url;
                             if(post.source){
                                 var source = post.source;
