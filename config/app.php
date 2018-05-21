@@ -167,6 +167,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
+       // not ready for php 7 Elibyy\TCPDF\ServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -231,7 +232,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        'PDF' => Elibyy\TCPDF\Facades\TCPDF::class
     ],
 
 ];

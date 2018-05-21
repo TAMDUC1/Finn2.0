@@ -12,15 +12,15 @@
                                         <h4 class="card-title" style="color: black">
                                             Order {{$R->id}} Summary <br>
                                             <footer class="blockquote-footer"><cite title="Source Title">{{$R->created_at}}</cite></footer>
-
-
                                         </h4>
                                     </div>
                                    <div style="padding-left: 20px">
                                        @foreach($orderItems as $O)
                                            @if($O->order_id === $R->id)
+                                               {{$O->id}}
                                                <img style="width: 50px" class="img-responsive" src="{{ url('storage/images/productImages/'.$O->imagePath) }}" alt="" title="" />
-                                               <strong>    {{$O->name}} ( {{$O->amount}} pieces )</strong> <br>
+                                               <strong>  {{$O->name}} ( {{$O->amount}} pieces)</strong> <br>
+                                               <strong>Unit Price :{{$O->product->price}}</strong> <br>
                                            @endif
                                        @endforeach
                                    </div>

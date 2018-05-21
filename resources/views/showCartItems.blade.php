@@ -110,7 +110,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div style="padding-top: 12px">
+                            <div style="
+
+                            padding-top: 12px">
                                 <label for="nameOnCard">Name on Card</label>
                                 <input class="form-control input-sm" type="text" id="nameOnCard" name="nameOnCard" placeholder="{{session('name')}}">
                             </div>
@@ -150,7 +152,6 @@
                                         @endif
                                     </div>
                             @endif
-
                         </div>
                     </div>
                 </div>

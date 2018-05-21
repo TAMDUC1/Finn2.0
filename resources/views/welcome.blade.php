@@ -125,7 +125,6 @@
     </script>
     <nav class = "clearfix" style="background-color: #cac8c6"style="margin:1px ">
         <div class="pull-left">
-
             <div id="status1" >
         </div>
         </div>
@@ -138,9 +137,7 @@
                     {{ csrf_field() }}
                     <button type = "submit" class = "btn btn-danger float-right"style="margin:1px " >Log out</button>
                 </form>
-            <img class="img-responsive float-right"  src="{{session('avatar')}}" alt="profile Pic" style="border-radius: 5px; width: 38px" >
-
-        @endif
+            @endif
                 <a href="blogs" class="float-right">Blogs</a>
             @if(session('role'))
                 <a href="{{route('profile1')}}" class="float-right">Profile</a>
@@ -251,7 +248,8 @@
                         <ul style="margin-top: 10px">
                             <li><h4>Personal Info</h4></li>
                             <li>
-                               <span><strong>Tam Duc Pham</strong><img class="img-responsive icon-img" src="{{URL::asset('/images/profile.jpg')}}" alt="profile Pic" width="50" style="border-radius: 10px;margin-left: 20px" ></span>
+                               <span><strong>Tam Duc Pham</strong><img class="img-responsive icon-img" src="{{URL::asset('/images/profile.jpg')}}" alt="profile Pic" width="50" style="border-radius: 10px;margin-left: 20px" >
+                               </span>
                             </li>
                             <li>
                                 <fb:login-button size="large" max_rows="1" auto_logout_link="true" scope="public_profile,email" onlogin="checkLoginState();">
@@ -287,19 +285,14 @@
                             </li>
                             <li>Business Process Improvement
                             </li>
-                        </ul>
-                        <ul style="margin-top: 10px">
-                            <li><div><h4>Software</h4></div></li>
                             <li>
-                               PHP,C#,Javascrip
+                                Tech:PHP,C#,HTML,CSS,JAVASCRIPT,Linux/Unix,Apache,Mysql,Git,API
                             </li>
-                            <li>Linux/Unix
-                            </li>Apache
-                            <li>Laravel
+                            <li>
+                                Library:Bootstrap,Jquery...
                             </li>
-                            <li>Mysql
-                            </li>
-                            <li>git
+                            <li>
+                                Framework:LARAVEL, .NET, VUE
                             </li>
                         </ul>
                     </div>

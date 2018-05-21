@@ -835,3 +835,10 @@ tr {
     grid-template-columns: 5fr 3fr 0.5fr ;
 
 }
+.zoom:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transform: scale(1.09);
+    transition: transform 1s;
+    text-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}

@@ -28,9 +28,9 @@ class ProductController extends Controller
     }
     public function index1()
     {
-        $product = Product::sortable()->paginate(100);
+        $product = Product::paginate(100);
         // $product = DB :: table('products')->paginate(10);
-        return view('Web.listItems', compact('product'));
+        return view('products.index', compact('product'));
     }
     /**
      * Show the form for creating a new resource.

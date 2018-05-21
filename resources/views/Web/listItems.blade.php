@@ -113,7 +113,7 @@
         <div id="search" class="main-content-listItems" style="padding-right: 5%;padding-top: 2%">
             @foreach($sorted as $p)
                 @if($p->imagePath)
-                    <div id="test1" class="card" style="width:200px" data-name="{{$p->name}}" data-price="{{$p->price}}">
+                    <div id="test1" class="card zoom" style="width:250px;height: 100%" data-name="{{$p->name}}" data-price="{{$p->price}}">
                         <span data-name="{{$p->name}}" data-price="{{$p->price}}>
                             <a href = "{{action('ProductController@show', $id = $p->id)}}"> <img class="card-img-top img-thumbnail img-responsive" src="{{ url('storage/images/productImages/'.$p->imagePath) }}"alt="Card image" title="" />
                             </a>
@@ -121,7 +121,6 @@
                                 <a href="{{action('ProductController@show', $id = $p->id)}}">
                                     <h4 class="card-title">{{$p->name}}</h4>
                                 </a>
-                                <p class="card-text">{{$p->description}}</p>
                                <span>Price: <p class="card-text priceItem" data-price="{{$p->price}}">{{$p->price}} usd</p> </span>
                                 <!--
                                 <a class="btn btn-success" style="width: 150px" href="{{action('CartController@addItemsToCart',$id=$p->id)}}"> Add to Cart PHP</a>-->

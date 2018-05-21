@@ -17,13 +17,13 @@
                         "<div class='newsFrontPost'>"
                             +"<a href='"+front.url+"'><img class='img-responsive' style='width: 100%' src="+img+"></a>"
                             + "<h4 class='panel-title' style='color: #8b0a1c'>"+front.title +"</h4>"
-                            + "<h8> Reporter : "+ front.author +"</h8>"+"</br>"+
+                            + "<h8> Reporter : "+ front.author +"</h8>"+"</br>"
                             + "<span style='float: left;padding-left: 10px;margin: 20px'>"
                             + front.description
                             +"</span>"+"</br>"
                         +"</div>";
                     $('.newsFront').append(frontDiv);
-                    for (m = 1; m < 4; ++m) {
+                    for (m = 1; m <14; ++m) {
                         var side1 = value.articles[m];
                         var img2 = value.articles[m].urlToImage;
                         var side1Div =
@@ -52,8 +52,8 @@
                         var img1 = value.articles[k].urlToImage;
                         var sideDiv =
                             "<div class='newsFrontSide'>"
-                            +"<a href='"+side.url+"'><img class='img-responsive' style='width: 100%' src="+img1+"></a>"
-                            + "<h6 class='panel-title'>"+side.title +"</h6>"
+                                +"<a href='"+side.url+"'><img class='img-responsive' style='width: 100%' src="+img1+"></a>"
+                                + "<h6 class='panel-title'>"+side.title +"</h6>"
                             +"</div>";
                         $('.newsMini').append(sideDiv);
                     }
@@ -65,7 +65,7 @@
                 var promise3 = Promise.resolve(response.json());
                 promise3.then(function (value) {
                     var k;
-                    for (k = 0; k < 3; ++k) {
+                    for (k = 0; k < 10; ++k) {
                         var side = value.articles[k];
                         var img1 = value.articles[k].urlToImage;
                         var sideDiv =
@@ -95,25 +95,24 @@
         </nav>
     </div>
     <div class="mainNews">
-        <div >
-            <div style="border-style: solid;height: 400px;border-width: thin;margin: 0px 10px 10px 10px">
+        <div style="padding-right: 5px">
+            <div style="height: 400px;border-width: thin;margin: 0px 0px 0px 0px">
                 <img class="img-responsive" src="{{URL::asset('/images/ads1.jpg')}}" alt="profile Pic" width="100%" height="100%" style="" >
             </div>
-            <div style="border-style: solid;height: 200px;border-width: thin;margin: 10px">
+            <div style="height: 200px;border-width: thin;margin-top:10px ">
                 <img class="img-responsive" src="{{URL::asset('/images/ads2.jpg')}}" alt="profile Pic" width="100%" height="100%" style="" >
 
             </div>
-            <div style="border-style: solid;height: 300px;border-width: thin;margin: 10px">
+            <div style="height: 300px;border-width: thin;margin-top: 10px">
                 <img class="img-responsive" src="{{URL::asset('/images/ads3.jpg')}}" alt="profile Pic" width="100%" height="100%" style="" >
 
             </div>
-            <div style="border-style: solid;height: 400px;border-width: thin;margin: 10px">
+            <div style="height: 400px;border-width: thin;margin-top: 10px">
                 <img class="img-responsive" src="{{URL::asset('/images/ads4.jpg')}}" alt="profile Pic" width="100%" height="100%" style="" >
 
             </div>
-            <div style="border-style: solid;height: 500px;border-width: thin;margin: 10px">
+            <div style="height: 500px;border-width: thin;margin-top: 10px">
                 <img class="img-responsive" src="{{URL::asset('/images/ads5.jpg')}}" alt="profile Pic" width="100%" height="100%" style="" >
-
             </div>
         </div>
         <div>
@@ -122,13 +121,12 @@
                 </div>
                 <div class="newsMini">
                     <div class="btn-success text-center">
-                        <strong>financial-times</strong>
+                        <strong>Financial-times</strong>
                     </div>
-
                 </div>
             </div>
             <div class="newsMainPart2">
-                <div class="newsMainPart2Left" style="padding-left: 20px">
+                <div class="newsMainPart2Left" style="">
                 </div>
                 <div class="newsMainPart2Right" style="">
                     <div>
@@ -142,27 +140,25 @@
                 </div>
             </div>
         </div>
-        <div >
-            <div style="border-style: solid;height: 400px;border-width: thin;margin: 0px 10px 10px 10px">
+        <div style="padding-left: 5px">
+            <div style="height: 400px;border-width: thin;margin: 0px 0px 0px 0px">
                 <img class="img-responsive" src="{{URL::asset('/images/ads5.jpg')}}" alt="profile Pic" width="100%" height="100%" style="" >
             </div>
-            <div style="border-style: solid;height: 200px;border-width: thin;margin: 10px">
+            <div style="height: 200px;border-width: thin;margin-top:10px">
                 <img class="img-responsive" src="{{URL::asset('/images/ads4.jpg')}}" alt="profile Pic" width="100%" height="100%" style="" >
 
             </div>
-            <div style="border-style: solid;height: 300px;border-width: thin;margin: 10px">
+            <div style="height: 300px;border-width: thin;margin-top:10px">
                 <img class="img-responsive" src="{{URL::asset('/images/ads3.jpg')}}" alt="profile Pic" width="100%" height="100%" style="" >
 
             </div>
-            <div style="border-style: solid;height: 400px;border-width: thin;margin: 10px">
+            <div style="height: 400px;border-width: thin;margin-top: 10px">
                 <img class="img-responsive" src="{{URL::asset('/images/ads2.jpg')}}" alt="profile Pic" width="100%" height="100%" style="" >
 
             </div>
-            <div style="border-style: solid;height: 500px;border-width: thin;margin: 10px">
+            <div style="height: 500px;border-width: thin;margin-top: 10px">
                 <img class="img-responsive" src="{{URL::asset('/images/ads1.jpg')}}" alt="profile Pic" width="100%" height="100%" style="" >
-
             </div>
         </div>
     </div>
-
 @endsection

@@ -59,17 +59,25 @@ class OrderController extends Controller
         );
         $order['totalPrice'] = $cart['totalPrice'];
         $order['cart_id'] = session('user_id');
+        $order['user_id'] = session('user_id');
+
+        // print_r('kuyfk');die();
+        // Tao order
         $id = $user->orders()->create($order)->id;
-        $order1 = Order::where('cart_id', session('user_id'))->get();
-        $orderItems = OrderItem::where('cart_id', session('user_id'))->get();
-        foreach ($orderItems as $O){
+        // get all of the orders from the user
+        $order1 = Order::where('user_id', session('user_id'))->get();
+        // thay doi noi dung OrderItems
+        $orderItems1 = OrderItem::where('cart_id', session('user_id'))->get();
+        foreach ($orderItems1 as $O){
             $O->order_id = $id;
             $O->cart_id = null;
             $O->save();
         }
+        //xoa cart
         $cart -> delete();//done
         $request->session()->forget('cartTotalPrice');
-        //$orderItems2 = OrderItem::where('user_id', session('user_id'))->get();
+        //get all the order_items of this user to the view
+        $orderItems = OrderItem::where('user_id', session('user_id'))->get();
         return view('Web.confirmation',compact('orderItems','order1','user'));
     }
 
