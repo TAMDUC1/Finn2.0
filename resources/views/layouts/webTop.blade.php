@@ -133,13 +133,48 @@
                     <ul class="dropdown-menu">
                         @if($categories)
                             @foreach($categories as $C)
-                                <li class=" dropdown-item">
-                                    <a class="category1" href="{{route('categories.show',['id'=> $C->id])}}" data-id="{{$C->id}}">
+                                <li class="dropdown-item dropdown-submenu">
+                                    <a class="category1 " tabindex="-1" href="{{route('categories.show',['id'=> $C->id])}}" data-id="{{$C->id}}">
                                         {{$C->name}}
                                     </a>
+                                    <ul class="dropdown-menu">
+                                    </ul>
                                 </li>
                             @endforeach
                         @endif
+                        <li class="dropdown-submenu">
+                            <a class="test dropdown-item" href="#" tabindex="-1">Laptop <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item test" tabindex="-1" href="">Apple</a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">Mac mini</a>
+                                        </li>
+                                        <li>
+                                            <a href="">IMAC</a>
+                                        </li>
+                                        <li>
+                                            <a href="">Mac Pro</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a class="dropdown-item test" tabindex="-1" href="#">PC</a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">Dell</a>
+                                        </li>
+                                        <li>
+                                            <a href="">HP</a>
+                                        </li>
+                                        <li>
+                                            <a href="">Lenovo</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
             </div>
@@ -313,8 +348,10 @@
                 <li class="list-unstyled dropdown">
                     <a href="">PAGES</a>
                     <ul class="dropdown-menu">
-                        <li class=" dropdown-item">
+                        <li class="dropdown-item dropdown-submenu ">
                             Hi Tops
+                            <ul class="dropdown-menu">awed
+                            </ul>
                         </li>
                         <li class="dropdown-item">
                             Running shoes
@@ -378,6 +415,16 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $('.dropdown-submenu a.test').on("mouseover click",function(e){
+            $(this).next('ul').toggle();
+
+            e.stopPropagation();
+            e.preventDefault();
+        });
+    });
+</script>
 </body>
 @yield('web')
 

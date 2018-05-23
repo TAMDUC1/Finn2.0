@@ -644,12 +644,21 @@ div, input, select, textarea, span, img, table, label, td, th, p, a, button, ul,
                          "linhtinh";
 
 }
-.dropdown:hover>.dropdown-menu {
+.dropdown:hover>.dropdown-menu  {
      display: block;
  }
+
 .dropdown-item:hover{
     background-color: orangered !important;
 }
+.dropdown-submenu1:hover>ul{
+    display: block;
+}
+
+.test2{
+    display: none;
+}
+
 .mega-menu{
     width:600px;
     height: 310px;
@@ -841,4 +850,18 @@ tr {
     transition: transform 1s;
     text-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
+}
+.dropdown-submenu{
+    position: relative;
+}
+.dropdown-menu:hover > ul{
+    display: block;
+}
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+.dropdown-itemHover{
+    display: none;
 }

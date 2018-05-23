@@ -307,9 +307,6 @@ li{
     grid-template-columns:  30% 70%;
     grid-column-gap: 10px;
     grid-row-gap: 1px;
-    grid-template-areas:
-            "title title "
-            "side main";
 }
 
 
@@ -324,6 +321,7 @@ li{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transform: scale(2);
     transition: transform 1s;
+
 }
 .newsFrontPost{
 

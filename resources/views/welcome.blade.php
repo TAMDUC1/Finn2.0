@@ -123,7 +123,7 @@
             });
         }
     </script>
-    <nav class = "clearfix" style="background-color: #cac8c6"style="margin:1px ">
+    <nav class = "clearfix" style="background-color: #cac8c6;margin:1px ">
         <div class="pull-left">
             <div id="status1" >
         </div>
@@ -170,10 +170,10 @@
                     <div class="details-container-left">
                         <div>
                             <ul>
-                                <h4>
-                                    <strong>Experience</strong>
-                                </h4>
                                 <li>
+                                    <h4>
+                                        <strong>Experience</strong>
+                                    </h4>
                                     Software Developer
                                     <p>
                                         Web Freelancer Developer
@@ -227,10 +227,10 @@
                                 </li>
                             </ul>
                             <ul >
-                                <h4>
-                                    <strong>Languages</strong>
-                                </h4>
                                 <li>
+                                    <h4>
+                                        <strong>Languages</strong>
+                                    </h4>
                                     English
                                 </li>
                                 <li>
@@ -371,4 +371,5 @@
             })
         </script>
     </body>
+    <link rel="stylesheet" type="text/css" href="data:text/css,">
 </html>

@@ -131,6 +131,7 @@
                 <li class="list-unstyled dropdown">
                     <a  data-target="#" href="{{route('products.index')}}"aria-haspopup="true" aria-expanded="false">Items</a>
                     <ul class="dropdown-menu">
+
                     </ul>
                 </li>
             </div>

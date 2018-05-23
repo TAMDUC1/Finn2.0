@@ -178,10 +178,8 @@
                 url: 'http://www.apilayer.net/api/live?access_key=9b0014310065c13b40247e73fe5732a4&format=1',
                 dataType: 'jsonp',
                 success: function(json) {
-
                    //$("#ngoaiTe").html("ty gia USD lay tren apilayer : "+json.quotes.USDVND);
                     usd = parseFloat(json.quotes.USDUSD);
-
                     btc = parseFloat(json.quotes.USDBTC);
                     vnd = parseFloat(json.quotes.USDVND);
                     cad = parseFloat(json.quotes.USDCAD);
@@ -199,13 +197,10 @@
                     //alert(usd);
                     // exchange rata data is stored in json.quotes
                     // alert(json.quotes.USDGBP);
-
                     // source currency is stored in json.source
                     //alert(json.source);
-
                     // timestamp can be accessed in json.timestamp
                     //alert(json.timestamp);
-
                 }
             });
             $('#myCurrency').on('change', function()
